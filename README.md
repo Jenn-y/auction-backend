@@ -1,7 +1,7 @@
 # Foodie
 
 ### Swagger link:
-[http://localhost:8080/swagger-ui.html#/](http://localhost:8080/swagger-ui.html#/)
+[http://localhost:8080/swagger-ui/](http://localhost:8080/swagger-ui/)
 
 ### Connecting to the database: 
 1. Create a database with name
