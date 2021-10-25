@@ -43,7 +43,7 @@ public class User {
 
 	@Column
 	@Enumerated(EnumType.STRING)
-	private UserRoleEnum role;
+	private UserRole role;
 
 	public User() {
 	}
@@ -55,7 +55,7 @@ public class User {
                 final String password,
                 final Timestamp createdAt,
                 final Timestamp updatedAt,
-                final UserRoleEnum role) {
+                final UserRole role) {
 				
 		Objects.requireNonNull(email, "The email address must not be null");
 		Objects.requireNonNull(password, "The password must not be null");
@@ -126,11 +126,11 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	public UserRoleEnum getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
-	public void setRole(UserRoleEnum role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 }

@@ -1,5 +1,5 @@
 package com.auctionapp.api.model.entities;
 
-public enum UserRoleEnum {
+public enum UserRole {
 	USER, ADMIN
 }

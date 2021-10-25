@@ -1,15 +1,15 @@
 package com.auctionapp.api.model.dto;
 
-import com.auctionapp.api.model.entities.UserRoleEnum;
+import com.auctionapp.api.model.entities.UserRole;
 
 public class AuthenticationResponse {
 	private final String authenticationToken;
 	private final String email;
-	private final UserRoleEnum userRole;
+	private final UserRole userRole;
 
 	public AuthenticationResponse(final String authenticationToken, 
 								  final String email, 
-								  final UserRoleEnum userRole) {
+								  final UserRole userRole) {
 		this.authenticationToken = authenticationToken;
 		this.email = email;
 		this.userRole = userRole;
@@ -24,7 +24,7 @@ public class AuthenticationResponse {
 		return email;
 	}
 
-	public UserRoleEnum getUserRole() {
+	public UserRole getUserRole() {
 		return userRole;
 	}
 }
