@@ -1,6 +1,6 @@
 package com.auctionapp.api.model.entities;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
