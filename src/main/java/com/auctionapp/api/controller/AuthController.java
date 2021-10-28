@@ -19,16 +19,16 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AuthController {
 
-  private final AuthService authService;
-  
-  @PostMapping("/register")
-  public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest){
-    authService.register(registerRequest);
-    return new ResponseEntity<>("User registration successful!", HttpStatus.OK);
-  }
+    private final AuthService authService;
 
-  @PostMapping("/login")
-  public AuthenticationResponse login(@RequestBody LoginRequest loginRequest){
-    return authService.login(loginRequest);
-  }
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
+        authService.register(registerRequest);
+        return new ResponseEntity<>("User Registration Successful", HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
+        return authService.login(loginRequest);
+    }
 }
