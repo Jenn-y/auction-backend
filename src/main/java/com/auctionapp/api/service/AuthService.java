@@ -26,31 +26,31 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AuthService {
 
-  private final PasswordEncoder passwordEncoder;
-  private final UserRepository userRepository;
-  private final AuthenticationManager authenticationManager;
-  private final JwtProvider jwtProvider;
-  
-  @Transactional
-  public void register(RegisterRequest registerRequest){
-    User user = new User();
-    user.setFirstName(registerRequest.getFirstName());
-    user.setLastName(registerRequest.getLastName());
-    user.setEmail(registerRequest.getEmail());
-    user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-    user.setCreatedAt(Timestamp.from(Instant.now()));
-    
-    user.setRole(UserRoleEnum.USER);
-    userRepository.save(user);
-  }
+	private final PasswordEncoder passwordEncoder;
+	private final UserRepository userRepository;
+	private final AuthenticationManager authenticationManager;
+	private final JwtProvider jwtProvider;
 
-  public AuthenticationResponse login(LoginRequest loginRequest) {
-    Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
-            loginRequest.getPassword()));
-    SecurityContextHolder.getContext().setAuthentication(authenticate);
-    String token = jwtProvider.generateToken(authenticate);
+	@Transactional
+	public void register(RegisterRequest registerRequest) {
+		User user = new User();
+		user.setFirstName(registerRequest.getFirstName());
+		user.setLastName(registerRequest.getLastName());
+		user.setEmail(registerRequest.getEmail());
+		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+		user.setCreatedAt(Timestamp.from(Instant.now()));
 
-    Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
-    return new AuthenticationResponse(token, loginRequest.getEmail(), user.get().getRole());
-  } 
+		user.setRole(UserRoleEnum.USER);
+		userRepository.save(user);
+	}
+
+	public AuthenticationResponse login(LoginRequest loginRequest) {
+		Authentication authenticate = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+		SecurityContextHolder.getContext().setAuthentication(authenticate);
+		String token = jwtProvider.generateToken(authenticate);
+
+		Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
+		return new AuthenticationResponse(token, loginRequest.getEmail(), user.get().getRole());
+	}
 }

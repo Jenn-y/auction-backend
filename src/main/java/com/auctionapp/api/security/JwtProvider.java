@@ -28,7 +28,6 @@ public class JwtProvider {
 
     private KeyStore keyStore;
 
-
     @PostConstruct
     public void init() {
         try {
@@ -41,11 +40,9 @@ public class JwtProvider {
     }
 
     public String generateToken(Authentication authentication) {
-        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
-        return Jwts.builder()
-                .setSubject(principal.getUsername())
-                .signWith(getPrivateKey())
-                .compact();
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) authentication
+                .getPrincipal();
+        return Jwts.builder().setSubject(principal.getUsername()).signWith(getPrivateKey()).compact();
     }
 
     private PrivateKey getPrivateKey() {
@@ -70,11 +67,7 @@ public class JwtProvider {
     }
 
     public String getUsernameFromJwt(String token) {
-        Claims claims = parserBuilder()
-                .setSigningKey(getPublicKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        Claims claims = parserBuilder().setSigningKey(getPublicKey()).build().parseClaimsJws(token).getBody();
 
         return claims.getSubject();
     }

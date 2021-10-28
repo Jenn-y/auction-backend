@@ -18,29 +18,29 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class User extends EntityWithUUID {
-  
-  @Column(name = "first_name", nullable = true)
-  private String firstName;
 
-  @Column(name = "last_name", nullable = true)
-  private String lastName;
+	@Column(name = "first_name", nullable = true)
+	private String firstName;
 
-  @Column(name = "username", nullable = true)
-  private String username;
+	@Column(name = "last_name", nullable = true)
+	private String lastName;
 
-  @Column(name = "email", nullable = false, unique = true)
-  private String email;
+	@Column(name = "username", nullable = true)
+	private String username;
 
-  @Column(name = "password", nullable = false)
-  private String password;
+	@Column(name = "email", nullable = false, unique = true)
+	private String email;
 
-  @Column(name = "created_at", nullable = true)
-  private Timestamp createdAt;
+	@Column(name = "password", nullable = false)
+	private String password;
 
-  @Column(name = "updated_at", nullable = true)
-  private Timestamp updatedAt;
+	@Column(name = "created_at", nullable = true)
+	private Timestamp createdAt;
 
-  @Column(name = "role")
-  @Enumerated(EnumType.STRING)
-  private UserRoleEnum role;
+	@Column(name = "updated_at", nullable = true)
+	private Timestamp updatedAt;
+
+	@Column(name = "role")
+	@Enumerated(EnumType.STRING)
+	private UserRoleEnum role;
 }

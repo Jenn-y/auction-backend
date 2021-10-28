@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
-  private Long uuid;
-  private String firstName;
-  private String lastName;
-  private String username;
-  private String email;
-  private String password;
-  private Timestamp createdAt;
-  private Timestamp updatedAt;
+	private Long uuid;
+	private String firstName;
+	private String lastName;
+	private String username;
+	private String email;
+	private String password;
+	private Timestamp createdAt;
+	private Timestamp updatedAt;
 }
