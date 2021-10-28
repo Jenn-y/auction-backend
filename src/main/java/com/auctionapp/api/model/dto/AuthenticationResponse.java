@@ -10,6 +10,7 @@ public class AuthenticationResponse {
 	public AuthenticationResponse(final String authenticationToken, 
 								  final String email, 
 								  final UserRole userRole) {
+									  
 		this.authenticationToken = authenticationToken;
 		this.email = email;
 		this.userRole = userRole;
