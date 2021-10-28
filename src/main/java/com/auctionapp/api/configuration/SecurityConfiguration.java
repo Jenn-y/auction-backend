@@ -2,10 +2,11 @@ package com.auctionapp.api.configuration;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.auctionapp.api.security.JwtTokenFilter;
-import com.auctionapp.api.service.UserService;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import com.auctionapp.api.security.JwtAuthenticationFilter;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,12 +23,18 @@ import org.springframework.web.filter.CorsFilter;
 
 import lombok.AllArgsConstructor;
 
+@Configuration
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserService userService;
-    private final JwtTokenFilter jwtTokenFilter;
+    private final UserDetailsService userDetailsService;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Override @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -55,32 +62,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Set permissions on endpoints
         http.authorizeRequests()
-            .antMatchers("/api/auth/**").permitAll()
-            .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
             .antMatchers("/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",
                         "/configuration/security",
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
+            .antMatchers("/api/auth/**").permitAll()
+            .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
             .anyRequest().authenticated();
         
         // Add JWT token filter
         http.addFilterBefore(
-            jwtTokenFilter,
+            jwtAuthenticationFilter,
             UsernamePasswordAuthenticationFilter.class
         );
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userService)
+        authenticationManagerBuilder.userDetailsService(userDetailsService)
                 .passwordEncoder((passwordEncoder()));
-    }
-
-    @Override @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
     }
 
     @Bean
