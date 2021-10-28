@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -37,4 +39,8 @@ public class User extends EntityWithUUID {
 
   @Column(name = "updated_at", nullable = true)
   private Timestamp updatedAt;
+
+  @Column(name = "role")
+  @Enumerated(EnumType.STRING)
+  private UserRoleEnum role;
 }
