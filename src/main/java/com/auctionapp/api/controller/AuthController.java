@@ -1,5 +1,7 @@
 package com.auctionapp.api.controller;
 
+import com.auctionapp.api.model.dto.AuthenticationResponse;
+import com.auctionapp.api.model.dto.LoginRequest;
 import com.auctionapp.api.model.dto.RegisterRequest;
 import com.auctionapp.api.service.AuthService;
 
@@ -23,5 +25,10 @@ public class AuthController {
   public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest){
     authService.register(registerRequest);
     return new ResponseEntity<>("User registration successful!", HttpStatus.OK);
+  }
+
+  @PostMapping("/login")
+  public AuthenticationResponse login(@RequestBody LoginRequest loginRequest){
+    return authService.login(loginRequest);
   }
 }
