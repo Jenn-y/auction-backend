@@ -60,7 +60,7 @@ class AuthControllerTest {
     }
 
     @Test
-    public void testAuthenticateUser() throws Exception {
+    public void loginTest() throws Exception {
         LoginRequest loginRequest = new LoginRequest(user.getEmail(), user.getPassword());
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null);
         Mockito.when(authenticationManager.authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class)))
@@ -72,7 +72,7 @@ class AuthControllerTest {
     }
 
     @Test
-    public void testRegisterUser() throws Exception {
+    public void regstrationTest() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("John", "Do", user.getEmail(), user.getPassword());
         userRepository.save(user);
         String json = mapper.writeValueAsString(registerRequest);
