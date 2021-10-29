@@ -8,13 +8,16 @@ import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.Type;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @MappedSuperclass
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class EntityWithUUID implements Serializable {
 	@Id
 	@Type(type = "pg-uuid")
 	private UUID uuid;
-
-	public EntityWithUUID() {
-		this.uuid = UUID.randomUUID();
-	}
 }
