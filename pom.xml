@@ -120,31 +120,31 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-maven-plugin</artifactId>
-			<executions>
-					<execution>
-						<?m2e ignore?>
-						<phase>generate-sources</phase>
-						<goals>
-								<goal>migrate</goal>
-						</goals>
-					</execution>
-			</executions>
-			<configuration>
-					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:postgresql://localhost:5432/auction</url>
-					<user>postgres</user>
-					<password>admin</password>
-					<baselineOnMigrate>true</baselineOnMigrate>
-					<schemas>public</schemas>
-					<locations>
-						<location>
-								filesystem:src/main/resources/db/migration
-						</location>
-					</locations>
-			</configuration>
-		</plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<executions>
+						<execution>
+							<?m2e ignore?>
+							<phase>generate-sources</phase>
+							<goals>
+									<goal>migrate</goal>
+							</goals>
+						</execution>
+				</executions>
+				<configuration>
+						<driver>org.postgresql.Driver</driver>
+						<url>jdbc:postgresql://localhost:5432/auction</url>
+						<user>postgres</user>
+						<password>admin</password>
+						<baselineOnMigrate>true</baselineOnMigrate>
+						<schemas>public</schemas>
+						<locations>
+							<location>
+									filesystem:src/main/resources/db/migration
+							</location>
+						</locations>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
