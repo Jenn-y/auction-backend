@@ -31,7 +31,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    @Override @Bean
+    @Override
+    @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
@@ -42,47 +43,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http = http.cors().and().csrf().disable();
 
         // Set session management to stateless
-        http = http
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and();
+        http = http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
 
         // Set unauthorized requests exception handler
-        http = http
-            .exceptionHandling()
-            .authenticationEntryPoint(
-                (request, response, ex) -> {
-                    response.sendError(
-                        HttpServletResponse.SC_UNAUTHORIZED,
-                        ex.getMessage()
-                    );
-                }
-            )
-            .and();
+        http = http.exceptionHandling().authenticationEntryPoint((request, response, ex) -> {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
+        }).and();
 
         // Set permissions on endpoints
         http.authorizeRequests()
-            .antMatchers("/v2/api-docs",
-                        "/configuration/ui",
-                        "/swagger-resources/**",
-                        "/configuration/security",
-                        "/swagger-ui.html",
-                        "/webjars/**").permitAll()
-            .antMatchers("/api/auth/**").permitAll()
-            .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
-            .anyRequest().authenticated();
-        
+                .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security",
+                        "/swagger-ui.html", "/webjars/**")
+                .permitAll().antMatchers("/api/auth/**").permitAll().antMatchers(HttpMethod.OPTIONS, "**").permitAll()
+                .anyRequest().authenticated();
+
         // Add JWT token filter
-        http.addFilterBefore(
-            jwtAuthenticationFilter,
-            UsernamePasswordAuthenticationFilter.class
-        );
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService)
-                .passwordEncoder((passwordEncoder()));
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder((passwordEncoder()));
     }
 
     @Bean
@@ -92,11 +73,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source =
-            new UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
+        config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);

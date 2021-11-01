@@ -15,4 +15,3 @@ spring:
   data:
     jpa:
       repositories.enabled: true
-
