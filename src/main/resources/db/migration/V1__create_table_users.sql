@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS "users" (
   "password" varchar(255) NOT NULL,
   "created_at" timestamp,
   "updated_at" timestamp,
-  "role" integer
+  "role" varchar(255),
+  CONSTRAINT "email_unique" UNIQUE ("email")
 );
