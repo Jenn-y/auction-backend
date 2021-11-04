@@ -32,7 +32,7 @@ public class AuthService {
 	private final JwtProvider jwtProvider;
 
 	@Transactional
-	public void register(RegisterRequest registerRequest) {
+	public String register(RegisterRequest registerRequest) {
 		User user = new User();
 		user.setFirstName(registerRequest.getFirstName());
 		user.setLastName(registerRequest.getLastName());
@@ -41,7 +41,10 @@ public class AuthService {
 		user.setCreatedAt(Timestamp.from(Instant.now()));
 
 		user.setRole(UserRoleEnum.USER);
-		userRepository.save(user);
+		if (userRepository.save(user) != null) {
+			return "User registration successful";
+		}
+		return "User registration unsuccessful";
 	}
 
 	public AuthenticationResponse login(LoginRequest loginRequest) {

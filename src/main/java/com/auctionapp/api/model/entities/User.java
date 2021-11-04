@@ -40,7 +40,7 @@ public class User extends EntityWithUUID {
 	@Column(name = "updated_at", nullable = true)
 	private Timestamp updatedAt;
 
-	@Column(name = "role")
 	@Enumerated(EnumType.STRING)
+	@Column(name = "role")
 	private UserRoleEnum role;
 }
