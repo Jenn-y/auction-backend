@@ -1,6 +1,7 @@
 package com.auctionapp.api.model.dto;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
-	private Long uuid;
+	private UUID uuid;
 	private String firstName;
 	private String lastName;
 	private String username;
