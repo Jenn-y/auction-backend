@@ -22,7 +22,7 @@ public class Item extends EntityWithUUID {
 	private String name;
 
 	@Column(name = "start_price", nullable = true)
-	private Float startPrice;
+	private Double startPrice;
 
 	@Column(name = "color", nullable = true)
 	private String color;
