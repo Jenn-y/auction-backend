@@ -13,7 +13,7 @@ public class ItemDto {
 	private UUID uuid;
 	private String itemNumber;
 	private String name;
-	private Float startPrice;
+	private Double startPrice;
 	private String color;
 	private Integer size;
 	private String description;
