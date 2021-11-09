@@ -2,8 +2,6 @@ package com.auctionapp.api.service;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.auctionapp.api.model.dto.AuctionDto;
@@ -28,14 +26,6 @@ public class AuctionService {
 	public Collection<AuctionDto> getLastChance() {
 		List<Auction> auctions = auctionRepository.findAllByOrderByEndDateAsc();
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
-	}
-
-	public AuctionDto getAuction(UUID id) {
-		Optional<Auction> auction = auctionRepository.findById(id);
-		if (auction.isPresent()) {
-			return toPayload(auction.get());
-		}
-		throw new RuntimeException("Auction with id " + id + " does not exist!");
 	}
 
 	public static Auction fromPayload(AuctionDto payload) {
