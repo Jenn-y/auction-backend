@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_account")
 public class User {
 
 	@Id
