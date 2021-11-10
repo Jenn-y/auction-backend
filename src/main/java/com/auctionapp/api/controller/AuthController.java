@@ -24,7 +24,9 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
-        String result = authService.register(registerRequest);
+        String result = authService.validateRegisterRequest(registerRequest);
+
+        if (result.isEmpty()) result = authService.register(registerRequest);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
