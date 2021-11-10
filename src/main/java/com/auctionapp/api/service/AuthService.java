@@ -40,22 +40,32 @@ public class AuthService {
 	}
 
 	public String validateRegisterRequest(RegisterRequest registerRequest) {
-		if (registerRequest.getFirstName().isEmpty()) return "First name field must not be empty!";
-		else if (registerRequest.getLastName().isEmpty()) return "Last name field must not be empty!";
-		else if (registerRequest.getEmail().isEmpty()) return "Email field must not be empty!";
-		else if (!validateEmailAdress(registerRequest.getEmail())) return "Invalid email form!";
-		else if (!isAvailable(registerRequest.getEmail())) return "Email already in use!";
-		else if (registerRequest.getPassword().isEmpty()) return "Password field must not be empty!";
-		else if (registerRequest.getPassword().length() < 6) return "Password must be minimum 6 characters long!";
-
+		if (registerRequest.getFirstName().isEmpty()) { 
+			return "First name field must not be empty!";
+		} else if (registerRequest.getLastName().isEmpty()) {
+			return "Last name field must not be empty!";
+		} else if (registerRequest.getEmail().isEmpty()) { 
+			return "Email field must not be empty!";
+		} else if (!validateEmailAdress(registerRequest.getEmail())) {
+			return "Invalid email form!";
+		} else if (!isAvailable(registerRequest.getEmail())) {
+			return "Email already in use!";
+		} else if (registerRequest.getPassword().isEmpty()) {
+			return "Password field must not be empty!";
+		} else if (registerRequest.getPassword().length() < 6) {
+			return "Password must be minimum 6 characters long!";
+		}
 		return "";
 	}
 
 	public boolean validateLoginRequest(LoginRequest loginRequest) {
-		if (loginRequest.getEmail().isEmpty()) return false;
-		else if (!validateEmailAdress(loginRequest.getEmail())) return false;
-		else if (loginRequest.getPassword().isEmpty()) return false;
-
+		if (loginRequest.getEmail().isEmpty()) {
+			return false;
+		} else if (!validateEmailAdress(loginRequest.getEmail())) {
+			return false;
+		} else if (loginRequest.getPassword().isEmpty()) {
+			return false;
+		}
 		return true;
 	}
 
@@ -67,7 +77,9 @@ public class AuthService {
  	}
 
 	public boolean isAvailable(String email) {
-		if (userRepository.existsByEmail(email)) return false;
+		if (userRepository.existsByEmail(email)) {
+			return false;
+		}
 		return true;
  	}
 

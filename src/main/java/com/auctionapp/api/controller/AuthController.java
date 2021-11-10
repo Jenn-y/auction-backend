@@ -26,17 +26,19 @@ public class AuthController {
     public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
         String result = authService.validateRegisterRequest(registerRequest);
 
-        if (result.isEmpty()) result = authService.register(registerRequest);
+        if (result.isEmpty()) { 
+            result = authService.register(registerRequest); 
+        }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest loginRequest) {
+
         if (authService.validateLoginRequest(loginRequest)) { 
             AuthenticationResponse result = authService.login(loginRequest);
             return new ResponseEntity<AuthenticationResponse>(result, HttpStatus.OK);
         }
-        
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 }
