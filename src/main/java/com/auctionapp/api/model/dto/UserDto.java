@@ -4,26 +4,23 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 public class UserDto {
-	private UUID id;
-	private String firstName;
-	private String lastName;
-	private String username;
-	private String email;
-	private String password;
-	private Timestamp createdAt;
-	private Timestamp updatedAt;
+	private final UUID id;
+	private final String firstName;
+	private final String lastName;
+	private final String username;
+	private final String email;
+	private final String password;
+	private final Timestamp createdAt;
+	private final Timestamp updatedAt;
 
-	public UserDto() {
-	}
-
-	public UserDto(UUID id, 
-				  String firstName, 
-				  String lastName, 
-				  String username, 
-				  String email, 
-				  String password,
-				  Timestamp createdAt, 
-				  Timestamp updatedAt) {
+	public UserDto(final UUID id, 
+				  final String firstName, 
+				  final String lastName, 
+				  final String username, 
+				  final String email, 
+				  final String password,
+				  final Timestamp createdAt, 
+				  final Timestamp updatedAt) {
 					  
 		this.id = id;
 		this.firstName = firstName;
@@ -39,63 +36,31 @@ public class UserDto {
 		return id;
 	}
 
-	public void setUuid(UUID id) {
-		this.id = id;
-	}
-
 	public String getFirstName() {
 		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
 	}
 
 	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 	public String getUsername() {
 		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPassword() {
 		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
-
 	public Timestamp getUpdatedAt() {
 		return updatedAt;
-	}
-
-	public void setUpdatedAt(Timestamp updatedAt) {
-		this.updatedAt = updatedAt;
 	}
 }
