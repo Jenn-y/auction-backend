@@ -55,18 +55,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Set permissions on endpoints
         http.authorizeRequests()
-                .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security",
-                        "/swagger-ui.html", "/webjars/**")
-                .permitAll().antMatchers("/api/auth/**").permitAll().antMatchers(HttpMethod.OPTIONS, "**").permitAll()
+                .antMatchers("/v2/api-docs", 
+                            "/configuration/ui", 
+                            "/swagger-resources/**", 
+                            "/configuration/security",
+                            "/swagger-ui.html", 
+                            "/webjars/**")
+                .permitAll()
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
                 .anyRequest().authenticated();
 
         // Add JWT token filter
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter, 
+                            UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder((passwordEncoder()));
+        authenticationManagerBuilder.userDetailsService(userDetailsService)
+                                    .passwordEncoder((passwordEncoder()));
     }
 
     @Bean
