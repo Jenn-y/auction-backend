@@ -16,8 +16,15 @@ public class UserDto {
 	public UserDto() {
 	}
 
-	public UserDto(UUID id, String firstName, String lastName, String username, String email, String password,
-			Timestamp createdAt, Timestamp updatedAt) {
+	public UserDto(UUID id, 
+				  String firstName, 
+				  String lastName, 
+				  String username, 
+				  String email, 
+				  String password,
+				  Timestamp createdAt, 
+				  Timestamp updatedAt) {
+					  
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;

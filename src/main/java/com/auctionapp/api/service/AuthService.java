@@ -28,8 +28,11 @@ public class AuthService {
 	private final AuthenticationManager authenticationManager;
 	private final JwtProvider jwtProvider;
 
-	public AuthService(PasswordEncoder passwordEncoder, UserRepository userRepository,
-			AuthenticationManager authenticationManager, JwtProvider jwtProvider) {
+	public AuthService(final PasswordEncoder passwordEncoder, 
+						final UserRepository userRepository,
+						final AuthenticationManager authenticationManager, 
+						final JwtProvider jwtProvider) {
+
 		this.passwordEncoder = passwordEncoder;
 		this.userRepository = userRepository;
 		this.authenticationManager = authenticationManager;
@@ -55,6 +58,7 @@ public class AuthService {
 	public AuthenticationResponse login(LoginRequest loginRequest) {
 		Authentication authenticate = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+		
 		SecurityContextHolder.getContext().setAuthentication(authenticate);
 		String token = jwtProvider.generateToken(authenticate);
 

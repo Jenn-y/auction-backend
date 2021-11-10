@@ -21,36 +21,43 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtProvider jwtProvider;
     private final UserDetailsService userDetailsService;
 
-    public JwtAuthenticationFilter(JwtProvider jwtProvider, UserDetailsService userDetailsService) {
+    public JwtAuthenticationFilter(final JwtProvider jwtProvider, 
+                                    final UserDetailsService userDetailsService) {
         this.jwtProvider = jwtProvider;
         this.userDetailsService = userDetailsService;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, 
+                                    HttpServletResponse response, 
+                                    FilterChain filterChain) throws ServletException, IOException {
+        
         String jwt = getJwtFromRequest(request);
 
         if (StringUtils.hasText(jwt) && jwtProvider.validateToken(jwt)) {
+
             String username = jwtProvider.getUsernameFromJwt(jwt);
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
-                    null, userDetails.getAuthorities());
+                                                                                                        null, 
+                                                                                                        userDetails.getAuthorities());
+            
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-        filterChain.doFilter(request, response);
 
+        filterChain.doFilter(request, response);
     }
 
     private String getJwtFromRequest(HttpServletRequest request) {
+
         String bearerToken = request.getHeader(SecurityConstants.HEADER_STRING);
 
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(SecurityConstants.TOKEN_PREFIX)) {
             return bearerToken.substring(7);
         }
+        
         return bearerToken;
     }
 
