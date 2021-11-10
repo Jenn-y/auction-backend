@@ -22,29 +22,29 @@ public class User {
 	@Type(type = "pg-uuid")
 	private UUID id;
 
-	@Column(name = "first_name", nullable = true)
+	@Column
 	private String firstName;
 
-	@Column(name = "last_name", nullable = true)
+	@Column
 	private String lastName;
 
-	@Column(name = "username", nullable = true)
+	@Column
 	private String username;
 
-	@Column(name = "email", nullable = false, unique = true)
+	@Column
 	private String email;
 
-	@Column(name = "password", nullable = false)
+	@Column
 	private String password;
 
-	@Column(name = "created_at", nullable = true)
+	@Column
 	private Timestamp createdAt;
 
-	@Column(name = "updated_at", nullable = true)
+	@Column
 	private Timestamp updatedAt;
 
+	@Column
 	@Enumerated(EnumType.STRING)
-	@Column(name = "role")
 	private UserRoleEnum role;
 
 	public User() {
