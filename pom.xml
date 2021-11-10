@@ -15,10 +15,10 @@
 	<description>Spring Boot Project</description>
 	<properties>
 		<java.version>11</java.version>
-		<dependency.version>3.0.0</dependency.version>
-		<jwtDependency.version>0.11.2</jwtDependency.version>
-		<securityCoreDependency.version>5.4.6</securityCoreDependency.version>
-		<starterSecurityDependency.version>2.3.1.RELEASE</starterSecurityDependency.version>
+		<springfox.version>3.0.0</springfox.version>
+		<jsonwebtoken.version>0.11.2</jsonwebtoken.version>
+		<securitycore.version>5.4.6</securitycore.version>
+		<startersecurity.version>2.3.1.RELEASE</startersecurity.version>
 	</properties>
 
 	<dependencies>
@@ -33,40 +33,40 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>${dependency.version}</version>
+			<version>${springfox.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
-			<version>${dependency.version}</version>
+			<version>${springfox.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${dependency.version}</version>
+			<version>${springfox.version}</version>
 		</dependency>
 
 		<!-- JWT Related dependencies -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
-			<version>${jwtDependency.version}</version>
+			<version>${jsonwebtoken.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
 			<scope>runtime</scope>
-			<version>${jwtDependency.version}</version>
+			<version>${jsonwebtoken.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-jackson</artifactId>
 			<scope>runtime</scope>
-			<version>${jwtDependency.version}</version>
+			<version>${jsonwebtoken.version}</version>
 		</dependency>
 
 		<!-- Drivers Related dependencies -->
@@ -90,13 +90,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId> 
 			<artifactId>spring-boot-starter-security</artifactId>
-			<version>${starterSecurityDependency.version}</version>
+			<version>${startersecurity.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>${securityCoreDependency.version}</version>
+			<version>${securitycore.version}</version>
 		</dependency>
 
 		<dependency>
@@ -118,10 +118,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
