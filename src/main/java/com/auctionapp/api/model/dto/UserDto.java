@@ -1,9 +1,10 @@
 package com.auctionapp.api.model.dto;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 public class UserDto {
-	private Long uuid;
+	private UUID uuid;
 	private String firstName;
 	private String lastName;
 	private String username;
@@ -15,7 +16,7 @@ public class UserDto {
 	public UserDto() {
 	}
 
-	public UserDto(Long uuid, String firstName, String lastName, String username, String email, String password,
+	public UserDto(UUID uuid, String firstName, String lastName, String username, String email, String password,
 			Timestamp createdAt, Timestamp updatedAt) {
 		this.uuid = uuid;
 		this.firstName = firstName;
@@ -27,11 +28,11 @@ public class UserDto {
 		this.updatedAt = updatedAt;
 	}
 
-	public Long getUuid() {
+	public UUID getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(Long uuid) {
+	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
 	}
 

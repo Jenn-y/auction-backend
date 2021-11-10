@@ -7,11 +7,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "users")
-public class User extends EntityWithUUID {
+public class User {
+
+	@Id
+	@GeneratedValue(generator = "UUID")
+	@Type(type = "pg-uuid")
+	private UUID uuid;
 
 	@Column(name = "first_name", nullable = true)
 	private String firstName;
@@ -42,11 +51,11 @@ public class User extends EntityWithUUID {
 	}
 
 	public UUID getUuid() {
-		return super.getUuid();
+		return uuid;
 	}
 
 	public void setUuid(UUID uuid) {
-		super.setUuid(uuid);
+		this.uuid = uuid;
 	}
 
 	public String getFirstName() {
