@@ -20,16 +20,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
 public class AuthService {
 
 	private final PasswordEncoder passwordEncoder;
 	private final UserRepository userRepository;
 	private final AuthenticationManager authenticationManager;
 	private final JwtProvider jwtProvider;
+
+	public AuthService(PasswordEncoder passwordEncoder, UserRepository userRepository,
+			AuthenticationManager authenticationManager, JwtProvider jwtProvider) {
+		this.passwordEncoder = passwordEncoder;
+		this.userRepository = userRepository;
+		this.authenticationManager = authenticationManager;
+		this.jwtProvider = jwtProvider;
+	}
 
 	@Transactional
 	public String register(RegisterRequest registerRequest) {

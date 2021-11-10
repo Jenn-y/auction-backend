@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.AllArgsConstructor;
-
 import static java.util.Collections.singletonList;
 
 import java.util.Collection;
@@ -19,10 +17,13 @@ import com.auctionapp.api.model.entities.User;
 import com.auctionapp.api.repository.UserRepository;
 
 @Service
-@AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
+
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)
