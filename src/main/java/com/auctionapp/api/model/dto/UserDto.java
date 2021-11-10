@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 public class UserDto {
-	private UUID uuid;
+	private UUID id;
 	private String firstName;
 	private String lastName;
 	private String username;
@@ -16,9 +16,9 @@ public class UserDto {
 	public UserDto() {
 	}
 
-	public UserDto(UUID uuid, String firstName, String lastName, String username, String email, String password,
+	public UserDto(UUID id, String firstName, String lastName, String username, String email, String password,
 			Timestamp createdAt, Timestamp updatedAt) {
-		this.uuid = uuid;
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
@@ -29,11 +29,11 @@ public class UserDto {
 	}
 
 	public UUID getUuid() {
-		return uuid;
+		return id;
 	}
 
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
+	public void setUuid(UUID id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {

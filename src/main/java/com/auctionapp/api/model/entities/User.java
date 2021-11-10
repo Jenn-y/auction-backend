@@ -20,7 +20,7 @@ public class User {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@Type(type = "pg-uuid")
-	private UUID uuid;
+	private UUID id;
 
 	@Column(name = "first_name", nullable = true)
 	private String firstName;
@@ -51,11 +51,11 @@ public class User {
 	}
 
 	public UUID getUuid() {
-		return uuid;
+		return id;
 	}
 
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
+	public void setUuid(UUID id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {
