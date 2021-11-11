@@ -44,11 +44,11 @@ public class Auction {
 
 	@Enumerated(EnumType.STRING)
 	@Column
-	private StatusEnum status;
+	private Status status;
 
 	@Enumerated(EnumType.STRING)
 	@Column
-	private StatusEnum shippingCostIncluded;
+	private Status shippingCostIncluded;
 
 	@ManyToOne
 	@JoinColumn
@@ -121,19 +121,19 @@ public class Auction {
 		this.phone = phone;
 	}
 
-	public StatusEnum getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusEnum status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public StatusEnum getShippingCostIncluded() {
+	public Status getShippingCostIncluded() {
 		return shippingCostIncluded;
 	}
 
-	public void setShippingCostIncluded(StatusEnum shippingCostIncluded) {
+	public void setShippingCostIncluded(Status shippingCostIncluded) {
 		this.shippingCostIncluded = shippingCostIncluded;
 	}
 
