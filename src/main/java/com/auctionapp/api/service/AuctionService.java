@@ -30,12 +30,12 @@ public class AuctionService {
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
-	public AuctionDto getAuction(UUID uuid) {
-		Optional<Auction> auction = auctionRepository.findById(uuid);
+	public AuctionDto getAuction(final UUID id) {
+		Optional<Auction> auction = auctionRepository.findById(id);
 		if (auction.isPresent()) {
 			return toPayload(auction.get());
 		}
-		throw new RuntimeException("Auction with id " + uuid + " does not exist!");
+		throw new RuntimeException("Auction with id " + id + " does not exist!");
 	}
 
 	public static Auction fromPayload(AuctionDto payload) {
