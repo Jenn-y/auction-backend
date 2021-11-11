@@ -45,7 +45,7 @@ public class User {
 
 	@Column
 	@Enumerated(EnumType.STRING)
-	private UserRoleEnum role;
+	private UserRole role;
 
 	public User() {
 	}
@@ -114,11 +114,11 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	public UserRoleEnum getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
-	public void setRole(UserRoleEnum role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 }

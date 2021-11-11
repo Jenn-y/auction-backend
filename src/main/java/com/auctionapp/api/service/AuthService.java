@@ -8,7 +8,7 @@ import com.auctionapp.api.model.dto.AuthenticationResponse;
 import com.auctionapp.api.model.dto.LoginRequest;
 import com.auctionapp.api.model.dto.RegisterRequest;
 import com.auctionapp.api.model.entities.User;
-import com.auctionapp.api.model.entities.UserRoleEnum;
+import com.auctionapp.api.model.entities.UserRole;
 import com.auctionapp.api.repository.UserRepository;
 import com.auctionapp.api.security.JwtProvider;
 
@@ -92,7 +92,7 @@ public class AuthService {
 		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 		user.setCreatedAt(Timestamp.from(Instant.now()));
 
-		user.setRole(UserRoleEnum.USER);
+		user.setRole(UserRole.USER);
 		if (userRepository.save(user) != null) {
 			return "User registration successful";
 		}
