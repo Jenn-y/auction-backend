@@ -41,7 +41,7 @@ public class Category {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(final UUID id) {
 		this.id = id;
 	}
 
@@ -49,7 +49,7 @@ public class Category {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -57,7 +57,7 @@ public class Category {
 		return subcategory;
 	}
 
-	public void setSubcategory(Category subcategory) {
+	public void setSubcategory(final Category subcategory) {
 		this.subcategory = subcategory;
 	}
 
@@ -65,7 +65,7 @@ public class Category {
 		return itemList;
 	}
 
-	public void setItemList(Set<Auction> itemList) {
+	public void setItemList(final Set<Auction> itemList) {
 		this.itemList = itemList;
 	}
 }

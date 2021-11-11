@@ -54,7 +54,7 @@ public class User {
 		return id;
 	}
 
-	public void setUuid(UUID id) {
+	public void setUuid(final UUID id) {
 		this.id = id;
 	}
 
@@ -62,7 +62,7 @@ public class User {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -70,7 +70,7 @@ public class User {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
 
@@ -78,7 +78,7 @@ public class User {
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
 	}
 
@@ -86,7 +86,7 @@ public class User {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(final String email) {
 		this.email = email;
 	}
 
@@ -94,7 +94,7 @@ public class User {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 
@@ -102,7 +102,7 @@ public class User {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Timestamp createdAt) {
+	public void setCreatedAt(final Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -110,7 +110,7 @@ public class User {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Timestamp updatedAt) {
+	public void setUpdatedAt(final Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
@@ -118,7 +118,7 @@ public class User {
 		return role;
 	}
 
-	public void setRole(UserRole role) {
+	public void setRole(final UserRole role) {
 		this.role = role;
 	}
 }

@@ -49,7 +49,7 @@ public class Item {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -57,7 +57,7 @@ public class Item {
 		return startPrice;
 	}
 
-	public void setStartPrice(Double startPrice) {
+	public void setStartPrice(final Double startPrice) {
 		this.startPrice = startPrice;
 	}
 
@@ -65,7 +65,7 @@ public class Item {
 		return color;
 	}
 
-	public void setColor(String color) {
+	public void setColor(final String color) {
 		this.color = color;
 	}
 
@@ -73,7 +73,7 @@ public class Item {
 		return size;
 	}
 
-	public void setSize(Integer size) {
+	public void setSize(final Integer size) {
 		this.size = size;
 	}
 
@@ -81,7 +81,7 @@ public class Item {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 }

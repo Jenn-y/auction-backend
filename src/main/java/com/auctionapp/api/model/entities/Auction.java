@@ -69,7 +69,7 @@ public class Auction {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(final UUID id) {
 		this.id = id;
 	}
 
@@ -77,7 +77,7 @@ public class Auction {
 		return startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(final Timestamp startDate) {
 		this.startDate = startDate;
 	}
 
@@ -85,7 +85,7 @@ public class Auction {
 		return endDate;
 	}
 
-	public void setEndDate(Timestamp endDate) {
+	public void setEndDate(final Timestamp endDate) {
 		this.endDate = endDate;
 	}
 
@@ -93,7 +93,7 @@ public class Auction {
 		return highestBid;
 	}
 
-	public void setHighestBid(Double highestBid) {
+	public void setHighestBid(final Double highestBid) {
 		this.highestBid = highestBid;
 	}
 
@@ -101,7 +101,7 @@ public class Auction {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(final String address) {
 		this.address = address;
 	}
 
@@ -109,7 +109,7 @@ public class Auction {
 		return zipCode;
 	}
 
-	public void setZipCode(Integer zipCode) {
+	public void setZipCode(final Integer zipCode) {
 		this.zipCode = zipCode;
 	}
 
@@ -117,7 +117,7 @@ public class Auction {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(final String phone) {
 		this.phone = phone;
 	}
 
@@ -125,7 +125,7 @@ public class Auction {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(final Status status) {
 		this.status = status;
 	}
 
@@ -133,7 +133,7 @@ public class Auction {
 		return shippingCostIncluded;
 	}
 
-	public void setShippingCostIncluded(Status shippingCostIncluded) {
+	public void setShippingCostIncluded(final Status shippingCostIncluded) {
 		this.shippingCostIncluded = shippingCostIncluded;
 	}
 
@@ -141,7 +141,7 @@ public class Auction {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(final Category category) {
 		this.category = category;
 	}
 
@@ -149,7 +149,7 @@ public class Auction {
 		return seller;
 	}
 
-	public void setSeller(User seller) {
+	public void setSeller(final User seller) {
 		this.seller = seller;
 	}
 
@@ -157,7 +157,7 @@ public class Auction {
 		return item;
 	}
 
-	public void setItem(Item item) {
+	public void setItem(final Item item) {
 		this.item = item;
 	}
 }
