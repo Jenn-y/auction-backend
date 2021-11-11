@@ -3,7 +3,7 @@ package com.auctionapp.api.model.dto;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import com.auctionapp.api.model.entities.StatusEnum;
+import com.auctionapp.api.model.entities.Status;
 
 public class AuctionDto {
 	private UUID id;
@@ -13,8 +13,8 @@ public class AuctionDto {
 	private String address;
 	private Integer zipCode;
 	private String phone;
-	private StatusEnum status;
-	private StatusEnum shippingCostIncluded;
+	private Status status;
+	private Status shippingCostIncluded;
 	private CategoryDto category;
 	private UserDto seller;
 	private ItemDto item;
@@ -28,8 +28,8 @@ public class AuctionDto {
 					final String address,
 					final Integer zipCode,
 					final String phone,
-					final StatusEnum status,
-					final StatusEnum shippingCostIncluded,
+					final Status status,
+					final Status shippingCostIncluded,
 					final CategoryDto category,
 					final UserDto seller,
 					final ItemDto item) {
@@ -76,11 +76,11 @@ public class AuctionDto {
 		return phone;
 	}
 
-	public StatusEnum getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public StatusEnum getShippingCostIncluded() {
+	public Status getShippingCostIncluded() {
 		return shippingCostIncluded;
 	}
 
@@ -124,11 +124,11 @@ public class AuctionDto {
 		this.phone = phone;
 	}
 
-	public void setStatus(StatusEnum status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public void setShippingCostIncluded(StatusEnum shippingCostIncluded) {
+	public void setShippingCostIncluded(Status shippingCostIncluded) {
 		this.shippingCostIncluded = shippingCostIncluded;
 	}
 

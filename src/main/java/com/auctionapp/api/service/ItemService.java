@@ -23,7 +23,7 @@ public class ItemService {
 
 	public static ItemDto toPayload(Item item) {
 		ItemDto payload = new ItemDto();
-		payload.setId(item.getId());
+		if (item.getId() != null) payload.setId(item.getId());
 		payload.setName(item.getName());
 		payload.setStartPrice(item.getStartPrice());
 		payload.setColor(item.getColor());
