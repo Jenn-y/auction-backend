@@ -20,7 +20,7 @@ public class UserService {
 
 	public static UserDto toPayload(User user) {
 		UserDto payload = new UserDto();
-		payload.setUuid(user.getUuid());
+		payload.setId(user.getUuid());
 		payload.setEmail(user.getEmail());
 		payload.setFirstName(user.getFirstName());
 		payload.setLastName(user.getLastName());

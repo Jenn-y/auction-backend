@@ -28,28 +28,4 @@ public class RegisterRequestTest {
     void getPassword() {
         assertEquals("123456", registerRequest.getPassword());
     }
-
-    @Test
-    void setName() {
-        registerRequest.setFirstName("JohnNew");
-        assertEquals("JohnNew", registerRequest.getFirstName());
-    }
-
-    @Test
-    void setSurname() {
-        registerRequest.setLastName("DoeNew");
-        assertEquals("DoeNew", registerRequest.getLastName());
-    }
-
-    @Test
-    void setEmail() {
-        registerRequest.setEmail("e@email.com");
-        assertEquals("e@email.com", registerRequest.getEmail());
-    }
-
-    @Test
-    void setPassword() {
-        registerRequest.setPassword("111111");
-        assertEquals("111111", registerRequest.getPassword());
-    }
 }

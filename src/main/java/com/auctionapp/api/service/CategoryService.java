@@ -12,11 +12,13 @@ public class CategoryService {
 
 	public static Category fromPayload(CategoryDto payload) {
 		Category category = new Category();
-		if (payload.getUuid() != null)
-			category.setUuid(payload.getUuid());
+		if (payload.getId() != null) {
+			category.setId(payload.getId());
+		}
 		category.setName(payload.getName());
-		if (payload.getSubcategory() != null)
+		if (payload.getSubcategory() != null) {
 			category.setSubcategory(CategoryService.fromPayload(payload.getSubcategory()));
+		}
 		category.setItemList(
 				payload.getItemList().stream().map(t -> AuctionService.fromPayload(t)).collect(Collectors.toSet()));
 		return category;
@@ -24,10 +26,11 @@ public class CategoryService {
 
 	public static CategoryDto toPayload(Category category) {
 		CategoryDto payload = new CategoryDto();
-		payload.setUuid(category.getUuid());
+		payload.setId(category.getId());
 		payload.setName(category.getName());
-		if (category.getSubcategory() != null)
+		if (category.getSubcategory() != null) {
 			payload.setSubcategory(CategoryService.toPayload(category.getSubcategory()));
+		}
 		return payload;
 	}
 }

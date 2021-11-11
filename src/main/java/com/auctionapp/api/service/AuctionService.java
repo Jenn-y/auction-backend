@@ -1,6 +1,5 @@
 package com.auctionapp.api.service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -12,20 +11,21 @@ import com.auctionapp.api.repository.AuctionRepository;
 
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class AuctionService {
 
 	private final AuctionRepository auctionRepository;
 
-	public Collection<AuctionDto> getNewArrivals() {
+	public AuctionService(final AuctionRepository auctionRepository) {
+		this.auctionRepository = auctionRepository;
+	}
+
+	public List<AuctionDto> getNewArrivals() {
 		List<Auction> auctions = auctionRepository.findAllByOrderByStartDateDesc();
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
-	public Collection<AuctionDto> getLastChance() {
+	public List<AuctionDto> getLastChance() {
 		List<Auction> auctions = auctionRepository.findAllByOrderByEndDateAsc();
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
@@ -40,12 +40,13 @@ public class AuctionService {
 
 	public static Auction fromPayload(AuctionDto payload) {
 		Auction auction = new Auction();
-		if (payload.getUuid() != null)
-			auction.setUuid(payload.getUuid());
+		if (payload.getId() != null) {
+			auction.setId(payload.getId());
+		}
 		auction.setStartDate(payload.getStartDate());
 		auction.setEndDate(payload.getEndDate());
 		auction.setHighestBid(payload.getHighestBid());
-		auction.setAdress(payload.getAdress());
+		auction.setAddress(payload.getAddress());
 		auction.setPhone(payload.getPhone());
 		auction.setZipCode(payload.getZipCode());
 		auction.setStatus(payload.getStatus());
@@ -58,11 +59,11 @@ public class AuctionService {
 
 	public static AuctionDto toPayload(Auction auction) {
 		AuctionDto payload = new AuctionDto();
-		payload.setUuid(auction.getUuid());
+		payload.setId(auction.getId());
 		payload.setStartDate(auction.getStartDate());
 		payload.setEndDate(auction.getEndDate());
 		payload.setHighestBid(auction.getHighestBid());
-		payload.setAdress(auction.getAdress());
+		payload.setAddress(auction.getAddress());
 		payload.setPhone(auction.getPhone());
 		payload.setZipCode(auction.getZipCode());
 		payload.setStatus(auction.getStatus());

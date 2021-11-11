@@ -23,7 +23,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 @Service
-
 public class JwtProvider {
 
     private KeyStore keyStore;
@@ -40,9 +39,14 @@ public class JwtProvider {
     }
 
     public String generateToken(Authentication authentication) {
-        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) authentication
-                .getPrincipal();
-        return Jwts.builder().setSubject(principal.getUsername()).signWith(getPrivateKey()).compact();
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) 
+        authentication.getPrincipal();
+
+        return Jwts.builder()
+                .setSubject(principal
+                .getUsername())
+                .signWith(getPrivateKey())
+                .compact();
     }
 
     private PrivateKey getPrivateKey() {
@@ -54,7 +58,10 @@ public class JwtProvider {
     }
 
     public boolean validateToken(String jwt) {
-        parserBuilder().setSigningKey(getPublicKey()).build().parseClaimsJws(jwt);
+        parserBuilder()
+            .setSigningKey(getPublicKey())
+            .build()
+            .parseClaimsJws(jwt);
         return true;
     }
 
@@ -67,7 +74,11 @@ public class JwtProvider {
     }
 
     public String getUsernameFromJwt(String token) {
-        Claims claims = parserBuilder().setSigningKey(getPublicKey()).build().parseClaimsJws(token).getBody();
+        Claims claims = parserBuilder()
+                            .setSigningKey(getPublicKey())
+                            .build()
+                            .parseClaimsJws(token)
+                            .getBody();
 
         return claims.getSubject();
     }

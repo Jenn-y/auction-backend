@@ -21,15 +21,18 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import lombok.AllArgsConstructor;
-
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfiguration(final UserDetailsService userDetailsService,
+                                final JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.userDetailsService = userDetailsService;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
 
     @Override
     @Bean
@@ -52,18 +55,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Set permissions on endpoints
         http.authorizeRequests()
-                .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security",
-                        "/swagger-ui.html", "/webjars/**")
-                .permitAll().antMatchers("/api/auth/**").permitAll().antMatchers("/api/auctions/**").permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "**").permitAll().anyRequest().authenticated();
+                .antMatchers("/v2/api-docs", 
+                            "/configuration/ui", 
+                            "/swagger-resources/**", 
+                            "/configuration/security",
+                            "/swagger-ui.html", 
+                            "/webjars/**")
+                .permitAll()
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auctions/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
+                .anyRequest().authenticated();
 
         // Add JWT token filter
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter, 
+                            UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder((passwordEncoder()));
+        authenticationManagerBuilder.userDetailsService(userDetailsService)
+                                    .passwordEncoder((passwordEncoder()));
     }
 
     @Bean

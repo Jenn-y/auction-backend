@@ -18,16 +18,4 @@ public class LoginRequestTest {
     void getPassword() {
         assertEquals("123456", loginRequest.getPassword());
     }
-
-    @Test
-    void setEmail() {
-        loginRequest.setEmail("johndoenew@gmail.com");
-        assertEquals("johndoenew@gmail.com", loginRequest.getEmail());
-    }
-
-    @Test
-    void setPassword() {
-        loginRequest.setPassword("654321");
-        assertEquals("654321", loginRequest.getPassword());
-    }
 }

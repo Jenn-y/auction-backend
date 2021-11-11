@@ -1,5 +1,13 @@
 package com.auctionapp.api.service;
 
+import static java.util.Collections.singletonList;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.auctionapp.api.model.entities.User;
+import com.auctionapp.api.repository.UserRepository;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,21 +16,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.AllArgsConstructor;
-
-import static java.util.Collections.singletonList;
-
-import java.util.Collection;
-import java.util.Optional;
-
-import com.auctionapp.api.model.entities.User;
-import com.auctionapp.api.repository.UserRepository;
-
 @Service
-@AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
+
+    public UserDetailsServiceImpl(final UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -35,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 getAuthorities("USER"));
     }
 
-    private Collection<? extends GrantedAuthority> getAuthorities(String role) {
+    private List<? extends GrantedAuthority> getAuthorities(String role) {
         return singletonList(new SimpleGrantedAuthority(role));
     }
 
