@@ -31,8 +31,9 @@ public class AuctionService {
 
 	public static Auction fromPayload(AuctionDto payload) {
 		Auction auction = new Auction();
-		if (payload.getId() != null)
+		if (payload.getId() != null) {
 			auction.setId(payload.getId());
+		}
 		auction.setStartDate(payload.getStartDate());
 		auction.setEndDate(payload.getEndDate());
 		auction.setHighestBid(payload.getHighestBid());
