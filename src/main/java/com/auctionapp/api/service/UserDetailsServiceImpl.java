@@ -1,5 +1,13 @@
 package com.auctionapp.api.service;
 
+import static java.util.Collections.singletonList;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.auctionapp.api.model.entities.User;
+import com.auctionapp.api.repository.UserRepository;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,14 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import static java.util.Collections.singletonList;
-
-import java.util.Collection;
-import java.util.Optional;
-
-import com.auctionapp.api.model.entities.User;
-import com.auctionapp.api.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -36,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 getAuthorities("USER"));
     }
 
-    private Collection<? extends GrantedAuthority> getAuthorities(String role) {
+    private List<? extends GrantedAuthority> getAuthorities(String role) {
         return singletonList(new SimpleGrantedAuthority(role));
     }
 

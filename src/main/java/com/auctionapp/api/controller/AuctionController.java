@@ -1,6 +1,6 @@
 package com.auctionapp.api.controller;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.service.AuctionService;
@@ -22,15 +22,15 @@ public class AuctionController {
 	}
 
 	@GetMapping("/new_arrivals")
-	public ResponseEntity<Collection<AuctionDto>> getNewArrivals() {
-		Collection<AuctionDto> auctions = service.getNewArrivals();
+	public ResponseEntity<List<AuctionDto>> getNewArrivals() {
+		List<AuctionDto> auctions = service.getNewArrivals();
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
 
 	@GetMapping("/last_chance")
-	public ResponseEntity<Collection<AuctionDto>> getLastChance() {
-		Collection<AuctionDto> auctions = service.getLastChance();
+	public ResponseEntity<List<AuctionDto>> getLastChance() {
+		List<AuctionDto> auctions = service.getLastChance();
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
