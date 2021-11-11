@@ -13,7 +13,6 @@ public class ItemService {
 		if (payload.getId() != null)
 			item.setId(payload.getId());
 		item.setName(payload.getName());
-		item.setItemNumber(payload.getItemNumber());
 		item.setStartPrice(payload.getStartPrice());
 		item.setColor(payload.getColor());
 		item.setSize(payload.getSize());
@@ -25,7 +24,6 @@ public class ItemService {
 		ItemDto payload = new ItemDto();
 		payload.setId(item.getId());
 		payload.setName(item.getName());
-		payload.setItemNumber(item.getItemNumber());
 		payload.setStartPrice(item.getStartPrice());
 		payload.setColor(item.getColor());
 		payload.setSize(item.getSize());

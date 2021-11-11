@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "items")
+@Table(name = "item")
 public class Item {
 
 	@Id
@@ -19,23 +19,23 @@ public class Item {
 	@Type(type = "pg-uuid")
 	private UUID id;
 
-	@Column(name = "item_number", nullable = false)
-	private String itemNumber;
-
-	@Column(name = "name", nullable = false)
+	@Column
 	private String name;
 
-	@Column(name = "start_price", nullable = true)
+	@Column
 	private Double startPrice;
 
-	@Column(name = "color", nullable = true)
+	@Column
 	private String color;
 
-	@Column(name = "size", nullable = true)
+	@Column
 	private Integer size;
 
-	@Column(name = "description", nullable = true)
+	@Column
 	private String description;
+
+	public Item() {
+	}
 
 	public UUID getId() {
 		return id;
@@ -43,14 +43,6 @@ public class Item {
 
 	public void setId(UUID id) {
 		this.id = id;
-	}
-
-	public String getItemNumber() {
-		return itemNumber;
-	}
-
-	public void setItemNumber(String itemNumber) {
-		this.itemNumber = itemNumber;
 	}
 
 	public String getName() {

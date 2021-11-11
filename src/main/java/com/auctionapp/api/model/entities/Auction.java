@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "auctions")
+@Table(name = "auction")
 public class Auction {
 
 	@Id
@@ -24,43 +24,46 @@ public class Auction {
 	@Type(type = "pg-uuid")
 	private UUID id;
 	
-	@Column(name = "start_date", nullable = true)
+	@Column
 	private Timestamp startDate;
 
-	@Column(name = "end_date", nullable = true)
+	@Column
 	private Timestamp endDate;
 
-	@Column(name = "highest_bid", nullable = true)
-	private Float highestBid;
+	@Column
+	private Double highestBid;
 
-	@Column(name = "adress", nullable = true)
-	private String adress;
+	@Column
+	private String address;
 
-	@Column(name = "zip_code", nullable = true)
+	@Column
 	private Integer zipCode;
 
-	@Column(name = "phone", nullable = true)
+	@Column
 	private String phone;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "status", nullable = true)
+	@Column
 	private StatusEnum status;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "shipping_cost_included", nullable = true)
+	@Column
 	private StatusEnum shippingCostIncluded;
 
 	@ManyToOne
-	@JoinColumn(name = "category", referencedColumnName = "uuid", nullable = true)
+	@JoinColumn
 	private Category category;
 
 	@ManyToOne
-	@JoinColumn(name = "seller", referencedColumnName = "uuid", nullable = true)
+	@JoinColumn
 	private User seller;
 
 	@ManyToOne
-	@JoinColumn(name = "item", referencedColumnName = "uuid", nullable = true)
+	@JoinColumn
 	private Item item;
+
+	public Auction() {
+	}
 
 	public UUID getId() {
 		return id;
@@ -86,20 +89,20 @@ public class Auction {
 		this.endDate = endDate;
 	}
 
-	public Float getHighestBid() {
+	public Double getHighestBid() {
 		return highestBid;
 	}
 
-	public void setHighestBid(Float highestBid) {
+	public void setHighestBid(Double highestBid) {
 		this.highestBid = highestBid;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Integer getZipCode() {

@@ -16,12 +16,6 @@ public class ItemTest {
 	}
 
 	@Test
-	void setItemNumber() {
-		item.setItemNumber("2");
-		assertEquals("2", item.getItemNumber());
-	}
-
-	@Test
 	void setStartPrice() {
 		item.setStartPrice(20.0);
 		assertEquals(20, item.getStartPrice());

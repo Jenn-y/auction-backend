@@ -36,7 +36,7 @@ public class AuctionService {
 		auction.setStartDate(payload.getStartDate());
 		auction.setEndDate(payload.getEndDate());
 		auction.setHighestBid(payload.getHighestBid());
-		auction.setAdress(payload.getAdress());
+		auction.setAddress(payload.getAddress());
 		auction.setPhone(payload.getPhone());
 		auction.setZipCode(payload.getZipCode());
 		auction.setStatus(payload.getStatus());
@@ -53,7 +53,7 @@ public class AuctionService {
 		payload.setStartDate(auction.getStartDate());
 		payload.setEndDate(auction.getEndDate());
 		payload.setHighestBid(auction.getHighestBid());
-		payload.setAdress(auction.getAdress());
+		payload.setAddress(auction.getAddress());
 		payload.setPhone(auction.getPhone());
 		payload.setZipCode(auction.getZipCode());
 		payload.setStatus(auction.getStatus());

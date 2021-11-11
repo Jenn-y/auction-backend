@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "category")
 public class Category {
 
 	@Id
@@ -24,15 +24,18 @@ public class Category {
 	@Type(type = "pg-uuid")
 	private UUID id;
 
-	@Column(name = "name", nullable = false)
+	@Column
 	private String name;
 
 	@ManyToOne
-	@JoinColumn(name = "subcategory", referencedColumnName = "uuid", nullable = true)
+	@JoinColumn
 	private Category subcategory;
 
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private Set<Auction> itemList;
+
+	public Category(){
+	}
 
 	public UUID getId() {
 		return id;
