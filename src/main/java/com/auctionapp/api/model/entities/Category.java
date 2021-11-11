@@ -28,7 +28,7 @@ public class Category {
 	private String name;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "subcategory", referencedColumnName = "id")
 	private Category subcategory;
 
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
