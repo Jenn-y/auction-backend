@@ -1,6 +1,5 @@
 package com.auctionapp.api.service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,12 +18,12 @@ public class AuctionService {
 		this.auctionRepository = auctionRepository;
 	}
 
-	public Collection<AuctionDto> getNewArrivals() {
+	public List<AuctionDto> getNewArrivals() {
 		List<Auction> auctions = auctionRepository.findAllByOrderByStartDateDesc();
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
-	public Collection<AuctionDto> getLastChance() {
+	public List<AuctionDto> getLastChance() {
 		List<Auction> auctions = auctionRepository.findAllByOrderByEndDateAsc();
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
