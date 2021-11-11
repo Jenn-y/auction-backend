@@ -1,61 +1,163 @@
 package com.auctionapp.api.model.entities;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "auctions")
-@Getter
-@Setter
-@NoArgsConstructor
-public class Auction extends EntityWithUUID {
+@Table(name = "auction")
+public class Auction {
 
-	@Column(name = "start_date", nullable = true)
+	@Id
+	@GeneratedValue(generator = "UUID")
+	@Type(type = "pg-uuid")
+	private UUID id;
+	
+	@Column
 	private Timestamp startDate;
 
-	@Column(name = "end_date", nullable = true)
+	@Column
 	private Timestamp endDate;
 
-	@Column(name = "highest_bid", nullable = true)
-	private Float highestBid;
+	@Column
+	private Double highestBid;
 
-	@Column(name = "adress", nullable = true)
-	private String adress;
+	@Column
+	private String address;
 
-	@Column(name = "zip_code", nullable = true)
+	@Column
 	private Integer zipCode;
 
-	@Column(name = "phone", nullable = true)
+	@Column
 	private String phone;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "status", nullable = true)
+	@Column
 	private StatusEnum status;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "shipping_cost_included", nullable = true)
+	@Column
 	private StatusEnum shippingCostIncluded;
 
 	@ManyToOne
-	@JoinColumn(name = "category", referencedColumnName = "uuid", nullable = true)
+	@JoinColumn
 	private Category category;
 
 	@ManyToOne
-	@JoinColumn(name = "seller", referencedColumnName = "uuid", nullable = true)
+	@JoinColumn
 	private User seller;
 
 	@ManyToOne
-	@JoinColumn(name = "item", referencedColumnName = "uuid", nullable = true)
+	@JoinColumn
 	private Item item;
+
+	public Auction() {
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public Timestamp getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Timestamp startDate) {
+		this.startDate = startDate;
+	}
+
+	public Timestamp getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Timestamp endDate) {
+		this.endDate = endDate;
+	}
+
+	public Double getHighestBid() {
+		return highestBid;
+	}
+
+	public void setHighestBid(Double highestBid) {
+		this.highestBid = highestBid;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Integer getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(Integer zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public StatusEnum getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusEnum status) {
+		this.status = status;
+	}
+
+	public StatusEnum getShippingCostIncluded() {
+		return shippingCostIncluded;
+	}
+
+	public void setShippingCostIncluded(StatusEnum shippingCostIncluded) {
+		this.shippingCostIncluded = shippingCostIncluded;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public User getSeller() {
+		return seller;
+	}
+
+	public void setSeller(User seller) {
+		this.seller = seller;
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
 }
