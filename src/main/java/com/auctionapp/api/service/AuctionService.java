@@ -10,13 +10,14 @@ import com.auctionapp.api.repository.AuctionRepository;
 
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class AuctionService {
 
 	private final AuctionRepository auctionRepository;
+
+	public AuctionService(final AuctionRepository auctionRepository) {
+		this.auctionRepository = auctionRepository;
+	}
 
 	public Collection<AuctionDto> getNewArrivals() {
 		List<Auction> auctions = auctionRepository.findAllByOrderByStartDateDesc();
@@ -30,8 +31,8 @@ public class AuctionService {
 
 	public static Auction fromPayload(AuctionDto payload) {
 		Auction auction = new Auction();
-		if (payload.getUuid() != null)
-			auction.setUuid(payload.getUuid());
+		if (payload.getId() != null)
+			auction.setId(payload.getId());
 		auction.setStartDate(payload.getStartDate());
 		auction.setEndDate(payload.getEndDate());
 		auction.setHighestBid(payload.getHighestBid());
@@ -48,7 +49,7 @@ public class AuctionService {
 
 	public static AuctionDto toPayload(Auction auction) {
 		AuctionDto payload = new AuctionDto();
-		payload.setUuid(auction.getUuid());
+		payload.setId(auction.getId());
 		payload.setStartDate(auction.getStartDate());
 		payload.setEndDate(auction.getEndDate());
 		payload.setHighestBid(auction.getHighestBid());

@@ -2,15 +2,29 @@ package com.auctionapp.api.model.dto;
 
 import com.auctionapp.api.model.entities.UserRoleEnum;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class AuthenticationResponse {
-	private String authenticationToken;
-	private String email;
-	private UserRoleEnum userRole;
+	private final String authenticationToken;
+	private final String email;
+	private final UserRoleEnum userRole;
+
+	public AuthenticationResponse(final String authenticationToken, 
+									final String email, 
+									final UserRoleEnum userRole) {
+		this.authenticationToken = authenticationToken;
+		this.email = email;
+		this.userRole = userRole;
+	}
+
+	public String getAuthenticationToken() {
+		return authenticationToken;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+	public UserRoleEnum getUserRole() {
+		return userRole;
+	}
 }

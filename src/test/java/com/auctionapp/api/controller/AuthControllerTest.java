@@ -63,21 +63,31 @@ class AuthControllerTest {
     public void loginTest() throws Exception {
         LoginRequest loginRequest = new LoginRequest(user.getEmail(), user.getPassword());
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null);
+
         Mockito.when(authenticationManager.authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(authentication);
+
         String json = mapper.writeValueAsString(loginRequest);
-        mockMvc.perform(post("/api/auth/login").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
-                .content(json).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(jsonPath("$.authenticated").value("true")).andExpect(jsonPath("$.accessToken").isNotEmpty());
+        mockMvc.perform(post("/api/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8")
+                .content(json).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.authenticated").value("true"))
+                .andExpect(jsonPath("$.accessToken").isNotEmpty());
     }
 
     @Test
     public void regstrationTest() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("John", "Do", user.getEmail(), user.getPassword());
         userRepository.save(user);
+
         String json = mapper.writeValueAsString(registerRequest);
-        mockMvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
-                .content(json).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+        mockMvc.perform(post("/api/auth/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8")
+                .content(json).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value("true"))
                 .andExpect(jsonPath("$.message").value("User registered successfully"));
     }

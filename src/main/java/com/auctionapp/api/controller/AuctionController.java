@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.AllArgsConstructor;
-
 @RestController
 @RequestMapping("/api/auctions")
-@AllArgsConstructor
 public class AuctionController {
 
 	private final AuctionService service;
+
+	public AuctionController(final AuctionService auctionService) {
+		this.service = auctionService;
+	}
 
 	@GetMapping("/new_arrivals")
 	public ResponseEntity<Collection<AuctionDto>> getNewArrivals() {

@@ -5,6 +5,7 @@ import java.util.UUID;
 import com.auctionapp.api.model.entities.User;
 
 public class ObjectTestBuilder {
+	
 	private static final String FIRST_NAME = "User";
 	private static final String LAST_NAME = "One";
 	private static final String EMAIL = "userone@gmail.com";
