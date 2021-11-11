@@ -10,8 +10,9 @@ public class ItemService {
 
 	public static Item fromPayload(ItemDto payload) {
 		Item item = new Item();
-		if (payload.getUuid() != null)
-			item.setUuid(payload.getUuid());
+		if (payload.getId() != null) {
+			item.setId(payload.getId());
+		}
 		item.setName(payload.getName());
 		item.setStartPrice(payload.getStartPrice());
 		item.setColor(payload.getColor());
@@ -22,7 +23,7 @@ public class ItemService {
 
 	public static ItemDto toPayload(Item item) {
 		ItemDto payload = new ItemDto();
-		payload.setUuid(item.getUuid());
+		payload.setId(item.getId());
 		payload.setName(item.getName());
 		payload.setStartPrice(item.getStartPrice());
 		payload.setColor(item.getColor());
