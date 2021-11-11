@@ -37,19 +37,19 @@ public class CategoryDto {
 		return itemList;
 	}
 
-	public void setId(UUID id) {
+	public void setId(final UUID id) {
 		this.id = id;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
-	public void setSubcategory(CategoryDto subcategory) {
+	public void setSubcategory(final CategoryDto subcategory) {
 		this.subcategory = subcategory;
 	}
 
-	public void setItemList(Set<AuctionDto> itemList) {
+	public void setItemList(final Set<AuctionDto> itemList) {
 		this.itemList = itemList;
 	}
 }

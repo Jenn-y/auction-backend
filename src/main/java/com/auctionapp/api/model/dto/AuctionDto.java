@@ -96,51 +96,51 @@ public class AuctionDto {
 		return item;
 	}
 
-	public void setId(UUID id) {
+	public void setId(final UUID id) {
 		this.id = id;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(final Timestamp startDate) {
 		this.startDate = startDate;
 	}
 
-	public void setEndDate(Timestamp endDate) {
+	public void setEndDate(final Timestamp endDate) {
 		this.endDate = endDate;
 	}
 
-	public void setHighestBid(Double highestBid) {
+	public void setHighestBid(final Double highestBid) {
 		this.highestBid = highestBid;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(final String address) {
 		this.address = address;
 	}
 
-	public void setZipCode(Integer zipCode) {
+	public void setZipCode(final Integer zipCode) {
 		this.zipCode = zipCode;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(final String phone) {
 		this.phone = phone;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(final Status status) {
 		this.status = status;
 	}
 
-	public void setShippingCostIncluded(Status shippingCostIncluded) {
+	public void setShippingCostIncluded(final Status shippingCostIncluded) {
 		this.shippingCostIncluded = shippingCostIncluded;
 	}
 
-	public void setCategory(CategoryDto category) {
+	public void setCategory(final CategoryDto category) {
 		this.category = category;
 	}
 
-	public void setSeller(UserDto seller) {
+	public void setSeller(final UserDto seller) {
 		this.seller = seller;
 	}
 
-	public void setItem(ItemDto item) {
+	public void setItem(final ItemDto item) {
 		this.item = item;
 	}
 }

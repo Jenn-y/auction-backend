@@ -52,27 +52,27 @@ public class ItemDto {
 		return description;
 	}
 
-	public void setId(UUID id) {
+	public void setId(final UUID id) {
 		this.id = id;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
-	public void setStartPrice(Double startPrice) {
+	public void setStartPrice(final Double startPrice) {
 		this.startPrice = startPrice;
 	}
 
-	public void setColor(String color) {
+	public void setColor(final String color) {
 		this.color = color;
 	}
 
-	public void setSize(Integer size) {
+	public void setSize(final Integer size) {
 		this.size = size;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 }
