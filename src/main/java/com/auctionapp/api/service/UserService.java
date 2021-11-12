@@ -6,15 +6,15 @@ import com.auctionapp.api.model.entities.User;
 public class UserService {
 
 	public static User fromPayload(UserDto payload) {
-		User user = new User();
-		if (payload.getUuid() != null)
-			user.setUuid(payload.getUuid());
-		user.setEmail(payload.getEmail());
-		user.setFirstName(payload.getFirstName());
-		user.setLastName(payload.getLastName());
-		user.setPassword(payload.getPassword());
-		user.setCreatedAt(payload.getCreatedAt());
-		user.setUpdatedAt(payload.getUpdatedAt());
+		User user = new User(payload.getUuid(),
+							payload.getFirstName(),
+							payload.getLastName(),
+							payload.getEmail(),
+							payload.getPassword(),
+							payload.getCreatedAt(),
+							payload.getUpdatedAt(),
+							payload.getRole()
+							);
 		return user;
 	}
 
