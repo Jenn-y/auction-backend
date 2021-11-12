@@ -30,9 +30,6 @@ public class User {
 	private String lastName;
 
 	@Column
-	private String username;
-
-	@Column
 	private String email;
 
 	@Column
@@ -54,7 +51,6 @@ public class User {
 	public User(final UUID id,
                   final String firstName,
                   final String lastName,
-                  String username,
                   final String email,
                   final String password,
                   final Timestamp createdAt,
@@ -63,7 +59,6 @@ public class User {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
         Objects.requireNonNull(email, "The email address must not be null");
 		this.email = email;
 		Objects.requireNonNull(password, "The password must not be null");
@@ -95,14 +90,6 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getEmail() {

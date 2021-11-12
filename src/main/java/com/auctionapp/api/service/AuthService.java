@@ -88,7 +88,6 @@ public class AuthService {
 		User user = new User(null,
 							registerRequest.getFirstName(),
 							registerRequest.getLastName(),
-							null,
 							registerRequest.getEmail(),
 							passwordEncoder.encode(registerRequest.getPassword()),
 							Timestamp.from(Instant.now()),

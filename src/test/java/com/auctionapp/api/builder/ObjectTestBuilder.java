@@ -9,7 +9,6 @@ public class ObjectTestBuilder {
 	
 	private static final String FIRST_NAME = "User";
 	private static final String LAST_NAME = "One";
-	private static final String USERNAME = "Oney";
 	private static final String EMAIL = "userone@gmail.com";
 	private static final String PASSWORD = "123456";
 	private static final UserRoleEnum ROLE = UserRoleEnum.USER;
@@ -23,7 +22,6 @@ public class ObjectTestBuilder {
 		User user = new User(USER_ID,
 							FIRST_NAME,
 							LAST_NAME,
-							USERNAME,
 							EMAIL,
 							PASSWORD,
 							null,
