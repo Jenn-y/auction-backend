@@ -15,4 +15,10 @@ spring:
   data:
     jpa:
       repositories.enabled: true
-
+  flyway:
+    user: postgres
+    password: admin
+    schemas: public
+    baselineOnMigrate: true
+    url: jdbc:postgresql://localhost:5432/auction
+    locations: filesystem:src/main/resources/db/migration
