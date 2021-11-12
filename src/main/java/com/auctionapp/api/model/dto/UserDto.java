@@ -3,14 +3,20 @@ package com.auctionapp.api.model.dto;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import com.auctionapp.api.model.entities.UserRole;
+
 public class UserDto {
-	private final UUID id;
-	private final String firstName;
-	private final String lastName;
-	private final String email;
-	private final String password;
-	private final Timestamp createdAt;
-	private final Timestamp updatedAt;
+	private UUID id;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String password;
+	private Timestamp createdAt;
+	private Timestamp updatedAt;
+	private UserRole role;
+
+	public UserDto() {
+	}
 
 	public UserDto(final UUID id, 
 				  final String firstName, 
@@ -29,7 +35,7 @@ public class UserDto {
 		this.updatedAt = updatedAt;
 	}
 
-	public UUID getUuid() {
+	public UUID getId() {
 		return id;
 	}
 
@@ -55,5 +61,41 @@ public class UserDto {
 
 	public Timestamp getUpdatedAt() {
 		return updatedAt;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 }

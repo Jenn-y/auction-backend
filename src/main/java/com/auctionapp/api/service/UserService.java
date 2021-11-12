@@ -6,7 +6,7 @@ import com.auctionapp.api.model.entities.User;
 public class UserService {
 
 	public static User fromPayload(UserDto payload) {
-		User user = new User(payload.getUuid(),
+		User user = new User(payload.getId(),
 							payload.getFirstName(),
 							payload.getLastName(),
 							payload.getEmail(),
@@ -20,7 +20,7 @@ public class UserService {
 
 	public static UserDto toPayload(User user) {
 		UserDto payload = new UserDto();
-		payload.setUuid(user.getUuid());
+		payload.setId(user.getUuid());
 		payload.setEmail(user.getEmail());
 		payload.setFirstName(user.getFirstName());
 		payload.setLastName(user.getLastName());
