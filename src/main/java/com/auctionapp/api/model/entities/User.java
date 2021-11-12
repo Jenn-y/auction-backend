@@ -49,19 +49,21 @@ public class User {
 	}
 
 	public User(final UUID id,
-                  final String firstName,
-                  final String lastName,
-                  final String email,
-                  final String password,
-                  final Timestamp createdAt,
-                  Timestamp updatedAt,
-                  final UserRoleEnum role) {
+                final String firstName,
+                final String lastName,
+                final String email,
+                final String password,
+                final Timestamp createdAt,
+                final Timestamp updatedAt,
+                final UserRoleEnum role) {
+				
+		Objects.requireNonNull(email, "The email address must not be null");
+		Objects.requireNonNull(password, "The password must not be null");
+		
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        Objects.requireNonNull(email, "The email address must not be null");
 		this.email = email;
-		Objects.requireNonNull(password, "The password must not be null");
         this.password = password;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
