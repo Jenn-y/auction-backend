@@ -1,6 +1,7 @@
 package com.auctionapp.api.model.entities;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -49,6 +50,28 @@ public class User {
 
 	public User() {
 	}
+
+	public User(final UUID id,
+                  final String firstName,
+                  final String lastName,
+                  String username,
+                  final String email,
+                  final String password,
+                  final Timestamp createdAt,
+                  Timestamp updatedAt,
+                  final UserRoleEnum role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        Objects.requireNonNull(email, "The email address must not be null");
+		this.email = email;
+		Objects.requireNonNull(password, "The password must not be null");
+        this.password = password;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.role = role;
+    }
 
 	public UUID getUuid() {
 		return id;

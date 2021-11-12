@@ -85,14 +85,16 @@ public class AuthService {
 
 	@Transactional
 	public String register(RegisterRequest registerRequest) {
-		User user = new User();
-		user.setFirstName(registerRequest.getFirstName());
-		user.setLastName(registerRequest.getLastName());
-		user.setEmail(registerRequest.getEmail());
-		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-		user.setCreatedAt(Timestamp.from(Instant.now()));
-
-		user.setRole(UserRoleEnum.USER);
+		User user = new User(null,
+		registerRequest.getFirstName(),
+		registerRequest.getLastName(),
+		null,
+		registerRequest.getEmail(),
+		passwordEncoder.encode(registerRequest.getPassword()),
+		Timestamp.from(Instant.now()),
+		null,
+		UserRoleEnum.USER
+);
 		if (userRepository.save(user) != null) {
 			return "User registration successful";
 		}
