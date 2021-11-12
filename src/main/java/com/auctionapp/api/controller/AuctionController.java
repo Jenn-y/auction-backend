@@ -25,21 +25,21 @@ public class AuctionController {
 
 	@GetMapping("/new_arrivals")
 	public ResponseEntity<List<AuctionDto>> getNewArrivals() {
-		List<AuctionDto> auctions = service.getNewArrivals();
+		final List<AuctionDto> auctions = service.getNewArrivals();
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
 
 	@GetMapping("/last_chance")
 	public ResponseEntity<List<AuctionDto>> getLastChance() {
-		List<AuctionDto> auctions = service.getLastChance();
+		final List<AuctionDto> auctions = service.getLastChance();
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<AuctionDto> get(@PathVariable final UUID id) {
-		AuctionDto result = service.getAuction(id);
+		final AuctionDto result = service.getAuction(id);
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
