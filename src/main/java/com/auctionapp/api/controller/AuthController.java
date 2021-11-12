@@ -23,7 +23,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<String> register(@RequestBody final RegisterRequest registerRequest) {
         String result = authService.validateRegisterRequest(registerRequest);
 
         if (result.isEmpty()) { 
@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody final LoginRequest loginRequest) {
 
         if (authService.validateLoginRequest(loginRequest)) { 
             AuthenticationResponse result = authService.login(loginRequest);
