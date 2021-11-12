@@ -30,11 +30,6 @@ public class ObjectTestBuilder {
 							null,
 							ROLE
 							);
-		user.setFirstName(FIRST_NAME);
-		user.setLastName(LAST_NAME);
-		user.setEmail(EMAIL);
-		user.setPassword(PASSWORD);
-		user.setUuid(USER_ID);
 		return user;
 	}
 
