@@ -47,7 +47,25 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 
-	public User() {
+	public User(final UUID id, 
+				  final String firstName, 
+				  final String lastName, 
+				  String username, 
+				  final String email, 
+				  final String password,
+				  final Timestamp createdAt, 
+				  Timestamp updatedAt,
+				  final UserRole role) {
+					  
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.role = role;
 	}
 
 	public UUID getUuid() {

@@ -3,6 +3,8 @@ package com.auctionapp.api.model.dto;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import com.auctionapp.api.model.entities.UserRole;
+
 public class UserDto {
 	private UUID id;
 	private String firstName;
@@ -12,6 +14,7 @@ public class UserDto {
 	private String password;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
+	private UserRole role;
 
 	public UserDto() {}
 
@@ -100,5 +103,13 @@ public class UserDto {
 
 	public void setUpdatedAt(final Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 }
