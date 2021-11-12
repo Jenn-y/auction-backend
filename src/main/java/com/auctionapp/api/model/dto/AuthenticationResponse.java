@@ -8,8 +8,8 @@ public class AuthenticationResponse {
 	private final UserRoleEnum userRole;
 
 	public AuthenticationResponse(final String authenticationToken, 
-									final String email, 
-									final UserRoleEnum userRole) {
+								  final String email, 
+								  final UserRoleEnum userRole) {
 		this.authenticationToken = authenticationToken;
 		this.email = email;
 		this.userRole = userRole;
