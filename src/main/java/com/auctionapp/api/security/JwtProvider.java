@@ -38,7 +38,7 @@ public class JwtProvider {
         }
     }
 
-    public String generateToken(Authentication authentication) {
+    public String generateToken(final Authentication authentication) {
         org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) 
         authentication.getPrincipal();
 
@@ -57,7 +57,7 @@ public class JwtProvider {
         }
     }
 
-    public boolean validateToken(String jwt) {
+    public boolean validateToken(final String jwt) {
         parserBuilder()
             .setSigningKey(getPublicKey())
             .build()
@@ -73,7 +73,7 @@ public class JwtProvider {
         }
     }
 
-    public String getUsernameFromJwt(String token) {
+    public String getUsernameFromJwt(final String token) {
         Claims claims = parserBuilder()
                             .setSigningKey(getPublicKey())
                             .build()
