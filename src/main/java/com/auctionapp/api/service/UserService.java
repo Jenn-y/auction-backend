@@ -9,7 +9,6 @@ public class UserService {
 		User user = new User(payload.getUuid(),
 							payload.getFirstName(),
 							payload.getLastName(),
-							payload.getUsername(),
 							payload.getEmail(),
 							payload.getPassword(),
 							payload.getCreatedAt(),

@@ -9,7 +9,6 @@ public class UserDto {
 	private UUID id;
 	private String firstName;
 	private String lastName;
-	private String username;
 	private String email;
 	private String password;
 	private Timestamp createdAt;
@@ -21,7 +20,6 @@ public class UserDto {
 	public UserDto(final UUID id, 
 				  final String firstName, 
 				  final String lastName, 
-				  final String username, 
 				  final String email, 
 				  final String password,
 				  final Timestamp createdAt, 
@@ -30,7 +28,6 @@ public class UserDto {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.createdAt = createdAt;
@@ -47,10 +44,6 @@ public class UserDto {
 
 	public String getLastName() {
 		return lastName;
-	}
-
-	public String getUsername() {
-		return username;
 	}
 
 	public String getEmail() {
@@ -83,10 +76,6 @@ public class UserDto {
 
 	public void setLastName(final String lastName) {
 		this.lastName = lastName;
-	}
-
-	public void setUsername(final String username) {
-		this.username = username;
 	}
 
 	public void setEmail(final String email) {
