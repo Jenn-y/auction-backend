@@ -37,6 +37,9 @@ public class Bid {
 	@JoinColumn
 	private Auction auction;
 
+	public Bid() {
+	}
+
 	public Bid(final UUID id,
 			   final Double bidAmount,
 			   final Timestamp bidDate,
