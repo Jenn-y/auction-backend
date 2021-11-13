@@ -31,13 +31,13 @@ CREATE TABLE IF NOT EXISTS auction (
   seller_id UUID,
   category_id UUID,
   CONSTRAINT fk_category
-      FOREIGN KEY(category) 
+      FOREIGN KEY(category_id) 
 	  REFERENCES category(id),
   CONSTRAINT fk_item
-      FOREIGN KEY(item) 
+      FOREIGN KEY(item_id) 
 	  REFERENCES item(id),
   CONSTRAINT fk_seller
-      FOREIGN KEY(seller) 
+      FOREIGN KEY(seller_id) 
 	  REFERENCES user_account(id)
 );
 COMMIT;
