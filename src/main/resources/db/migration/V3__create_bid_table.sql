@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS bid (
   buyer_id UUID,
   auction_id UUID,
   bid_amount decimal,
+  bid_date timestamp,
   CONSTRAINT fk_buyer
       FOREIGN KEY(buyer_id) 
 	  REFERENCES user_account(id),
