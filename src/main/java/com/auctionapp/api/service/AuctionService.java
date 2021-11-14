@@ -38,7 +38,19 @@ public class AuctionService {
 		throw new RuntimeException("Auction with id " + id + " does not exist!");
 	}
 
-	public static Auction fromPayload(AuctionDto payload) {
+	public Auction update(final AuctionDto payload, final Double newHighestBid) {
+        Optional<Auction> auctionEntity = auctionRepository.findById(payload.getId());
+
+        if (auctionEntity.isPresent()) {
+            Auction  auction = fromPayload(payload);
+			auction.setHighestBid(newHighestBid);
+            auction = auctionRepository.save(auction);
+            return auction;
+        }
+        throw new RuntimeException("Auction with id " + payload.getId() + " does not exist!");
+    }
+
+	public static Auction fromPayload(final AuctionDto payload) {
 		Auction auction = new Auction();
 		if (payload.getId() != null) {
 			auction.setId(payload.getId());
@@ -57,7 +69,7 @@ public class AuctionService {
 		return auction;
 	}
 
-	public static AuctionDto toPayload(Auction auction) {
+	public static AuctionDto toPayload(final Auction auction) {
 		AuctionDto payload = new AuctionDto();
 		payload.setId(auction.getId());
 		payload.setStartDate(auction.getStartDate());

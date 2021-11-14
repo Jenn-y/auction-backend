@@ -16,9 +16,12 @@ import org.springframework.stereotype.Service;
 public class BidService {
 
     private final BidRepository bidRepository;
+	private final AuctionService auctionService;
 
-    public BidService(final BidRepository bidRepository) {
+    public BidService(final BidRepository bidRepository,
+					  final AuctionService auctionService) {
         this.bidRepository = bidRepository;
+		this.auctionService = auctionService;
     }
 
     public List<BidDto> getAuctionBids(UUID auctionId) {
@@ -30,6 +33,7 @@ public class BidService {
 		payload.setBidDate(Timestamp.from(Instant.now()));
         Bid bid = fromPayload(payload);
         bid = bidRepository.save(bid);
+		bid.setAuction(auctionService.update(payload.getAuction(), payload.getBidAmount()));
         return toPayload(bid);
 	}
 
@@ -43,8 +47,8 @@ public class BidService {
 		return currentBid > highestBid;
 	}
 
-	private boolean existsAmongBidders(UUID bidderId) {
-		return bidRepository.existsByBuyerId(bidderId);
+	private boolean existsAmongBidders(UUID buyerId) {
+		return bidRepository.existsByBuyerId(buyerId);
 	}
 
     private boolean isBidderEqualSeller(UUID bidderId, UUID sellerId) {
