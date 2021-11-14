@@ -3,6 +3,7 @@ package com.auctionapp.api.service;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,10 @@ public class BidService {
     }
 
 	public BidDto save(final BidDto payload) {
+		if (existsAmongBidders(payload.getBuyer().getId(), payload.getAuction().getId())) {
+			return toPayload(update(payload));
+		}
+
 		payload.setBidDate(Timestamp.from(Instant.now()));
         Bid bid = fromPayload(payload);
         bid = bidRepository.save(bid);
@@ -37,9 +42,23 @@ public class BidService {
         return toPayload(bid);
 	}
 
+	public Bid update(final BidDto payload) {
+        Optional<Bid> bidEntity = bidRepository.findByBuyerIdAndAuctionId(payload.getBuyer().getId(), payload.getAuction().getId());
+
+        if (bidEntity.isPresent()) {
+			if (payload.getBidAmount() > bidEntity.get().getBidAmount()) {
+				bidEntity.get().setBidAmount(payload.getBidAmount());
+				Bid  bid = bidRepository.save(bidEntity.get());
+				bid.setAuction(auctionService.update(payload.getAuction(), payload.getBidAmount()));
+				return bid;
+			}
+			throw new RuntimeException("New bid amount has to be greater than the previous ones!");
+        }
+        throw new RuntimeException("Bid with id " + payload.getId() + " does not exist!");
+    }
+
 	public boolean validateBid(final BidDto bid){
 		return validateBidAmount(bid.getBidAmount(), bid.getAuction().getHighestBid()) 
-		        && !existsAmongBidders(bid.getBuyer().getId())
                 && !isBidderEqualSeller(bid.getBuyer().getId(), bid.getAuction().getSeller().getId());
 	}
 
@@ -47,8 +66,8 @@ public class BidService {
 		return currentBid > highestBid;
 	}
 
-	private boolean existsAmongBidders(final UUID buyerId) {
-		return bidRepository.existsByBuyerId(buyerId);
+	private boolean existsAmongBidders(final UUID buyerId, final UUID auctionId) {
+		return bidRepository.existsByBuyerIdAndAuctionId(buyerId, auctionId);
 	}
 
     private boolean isBidderEqualSeller(final UUID bidderId, final UUID sellerId) {

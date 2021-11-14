@@ -1,6 +1,7 @@
 package com.auctionapp.api.repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.auctionapp.api.model.entities.Bid;
@@ -13,6 +14,8 @@ public interface BidRepository extends JpaRepository<Bid, UUID> {
 
 	List<Bid> findAllByAuctionId(final UUID auctionId);
 
-	Boolean existsByBuyerId(final UUID buyerId);
+	Boolean existsByBuyerIdAndAuctionId(final UUID buyerId, final UUID auctionId);
+
+	Optional<Bid> findByBuyerIdAndAuctionId(final UUID buyerId, final UUID auctionId);
 	
 }
