@@ -33,10 +33,12 @@ public class BidController {
 	}
 
 	@PostMapping("/newBid")
-    public ResponseEntity<BidDto> save(
-            @RequestBody final BidDto bid
-    ) {
-        BidDto result = service.save(bid);
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+    public ResponseEntity<BidDto> save(@RequestBody final BidDto bid) {
+
+		if (service.validateBid(bid)) { 
+            BidDto result = service.save(bid);
+        	return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 }

@@ -33,6 +33,24 @@ public class BidService {
         return toPayload(bid);
 	}
 
+	public boolean validateBid(BidDto bid){
+		return validateBidAmount(bid.getBidAmount(), bid.getAuction().getHighestBid()) 
+		        && !existsAmongBidders(bid.getBuyer().getId())
+                && !isBidderEqualSeller(bid.getBuyer().getId(), bid.getAuction().getSeller().getId());
+	}
+
+	private boolean validateBidAmount(Double currentBid, Double highestBid) {
+		return currentBid > highestBid;
+	}
+
+	private boolean existsAmongBidders(UUID bidderId) {
+		return bidRepository.existsByBuyerId(bidderId);
+	}
+
+    private boolean isBidderEqualSeller(UUID bidderId, UUID sellerId) {
+        return bidderId == sellerId;
+    }
+
 	public static Bid fromPayload(final BidDto payload) {
 		Bid bid = new Bid(
 						  payload.getId(),

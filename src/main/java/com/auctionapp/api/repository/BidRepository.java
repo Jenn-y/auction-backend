@@ -12,5 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface BidRepository extends JpaRepository<Bid, UUID> {
 
 	List<Bid> findAllByAuctionId(UUID auctionId);
+
+	Boolean existsByBuyerId(UUID bidderId);
 	
 }
