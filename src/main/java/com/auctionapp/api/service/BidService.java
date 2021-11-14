@@ -48,6 +48,7 @@ public class BidService {
         if (bidEntity.isPresent()) {
 			if (payload.getBidAmount() > bidEntity.get().getBidAmount()) {
 				bidEntity.get().setBidAmount(payload.getBidAmount());
+				bidEntity.get().setBidDate(Timestamp.from(Instant.now()));
 				Bid  bid = bidRepository.save(bidEntity.get());
 				bid.setAuction(auctionService.update(payload.getAuction(), payload.getBidAmount()));
 				return bid;
