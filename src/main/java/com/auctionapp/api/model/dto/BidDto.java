@@ -29,30 +29,39 @@ public class BidDto {
 	public UUID getId() {
 		return id;
 	}
+
 	public void setId(final UUID id) {
 		this.id = id;
 	}
+
 	public Double getBidAmount() {
 		return bidAmount;
 	}
+
 	public void setBidAmount(final Double bidAmount) {
 		this.bidAmount = bidAmount;
 	}
+
 	public Timestamp getBidDate() {
 		return bidDate;
 	}
+
 	public void setBidDate(final Timestamp bidDate) {
 		this.bidDate = bidDate;
 	}
+
 	public UserDto getBuyer() {
 		return buyer;
 	}
+
 	public void setBuyer(final UserDto buyer) {
 		this.buyer = buyer;
 	}
+
 	public AuctionDto getAuction() {
 		return auction;
 	}
+	
 	public void setAuction(final AuctionDto auction) {
 		this.auction = auction;
 	}

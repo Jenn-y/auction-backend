@@ -36,7 +36,7 @@ public class BidController {
     public ResponseEntity<BidDto> save(@RequestBody final BidDto bid) {
 
 		if (service.validateBid(bid)) { 
-            BidDto result = service.save(bid);
+            final BidDto result = service.save(bid);
         	return ResponseEntity.status(HttpStatus.OK).body(result);
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);

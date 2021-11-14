@@ -24,12 +24,12 @@ public class BidService {
 		this.auctionService = auctionService;
     }
 
-    public List<BidDto> getAuctionBids(UUID auctionId) {
-        List<Bid> bids = bidRepository.findAllByAuctionId(auctionId);
+    public List<BidDto> getAuctionBids(final UUID auctionId) {
+        final List<Bid> bids = bidRepository.findAllByAuctionId(auctionId);
 		return bids.stream().map(t -> toPayload(t)).collect(Collectors.toList());
     }
 
-	public BidDto save(BidDto payload) {
+	public BidDto save(final BidDto payload) {
 		payload.setBidDate(Timestamp.from(Instant.now()));
         Bid bid = fromPayload(payload);
         bid = bidRepository.save(bid);
@@ -37,21 +37,21 @@ public class BidService {
         return toPayload(bid);
 	}
 
-	public boolean validateBid(BidDto bid){
+	public boolean validateBid(final BidDto bid){
 		return validateBidAmount(bid.getBidAmount(), bid.getAuction().getHighestBid()) 
 		        && !existsAmongBidders(bid.getBuyer().getId())
                 && !isBidderEqualSeller(bid.getBuyer().getId(), bid.getAuction().getSeller().getId());
 	}
 
-	private boolean validateBidAmount(Double currentBid, Double highestBid) {
+	private boolean validateBidAmount(final Double currentBid, final Double highestBid) {
 		return currentBid > highestBid;
 	}
 
-	private boolean existsAmongBidders(UUID buyerId) {
+	private boolean existsAmongBidders(final UUID buyerId) {
 		return bidRepository.existsByBuyerId(buyerId);
 	}
 
-    private boolean isBidderEqualSeller(UUID bidderId, UUID sellerId) {
+    private boolean isBidderEqualSeller(final UUID bidderId, final UUID sellerId) {
         return bidderId == sellerId;
     }
 
