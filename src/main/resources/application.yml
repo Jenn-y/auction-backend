@@ -16,9 +16,9 @@ spring:
     jpa:
       repositories.enabled: true
   flyway:
-    user: postgres
-    password: admin
+    user: ${APPLICATION_DB_USER:postgres}
+    password: ${APPLICATION_DB_PASSWORD:admin}
     schemas: public
     baselineOnMigrate: true
-    url: jdbc:postgresql://localhost:5432/auction
+    url: jjdbc:postgresql://${APPLICATION_DB_URL:localhost}:${APPLICATION_DB_PORT:5432}/${APPLICATION_DB_NAME:auction}
     locations: filesystem:src/main/resources/db/migration
