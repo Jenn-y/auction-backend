@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar -Dserver.port=$PORT target/*.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/bidba-api-0.0.1-SNAPSHOT.jar
