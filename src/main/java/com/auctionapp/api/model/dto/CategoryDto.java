@@ -1,5 +1,6 @@
 package com.auctionapp.api.model.dto;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -7,7 +8,7 @@ public class CategoryDto {
 	private UUID id;
 	private String name;
 	private CategoryDto subcategoryOf;
-	private Set<AuctionDto> itemList;
+	private Set<AuctionDto> itemList = new HashSet<AuctionDto>();
 
 	public CategoryDto() {}
 
