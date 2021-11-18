@@ -34,7 +34,7 @@ public class Category {
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private Set<Auction> itemList;
 
-	public Category() {
+	public Category(){
 	}
 
 	public UUID getId() {

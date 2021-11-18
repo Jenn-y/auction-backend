@@ -1,6 +1,5 @@
 package com.auctionapp.api.model.entities;
 
-import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -24,6 +23,9 @@ public class Item {
 	private String name;
 
 	@Column
+	private Double startPrice;
+
+	@Column
 	private String color;
 
 	@Column
@@ -35,39 +37,51 @@ public class Item {
 	public Item() {
 	}
 
-	public Item(final UUID id, 
-				final String name, 
-				final String color, 
-				final Integer size, 
-				final String description) {
-
-		Objects.requireNonNull(name, "The name field must not be null");
-		Objects.requireNonNull(description, "The description field must not be null");
-		
-		this.id = id;
-		this.name = name;
-		this.color = color;
-		this.size = size;
-		this.description = description;
-	}
-
 	public UUID getId() {
 		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public Double getStartPrice() {
+		return startPrice;
+	}
+
+	public void setStartPrice(final Double startPrice) {
+		this.startPrice = startPrice;
+	}
+
 	public String getColor() {
 		return color;
+	}
+
+	public void setColor(final String color) {
+		this.color = color;
 	}
 
 	public Integer getSize() {
 		return size;
 	}
 
+	public void setSize(final Integer size) {
+		this.size = size;
+	}
+
 	public String getDescription() {
 		return description;
+	}
+
+	public void setDescription(final String description) {
+		this.description = description;
 	}
 }

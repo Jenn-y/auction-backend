@@ -57,13 +57,8 @@ public class User {
                 final Timestamp updatedAt,
                 final UserRole role) {
 				
-		Objects.requireNonNull(firstName, "The first name field must not be null");
-		Objects.requireNonNull(lastName, "The last name field must not be null");
 		Objects.requireNonNull(email, "The email address must not be null");
 		Objects.requireNonNull(password, "The password must not be null");
-		Objects.requireNonNull(createdAt, "The created at field must not be null");
-		Objects.requireNonNull(updatedAt, "The updated at field must not be null");
-		Objects.requireNonNull(role, "The role field must not be null");
 		
         this.id = id;
         this.firstName = firstName;
@@ -79,31 +74,63 @@ public class User {
 		return id;
 	}
 
+	public void setUuid(final UUID id) {
+		this.id = id;
+	}
+
 	public String getFirstName() {
 		return firstName;
+	}
+
+	public void setFirstName(final String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
 		return lastName;
 	}
 
+	public void setLastName(final String lastName) {
+		this.lastName = lastName;
+	}
+
 	public String getEmail() {
 		return email;
+	}
+
+	public void setEmail(final String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
 	public Timestamp getCreatedAt() {
 		return createdAt;
+	}
+
+	public void setCreatedAt(final Timestamp createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
+	public void setUpdatedAt(final Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
 	public UserRole getRole() {
 		return role;
+	}
+
+	public void setRole(final UserRole role) {
+		this.role = role;
 	}
 }

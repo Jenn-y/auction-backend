@@ -51,40 +51,38 @@ public class AuctionService {
     }
 
 	public static Auction fromPayload(final AuctionDto payload) {
-		Auction auction = new Auction(
-									payload.getId(),
-									payload.getStartDate(),
-									payload.getEndDate(),
-									payload.getStartPrice(),
-									payload.getHighestBid(),
-									payload.getAddress(),
-									payload.getZipCode(),
-									payload.getPhone(),
-									payload.getStatus(),
-									payload.getShippingCostIncluded(),
-									CategoryService.fromPayload(payload.getCategory()),
-									UserService.fromPayload(payload.getSeller()),
-									ItemService.fromPayload(payload.getItem())
-									);
+		Auction auction = new Auction();
+		if (payload.getId() != null) {
+			auction.setId(payload.getId());
+		}
+		auction.setStartDate(payload.getStartDate());
+		auction.setEndDate(payload.getEndDate());
+		auction.setHighestBid(payload.getHighestBid());
+		auction.setAddress(payload.getAddress());
+		auction.setPhone(payload.getPhone());
+		auction.setZipCode(payload.getZipCode());
+		auction.setStatus(payload.getStatus());
+		auction.setShippingCostIncluded(payload.getShippingCostIncluded());
+		auction.setItem(ItemService.fromPayload(payload.getItem()));
+		auction.setCategory(CategoryService.fromPayload(payload.getCategory()));
+		auction.setSeller(UserService.fromPayload(payload.getSeller()));
 		return auction;
 	}
 
 	public static AuctionDto toPayload(final Auction auction) {
-		AuctionDto payload = new AuctionDto(
-											auction.getId(),
-											auction.getStartDate(),
-											auction.getEndDate(),
-											auction.getStartPrice(),
-											auction.getHighestBid(),
-											auction.getAddress(),
-											auction.getZipCode(),
-											auction.getPhone(),
-											auction.getStatus(),
-											auction.getShippingCostIncluded(),
-											CategoryService.toPayload(auction.getCategory()),
-											UserService.toPayload(auction.getSeller()),
-											ItemService.toPayload(auction.getItem())
-											);
+		AuctionDto payload = new AuctionDto();
+		payload.setId(auction.getId());
+		payload.setStartDate(auction.getStartDate());
+		payload.setEndDate(auction.getEndDate());
+		payload.setHighestBid(auction.getHighestBid());
+		payload.setAddress(auction.getAddress());
+		payload.setPhone(auction.getPhone());
+		payload.setZipCode(auction.getZipCode());
+		payload.setStatus(auction.getStatus());
+		payload.setShippingCostIncluded(auction.getShippingCostIncluded());
+		payload.setItem(ItemService.toPayload(auction.getItem()));
+		payload.setCategory(CategoryService.toPayload(auction.getCategory()));
+		payload.setSeller(UserService.toPayload(auction.getSeller()));
 		return payload;
 	}
 }

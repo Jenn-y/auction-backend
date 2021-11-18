@@ -91,7 +91,7 @@ public class AuthService {
 							registerRequest.getEmail(),
 							passwordEncoder.encode(registerRequest.getPassword()),
 							Timestamp.from(Instant.now()),
-							Timestamp.from(Instant.now()),
+							null,
 							UserRole.USER
 		);
 

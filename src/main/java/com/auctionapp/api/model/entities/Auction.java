@@ -1,7 +1,6 @@
 package com.auctionapp.api.model.entities;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -30,9 +29,6 @@ public class Auction {
 
 	@Column
 	private Timestamp endDate;
-
-	@Column
-	private Double startPrice;
 
 	@Column
 	private Double highestBid;
@@ -69,56 +65,28 @@ public class Auction {
 	public Auction() {
 	}
 
-	public Auction(final UUID id, 
-				   final Timestamp startDate, 
-				   final Timestamp endDate, 
-				   final Double startPrice,
-				   final Double highestBid, 
-				   final String address, 
-				   final Integer zipCode,
-				   final String phone, 
-				   final Status status, 
-				   final Status shippingCostIncluded, 
-				   final Category category, 
-				   final User seller, 
-				   final Item item) {
-
-		Objects.requireNonNull(startDate, "The start date field must not be null");
-		Objects.requireNonNull(endDate, "The end date field must not be null");
-		Objects.requireNonNull(startPrice, "The start price field must not be null");
-		Objects.requireNonNull(item, "The item id field must not be null");
-		Objects.requireNonNull(seller, "The seller id field must not be null");
-		Objects.requireNonNull(category, "The category id field must not be null");
-
-		this.id = id;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.startPrice = startPrice;
-		this.highestBid = highestBid;
-		this.address = address;
-		this.zipCode = zipCode;
-		this.phone = phone;
-		this.status = status;
-		this.shippingCostIncluded = shippingCostIncluded;
-		this.category = category;
-		this.seller = seller;
-		this.item = item;
-	}
-
 	public UUID getId() {
 		return id;
+	}
+
+	public void setId(final UUID id) {
+		this.id = id;
 	}
 
 	public Timestamp getStartDate() {
 		return startDate;
 	}
 
+	public void setStartDate(final Timestamp startDate) {
+		this.startDate = startDate;
+	}
+
 	public Timestamp getEndDate() {
 		return endDate;
 	}
 
-	public Double getStartPrice() {
-		return startPrice;
+	public void setEndDate(final Timestamp endDate) {
+		this.endDate = endDate;
 	}
 
 	public Double getHighestBid() {
@@ -133,31 +101,63 @@ public class Auction {
 		return address;
 	}
 
+	public void setAddress(final String address) {
+		this.address = address;
+	}
+
 	public Integer getZipCode() {
 		return zipCode;
+	}
+
+	public void setZipCode(final Integer zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public String getPhone() {
 		return phone;
 	}
 
+	public void setPhone(final String phone) {
+		this.phone = phone;
+	}
+
 	public Status getStatus() {
 		return status;
+	}
+
+	public void setStatus(final Status status) {
+		this.status = status;
 	}
 
 	public Status getShippingCostIncluded() {
 		return shippingCostIncluded;
 	}
 
+	public void setShippingCostIncluded(final Status shippingCostIncluded) {
+		this.shippingCostIncluded = shippingCostIncluded;
+	}
+
 	public Category getCategory() {
 		return category;
+	}
+
+	public void setCategory(final Category category) {
+		this.category = category;
 	}
 
 	public User getSeller() {
 		return seller;
 	}
 
+	public void setSeller(final User seller) {
+		this.seller = seller;
+	}
+
 	public Item getItem() {
 		return item;
+	}
+
+	public void setItem(final Item item) {
+		this.item = item;
 	}
 }
