@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemService {
 
-	public static Item fromPayload(ItemDto payload) {
+	public static Item fromPayload(final ItemDto payload) {
 		Item item = new Item(
 							payload.getId(),
 							payload.getName(),
@@ -19,7 +19,7 @@ public class ItemService {
 		return item;
 	}
 
-	public static ItemDto toPayload(Item item) {
+	public static ItemDto toPayload(final Item item) {
 		ItemDto payload = new ItemDto(
                                       item.getId(),
                                       item.getName(),

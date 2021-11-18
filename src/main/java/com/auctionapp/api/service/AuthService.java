@@ -84,7 +84,7 @@ public class AuthService {
  	}
 
 	@Transactional
-	public String register(RegisterRequest registerRequest) {
+	public String register(final RegisterRequest registerRequest) {
 		User user = new User(null,
 							registerRequest.getFirstName(),
 							registerRequest.getLastName(),
@@ -101,7 +101,7 @@ public class AuthService {
 		return "User registration unsuccessful";
 	}
 
-	public AuthenticationResponse login(LoginRequest loginRequest) {
+	public AuthenticationResponse login(final LoginRequest loginRequest) {
 		Authentication authenticate = authenticationManager.authenticate(
 			new UsernamePasswordAuthenticationToken(
 				loginRequest.getEmail(), 

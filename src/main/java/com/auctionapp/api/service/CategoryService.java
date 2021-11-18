@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryService {
 
-	public static Category fromPayload(CategoryDto payload) {
+	public static Category fromPayload(final CategoryDto payload) {
 		Category category = new Category();
 		if (payload.getId() != null) {
 			category.setId(payload.getId());
@@ -24,7 +24,7 @@ public class CategoryService {
 		return category;
 	}
 
-	public static CategoryDto toPayload(Category category) {
+	public static CategoryDto toPayload(final Category category) {
 		CategoryDto payload = new CategoryDto();
 		payload.setId(category.getId());
 		payload.setName(category.getName());
