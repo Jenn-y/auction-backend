@@ -59,12 +59,12 @@ public class BidService {
     }
 
 	public boolean validateBid(final BidDto bid){
-		return validateBidAmount(bid.getBidAmount(), bid.getAuction().getHighestBid()) 
+		return validateBidAmount(bid.getBidAmount(), bid.getAuction().getHighestBid(), bid.getAuction().getStartPrice()) 
                 && !isBidderEqualSeller(bid.getBuyer().getId(), bid.getAuction().getSeller().getId());
 	}
 
-	private boolean validateBidAmount(final Double currentBid, final Double highestBid) {
-		return currentBid > highestBid;
+	private boolean validateBidAmount(final Double currentBid, final Double highestBid, final Double startPrice) {
+		return currentBid > highestBid && currentBid > startPrice;
 	}
 
 	private boolean existsAmongBidders(final UUID buyerId, final UUID auctionId) {
