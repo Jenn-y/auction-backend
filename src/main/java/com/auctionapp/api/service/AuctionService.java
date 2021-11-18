@@ -51,21 +51,20 @@ public class AuctionService {
     }
 
 	public static Auction fromPayload(final AuctionDto payload) {
-		Auction auction = new Auction();
-		if (payload.getId() != null) {
-			auction.setId(payload.getId());
-		}
-		auction.setStartDate(payload.getStartDate());
-		auction.setEndDate(payload.getEndDate());
-		auction.setHighestBid(payload.getHighestBid());
-		auction.setAddress(payload.getAddress());
-		auction.setPhone(payload.getPhone());
-		auction.setZipCode(payload.getZipCode());
-		auction.setStatus(payload.getStatus());
-		auction.setShippingCostIncluded(payload.getShippingCostIncluded());
-		auction.setItem(ItemService.fromPayload(payload.getItem()));
-		auction.setCategory(CategoryService.fromPayload(payload.getCategory()));
-		auction.setSeller(UserService.fromPayload(payload.getSeller()));
+		Auction auction = new Auction(
+									payload.getId(),
+									payload.getStartDate(),
+									payload.getEndDate(),
+									payload.getHighestBid(),
+									payload.getAddress(),
+									payload.getZipCode(),
+									payload.getPhone(),
+									payload.getStatus(),
+									payload.getShippingCostIncluded(),
+									CategoryService.fromPayload(payload.getCategory()),
+									UserService.fromPayload(payload.getSeller()),
+									ItemService.fromPayload(payload.getItem())
+									);
 		return auction;
 	}
 

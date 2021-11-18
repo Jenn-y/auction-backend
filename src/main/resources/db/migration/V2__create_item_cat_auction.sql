@@ -19,17 +19,17 @@ CREATE TABLE IF NOT EXISTS item (
 
 CREATE TABLE IF NOT EXISTS auction (
   id UUID DEFAULT gen_random_uuid () PRIMARY KEY,
-  start_date timestamp,
-  end_date timestamp,
+  start_date timestamp NOT NULL,
+  end_date timestamp NOT NULL,
   highest_bid decimal,
   address text,
   zip_code numeric,
   phone text,
   status text,
   shipping_cost_included text,
-  item_id UUID,
-  seller_id UUID,
-  category_id UUID,
+  item_id UUID NOT NULL,
+  seller_id UUID NOT NULL,
+  category_id UUID NOT NULL,
   CONSTRAINT fk_category
       FOREIGN KEY(category_id) 
 	  REFERENCES category(id),
