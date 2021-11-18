@@ -9,26 +9,24 @@ import org.springframework.stereotype.Service;
 public class ItemService {
 
 	public static Item fromPayload(ItemDto payload) {
-		Item item = new Item();
-		if (payload.getId() != null) {
-			item.setId(payload.getId());
-		}
-		item.setName(payload.getName());
-		item.setStartPrice(payload.getStartPrice());
-		item.setColor(payload.getColor());
-		item.setSize(payload.getSize());
-		item.setDescription(payload.getDescription());
+		Item item = new Item(
+							payload.getId(),
+							payload.getName(),
+							payload.getColor(),
+							payload.getSize(),
+							payload.getDescription()
+							);
 		return item;
 	}
 
 	public static ItemDto toPayload(Item item) {
-		ItemDto payload = new ItemDto();
-		payload.setId(item.getId());
-		payload.setName(item.getName());
-		payload.setStartPrice(item.getStartPrice());
-		payload.setColor(item.getColor());
-		payload.setSize(item.getSize());
-		payload.setDescription(item.getDescription());
+		ItemDto payload = new ItemDto(
+                                      item.getId(),
+                                      item.getName(),
+                                      item.getColor(),
+                                      item.getSize(),
+                                      item.getDescription()
+                                      );
 		return payload;
 	}
 }

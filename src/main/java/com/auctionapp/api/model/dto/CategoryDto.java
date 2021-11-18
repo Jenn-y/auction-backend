@@ -6,50 +6,51 @@ import java.util.UUID;
 public class CategoryDto {
 	private UUID id;
 	private String name;
-	private CategoryDto subcategory;
+	private CategoryDto subcategoryOf;
 	private Set<AuctionDto> itemList;
 
 	public CategoryDto() {}
 
 	public CategoryDto(final UUID id,
 						final String name,
-						final CategoryDto subcategory,
+						final CategoryDto subcategoryOf,
 						final Set<AuctionDto> itemList) {
 
 		this.id = id;
 		this.name = name;
-		this.subcategory = subcategory;
+		this.subcategoryOf = subcategoryOf;
 		this.itemList = itemList;
 	}
+
 	public UUID getId() {
 		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public CategoryDto getSubcategory() {
-		return subcategory;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public CategoryDto getSubcategoryOf() {
+		return subcategoryOf;
+	}
+
+	public void setSubcategoryOf(CategoryDto subcategoryOf) {
+		this.subcategoryOf = subcategoryOf;
 	}
 
 	public Set<AuctionDto> getItemList() {
 		return itemList;
 	}
 
-	public void setId(final UUID id) {
-		this.id = id;
-	}
-
-	public void setName(final String name) {
-		this.name = name;
-	}
-
-	public void setSubcategory(final CategoryDto subcategory) {
-		this.subcategory = subcategory;
-	}
-
-	public void setItemList(final Set<AuctionDto> itemList) {
+	public void setItemList(Set<AuctionDto> itemList) {
 		this.itemList = itemList;
 	}
 }

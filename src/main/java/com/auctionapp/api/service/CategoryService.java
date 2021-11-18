@@ -16,8 +16,8 @@ public class CategoryService {
 			category.setId(payload.getId());
 		}
 		category.setName(payload.getName());
-		if (payload.getSubcategory() != null) {
-			category.setSubcategory(CategoryService.fromPayload(payload.getSubcategory()));
+		if (payload.getSubcategoryOf() != null) {
+			category.setSubcategoryOf(CategoryService.fromPayload(payload.getSubcategoryOf()));
 		}
 		if (payload.getItemList() != null) {
 			category.setItemList(
@@ -30,8 +30,8 @@ public class CategoryService {
 		CategoryDto payload = new CategoryDto();
 		payload.setId(category.getId());
 		payload.setName(category.getName());
-		if (category.getSubcategory() != null) {
-			payload.setSubcategory(CategoryService.toPayload(category.getSubcategory()));
+		if (category.getSubcategoryOf() != null) {
+			payload.setSubcategoryOf(CategoryService.toPayload(category.getSubcategoryOf()));
 		}
 		return payload;
 	}
