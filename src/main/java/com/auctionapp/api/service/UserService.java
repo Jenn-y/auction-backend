@@ -37,14 +37,15 @@ public class UserService {
 	}
 
 	public static UserDto toPayload(User user) {
-		UserDto payload = new UserDto();
-		payload.setId(user.getUuid());
-		payload.setEmail(user.getEmail());
-		payload.setFirstName(user.getFirstName());
-		payload.setLastName(user.getLastName());
-		payload.setPassword(user.getPassword());
-		payload.setCreatedAt(user.getCreatedAt());
-		payload.setUpdatedAt(user.getUpdatedAt());
+		UserDto payload = new UserDto(
+									  user.getUuid(),
+									  user.getFirstName(),
+									  user.getLastName(),
+                                      user.getEmail(),
+									  user.getPassword(),
+									  user.getCreatedAt(),
+									  user.getUpdatedAt()
+									  );
 		return payload;
 	}
 }

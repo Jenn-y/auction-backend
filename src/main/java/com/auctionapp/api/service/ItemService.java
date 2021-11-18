@@ -22,13 +22,14 @@ public class ItemService {
 	}
 
 	public static ItemDto toPayload(Item item) {
-		ItemDto payload = new ItemDto();
-		payload.setId(item.getId());
-		payload.setName(item.getName());
-		payload.setStartPrice(item.getStartPrice());
-		payload.setColor(item.getColor());
-		payload.setSize(item.getSize());
-		payload.setDescription(item.getDescription());
+		ItemDto payload = new ItemDto(
+									  item.getId(),
+									  item.getName(),
+									  item.getStartPrice(),
+									  item.getColor(),
+									  item.getSize(),
+									  item.getDescription()
+									  );
 		return payload;
 	}
 }

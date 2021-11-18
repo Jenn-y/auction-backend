@@ -30,16 +30,8 @@ public class BidDto {
 		return id;
 	}
 
-	public void setId(final UUID id) {
-		this.id = id;
-	}
-
 	public Double getBidAmount() {
 		return bidAmount;
-	}
-
-	public void setBidAmount(final Double bidAmount) {
-		this.bidAmount = bidAmount;
 	}
 
 	public Timestamp getBidDate() {
@@ -54,15 +46,7 @@ public class BidDto {
 		return buyer;
 	}
 
-	public void setBuyer(final UserDto buyer) {
-		this.buyer = buyer;
-	}
-
 	public AuctionDto getAuction() {
 		return auction;
-	}
-	
-	public void setAuction(final AuctionDto auction) {
-		this.auction = auction;
 	}
 }

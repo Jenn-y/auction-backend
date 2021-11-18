@@ -21,32 +21,33 @@ public class CategoryDto {
 		this.subcategory = subcategory;
 		this.itemList = itemList;
 	}
+
 	public UUID getId() {
 		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public CategoryDto getSubcategory() {
-		return subcategory;
-	}
-
-	public Set<AuctionDto> getItemList() {
-		return itemList;
-	}
-
-	public void setId(final UUID id) {
-		this.id = id;
-	}
-
 	public void setName(final String name) {
 		this.name = name;
 	}
 
+	public CategoryDto getSubcategory() {
+		return subcategory;
+	}
+
 	public void setSubcategory(final CategoryDto subcategory) {
 		this.subcategory = subcategory;
+	}
+
+	public Set<AuctionDto> getItemList() {
+		return itemList;
 	}
 
 	public void setItemList(final Set<AuctionDto> itemList) {
