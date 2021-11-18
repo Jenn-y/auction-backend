@@ -50,7 +50,7 @@ public class AuctionService {
         throw new RuntimeException("Auction with id " + payload.getId() + " does not exist!");
     }
 
-	public static Auction fromPayload(AuctionDto payload) {
+	public static Auction fromPayload(final AuctionDto payload) {
 		Auction auction = new Auction(
 									payload.getId(),
 									payload.getStartDate(),
@@ -69,7 +69,7 @@ public class AuctionService {
 		return auction;
 	}
 
-	public static AuctionDto toPayload(Auction auction) {
+	public static AuctionDto toPayload(final Auction auction) {
 		AuctionDto payload = new AuctionDto(
                                             auction.getId(),
                                             auction.getStartDate(),

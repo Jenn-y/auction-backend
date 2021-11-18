@@ -17,13 +17,15 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
-	public UserDto getUser(String email) {
+	public UserDto getUser(final String email) {
 		Optional<User> user = userRepository.findByEmail(email);
-        if (user.isPresent()) return toPayload(user.get());
+        if (user.isPresent()) {
+			return toPayload(user.get());
+		}
         throw new RuntimeException("User with email " + email + " does not exist!");
 	}
 
-	public static User fromPayload(UserDto payload) {
+	public static User fromPayload(final UserDto payload) {
 		User user = new User(payload.getId(),
 							payload.getFirstName(),
 							payload.getLastName(),
@@ -36,7 +38,7 @@ public class UserService {
 		return user;
 	}
 
-	public static UserDto toPayload(User user) {
+	public static UserDto toPayload(final User user) {
 		UserDto payload = new UserDto(
                                       user.getUuid(),
                                       user.getFirstName(),
