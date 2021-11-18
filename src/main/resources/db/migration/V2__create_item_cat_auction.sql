@@ -2,9 +2,9 @@ BEGIN;
 CREATE TABLE IF NOT EXISTS category (
   id UUID DEFAULT gen_random_uuid () PRIMARY KEY,
   name text NOT NULL,
-  subcategory UUID,
-  CONSTRAINT fk_subcategory
-      FOREIGN KEY(subcategory)
+  subcategory_of UUID,
+  CONSTRAINT fk_subcategory_of
+      FOREIGN KEY(subcategory_of)
     REFERENCES category(id)
 );
 

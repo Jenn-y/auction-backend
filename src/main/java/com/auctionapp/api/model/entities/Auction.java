@@ -118,8 +118,8 @@ public class Auction {
 	}
 
 	public Double getStartPrice() {
-        return startPrice;
-    }
+		return startPrice;
+	}
 
 	public Double getHighestBid() {
 		return highestBid;

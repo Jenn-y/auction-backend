@@ -28,13 +28,13 @@ public class Category {
 	private String name;
 
 	@ManyToOne
-	@JoinColumn(name = "subcategory", referencedColumnName = "id")
-	private Category subcategory;
+	@JoinColumn(name = "subcategory_of", referencedColumnName = "id")
+	private Category subcategoryOf;
 
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private Set<Auction> itemList;
 
-	public Category(){
+	public Category() {
 	}
 
 	public UUID getId() {
@@ -53,12 +53,12 @@ public class Category {
 		this.name = name;
 	}
 
-	public Category getSubcategory() {
-		return subcategory;
+	public Category getSubcategoryOf() {
+		return subcategoryOf;
 	}
 
-	public void setSubcategory(final Category subcategory) {
-		this.subcategory = subcategory;
+	public void setSubcategoryOf(final Category subcategory) {
+		this.subcategoryOf = subcategory;
 	}
 
 	public Set<Auction> getItemList() {
