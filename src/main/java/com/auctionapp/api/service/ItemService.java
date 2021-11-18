@@ -12,7 +12,6 @@ public class ItemService {
 		Item item = new Item(
 		payload.getId(),
 		payload.getName(),
-		payload.getStartPrice(),
 		payload.getColor(),
 		payload.getSize(),
 		payload.getDescription()
@@ -24,7 +23,6 @@ public class ItemService {
 		ItemDto payload = new ItemDto(
 									  item.getId(),
 									  item.getName(),
-									  item.getStartPrice(),
 									  item.getColor(),
 									  item.getSize(),
 									  item.getDescription()

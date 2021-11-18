@@ -32,6 +32,9 @@ public class Auction {
 	private Timestamp endDate;
 
 	@Column
+	private Double startPrice;
+
+	@Column
 	private Double highestBid;
 
 	@Column
@@ -69,6 +72,7 @@ public class Auction {
 	public Auction(final UUID id, 
 				   final Timestamp startDate, 
 				   final Timestamp endDate, 
+				   final Double startPrice,
 				   final Double highestBid, 
 				   final String address, 
 				   final Integer zipCode,
@@ -81,6 +85,7 @@ public class Auction {
 
 		Objects.requireNonNull(startDate, "The start date field must not be null");
 		Objects.requireNonNull(endDate, "The end date field must not be null");
+		Objects.requireNonNull(startPrice, "The start price field must not be null");
 		Objects.requireNonNull(item, "The item id field must not be null");
 		Objects.requireNonNull(seller, "The seller id field must not be null");
 		Objects.requireNonNull(category, "The category id field must not be null");
@@ -88,6 +93,7 @@ public class Auction {
 		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.startPrice = startPrice;
 		this.highestBid = highestBid;
 		this.address = address;
 		this.zipCode = zipCode;
@@ -109,6 +115,10 @@ public class Auction {
 
 	public Timestamp getEndDate() {
 		return endDate;
+	}
+
+	public Double getStartPrice() {
+		return startPrice;
 	}
 
 	public Double getHighestBid() {

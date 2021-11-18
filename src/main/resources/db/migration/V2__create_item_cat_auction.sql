@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS category (
 CREATE TABLE IF NOT EXISTS item (
   id UUID DEFAULT gen_random_uuid () PRIMARY KEY,
   name text NOT NULL,
-  start_price decimal,
   color text,
   size numeric,
   description text NOT NULL
@@ -21,6 +20,7 @@ CREATE TABLE IF NOT EXISTS auction (
   id UUID DEFAULT gen_random_uuid () PRIMARY KEY,
   start_date timestamp NOT NULL,
   end_date timestamp NOT NULL,
+  start_price decimal NOT NULL,
   highest_bid decimal,
   address text,
   zip_code numeric,
