@@ -62,10 +62,6 @@ public class Bid {
 		return id;
 	}
 
-	public void setId(final UUID id) {
-		this.id = id;
-	}
-
 	public Double getBidAmount() {
 		return bidAmount;
 	}
@@ -84,10 +80,6 @@ public class Bid {
 
 	public User getBuyer() {
 		return buyer;
-	}
-
-	public void setBuyer(final User buyer) {
-		this.buyer = buyer;
 	}
 
 	public Auction getAuction() {
