@@ -46,7 +46,8 @@ public class UserService {
                                       user.getEmail(),
                                       user.getPassword(),
                                       user.getCreatedAt(),
-                                      user.getUpdatedAt()
+                                      user.getUpdatedAt(),
+									  user.getRole()
                                       );
 		return payload;
 	}

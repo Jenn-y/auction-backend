@@ -24,7 +24,8 @@ public class UserDto {
 				  final String email, 
 				  final String password,
 				  final Timestamp createdAt, 
-				  final Timestamp updatedAt) {
+				  final Timestamp updatedAt,
+				  final UserRole role) {
 					  
 		this.id = id;
 		this.firstName = firstName;
@@ -33,6 +34,7 @@ public class UserDto {
 		this.password = password;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.role = role;
 	}
 
 	public UUID getId() {
