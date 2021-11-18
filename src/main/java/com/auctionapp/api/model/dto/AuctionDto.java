@@ -9,6 +9,7 @@ public class AuctionDto {
 	private UUID id;
 	private Timestamp startDate;
 	private Timestamp endDate;
+	private Double startPrice;
 	private Double highestBid;
 	private String address;
 	private Integer zipCode;
@@ -22,31 +23,32 @@ public class AuctionDto {
 	public AuctionDto() {}
 	
 	public AuctionDto(final UUID id,
-					final Timestamp startDate,
-					final Timestamp endDate,
-					final Double highestBid,
-					final String address,
-					final Integer zipCode,
-					final String phone,
-					final Status status,
-					final Status shippingCostIncluded,
-					final CategoryDto category,
-					final UserDto seller,
-					final ItemDto item) {
-
-		this.id = id;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.highestBid = highestBid;
-		this.address = address;
-		this.zipCode = zipCode;
-		this.phone = phone;
-		this.status = status;
-		this.shippingCostIncluded = shippingCostIncluded;
-		this.category = category;
-		this.seller = seller;
-		this.item = item;
-	}
+                    final Timestamp startDate,
+                    final Timestamp endDate,
+                    final Double startPrice,
+                    final Double highestBid,
+                    final String address,
+                    final Integer zipCode,
+                    final String phone,
+                    final Status status,
+                    final Status shippingCostIncluded,
+                    final CategoryDto category,
+                    final UserDto seller,
+                    final ItemDto item) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startPrice = startPrice;
+        this.highestBid = highestBid;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.phone = phone;
+        this.status = status;
+        this.shippingCostIncluded = shippingCostIncluded;
+        this.category = category;
+        this.seller = seller;
+        this.item = item;
+    }
 
 	public UUID getId() {
 		return id;
@@ -59,6 +61,10 @@ public class AuctionDto {
 	public Timestamp getEndDate() {
 		return endDate;
 	}
+
+	public Double getStartPrice() {
+        return startPrice;
+    }
 
 	public Double getHighestBid() {
 		return highestBid;
