@@ -1,10 +1,10 @@
 BEGIN;
 CREATE TABLE IF NOT EXISTS bid (
   id UUID DEFAULT gen_random_uuid () PRIMARY KEY,
-  buyer_id UUID,
-  auction_id UUID,
-  bid_amount decimal,
-  bid_date timestamp,
+  buyer_id UUID NOT NULL,
+  auction_id UUID NOT NULL,
+  bid_amount decimal NOT NULL,
+  bid_date timestamp NOT NULL,
   CONSTRAINT fk_buyer
       FOREIGN KEY(buyer_id) 
 	  REFERENCES user_account(id),
