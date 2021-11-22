@@ -37,15 +37,6 @@ public class Auction {
 	@Column
 	private Double highestBid;
 
-	@Column
-	private String address;
-
-	@Column
-	private Integer zipCode;
-
-	@Column
-	private String phone;
-
 	@Enumerated(EnumType.STRING)
 	@Column
 	private Status status;
@@ -74,9 +65,6 @@ public class Auction {
                    final Timestamp endDate,
                    final Double startPrice,
                    final Double highestBid,
-                   final String address,
-                   final Integer zipCode,
-                   final String phone,
                    final Status status,
                    final Status shippingCostIncluded,
                    final Category category,
@@ -95,9 +83,6 @@ public class Auction {
         this.endDate = endDate;
         this.startPrice = startPrice;
         this.highestBid = highestBid;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.phone = phone;
         this.status = status;
         this.shippingCostIncluded = shippingCostIncluded;
         this.category = category;
@@ -123,18 +108,6 @@ public class Auction {
 
 	public Double getHighestBid() {
 		return highestBid;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public Integer getZipCode() {
-		return zipCode;
-	}
-
-	public String getPhone() {
-		return phone;
 	}
 
 	public Status getStatus() {

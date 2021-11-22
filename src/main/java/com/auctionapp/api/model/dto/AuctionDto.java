@@ -11,9 +11,6 @@ public class AuctionDto {
 	private Timestamp endDate;
 	private Double startPrice;
 	private Double highestBid;
-	private String address;
-	private Integer zipCode;
-	private String phone;
 	private Status status;
 	private Status shippingCostIncluded;
 	private CategoryDto category;
@@ -27,9 +24,6 @@ public class AuctionDto {
                     final Timestamp endDate,
                     final Double startPrice,
                     final Double highestBid,
-                    final String address,
-                    final Integer zipCode,
-                    final String phone,
                     final Status status,
                     final Status shippingCostIncluded,
                     final CategoryDto category,
@@ -41,9 +35,6 @@ public class AuctionDto {
         this.endDate = endDate;
         this.startPrice = startPrice;
         this.highestBid = highestBid;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.phone = phone;
         this.status = status;
         this.shippingCostIncluded = shippingCostIncluded;
         this.category = category;
@@ -69,18 +60,6 @@ public class AuctionDto {
 
 	public Double getHighestBid() {
 		return highestBid;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public Integer getZipCode() {
-		return zipCode;
-	}
-
-	public String getPhone() {
-		return phone;
 	}
 
 	public Status getStatus() {
