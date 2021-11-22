@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS auction (
   start_date timestamp NOT NULL,
   end_date timestamp NOT NULL,
   start_price decimal NOT NULL,
-  highest_bid decimal,
   status text,
   shipping_cost_included text,
   item_id UUID NOT NULL,

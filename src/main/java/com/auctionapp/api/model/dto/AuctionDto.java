@@ -10,7 +10,6 @@ public class AuctionDto {
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private Double startPrice;
-	private Double highestBid;
 	private Status status;
 	private Status shippingCostIncluded;
 	private CategoryDto category;
@@ -23,7 +22,6 @@ public class AuctionDto {
                     final Timestamp startDate,
                     final Timestamp endDate,
                     final Double startPrice,
-                    final Double highestBid,
                     final Status status,
                     final Status shippingCostIncluded,
                     final CategoryDto category,
@@ -34,7 +32,6 @@ public class AuctionDto {
         this.startDate = startDate;
         this.endDate = endDate;
         this.startPrice = startPrice;
-        this.highestBid = highestBid;
         this.status = status;
         this.shippingCostIncluded = shippingCostIncluded;
         this.category = category;
@@ -57,10 +54,6 @@ public class AuctionDto {
 	public Double getStartPrice() {
         return startPrice;
     }
-
-	public Double getHighestBid() {
-		return highestBid;
-	}
 
 	public Status getStatus() {
 		return status;

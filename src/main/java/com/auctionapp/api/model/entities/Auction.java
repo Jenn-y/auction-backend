@@ -34,9 +34,6 @@ public class Auction {
 	@Column
     private Double startPrice;
 
-	@Column
-	private Double highestBid;
-
 	@Enumerated(EnumType.STRING)
 	@Column
 	private Status status;
@@ -64,7 +61,6 @@ public class Auction {
                    final Timestamp startDate,
                    final Timestamp endDate,
                    final Double startPrice,
-                   final Double highestBid,
                    final Status status,
                    final Status shippingCostIncluded,
                    final Category category,
@@ -82,7 +78,6 @@ public class Auction {
         this.startDate = startDate;
         this.endDate = endDate;
         this.startPrice = startPrice;
-        this.highestBid = highestBid;
         this.status = status;
         this.shippingCostIncluded = shippingCostIncluded;
         this.category = category;
@@ -104,10 +99,6 @@ public class Auction {
 
 	public Double getStartPrice() {
 		return startPrice;
-	}
-
-	public Double getHighestBid() {
-		return highestBid;
 	}
 
 	public Status getStatus() {
