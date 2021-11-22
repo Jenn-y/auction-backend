@@ -30,8 +30,8 @@ public class BidService {
 		return bids.stream().map(t -> toPayload(t)).collect(Collectors.toList());
     }
 
-	public Double getHighestBidAmount(UUID auctionId) {
-		Optional<Bid> bidEntity = bidRepository.findTopByAuctionIdOrderByBidAmountDesc(auctionId);
+	public Double getHighestBidAmount(final UUID auctionId) {
+		final Optional<Bid> bidEntity = bidRepository.findTopByAuctionIdOrderByBidAmountDesc(auctionId);
 		if (bidEntity.isPresent()) {
 			return bidEntity.get().getBidAmount();
 		}
