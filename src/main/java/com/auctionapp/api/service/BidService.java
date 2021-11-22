@@ -30,45 +30,28 @@ public class BidService {
 		return bids.stream().map(t -> toPayload(t)).collect(Collectors.toList());
     }
 
-	public BidDto save(final BidDto payload) {
-		if (existsAmongBidders(payload.getBuyer().getId(), payload.getAuction().getId())) {
-			return toPayload(update(payload));
+	public Double getHighestBidAmount(UUID auctionId) {
+		Optional<Bid> bidEntity = bidRepository.findTopByAuctionIdOrderByBidAmountDesc(auctionId);
+		if (bidEntity.isPresent()) {
+			return bidEntity.get().getBidAmount();
 		}
+		return auctionService.getAuction(auctionId).getStartPrice();
+	}
 
+	public BidDto save(final BidDto payload) {
 		payload.setBidDate(Timestamp.from(Instant.now()));
         Bid bid = fromPayload(payload);
         bid = bidRepository.save(bid);
-		bid.setAuction(auctionService.update(payload.getAuction(), payload.getBidAmount()));
         return toPayload(bid);
 	}
 
-	public Bid update(final BidDto payload) {
-        Optional<Bid> bidEntity = bidRepository.findByBuyerIdAndAuctionId(payload.getBuyer().getId(), payload.getAuction().getId());
-
-        if (bidEntity.isPresent()) {
-			if (payload.getBidAmount() > bidEntity.get().getBidAmount()) {
-				bidEntity.get().setBidAmount(payload.getBidAmount());
-				bidEntity.get().setBidDate(Timestamp.from(Instant.now()));
-				Bid  bid = bidRepository.save(bidEntity.get());
-				bid.setAuction(auctionService.update(payload.getAuction(), payload.getBidAmount()));
-				return bid;
-			}
-			throw new RuntimeException("New bid amount has to be greater than the previous ones!");
-        }
-        throw new RuntimeException("Bid with id " + payload.getId() + " does not exist!");
-    }
-
 	public boolean validateBid(final BidDto bid){
-		return validateBidAmount(bid.getBidAmount(), bid.getAuction().getHighestBid(), bid.getAuction().getStartPrice()) 
+		return validateBidAmount(bid.getBidAmount(), getHighestBidAmount(bid.getAuction().getId()), bid.getAuction().getStartPrice()) 
                 && !isBidderEqualSeller(bid.getBuyer().getId(), bid.getAuction().getSeller().getId());
 	}
 
 	private boolean validateBidAmount(final Double currentBid, final Double highestBid, final Double startPrice) {
 		return currentBid > highestBid && currentBid > startPrice;
-	}
-
-	private boolean existsAmongBidders(final UUID buyerId, final UUID auctionId) {
-		return bidRepository.existsByBuyerIdAndAuctionId(buyerId, auctionId);
 	}
 
     private boolean isBidderEqualSeller(final UUID bidderId, final UUID sellerId) {

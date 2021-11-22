@@ -32,6 +32,13 @@ public class BidController {
 		return ResponseEntity.status(HttpStatus.OK).body(bids);
 	}
 
+	@GetMapping("/highestBid/{auctionId}")
+	public ResponseEntity<Double> getHighestBidAmount(@PathVariable final UUID auctionId) {
+		final Double highestBid = service.getHighestBidAmount(auctionId);
+
+		return ResponseEntity.status(HttpStatus.OK).body(highestBid);
+	}
+
 	@PostMapping("/newBid")
     public ResponseEntity<BidDto> save(@RequestBody final BidDto bid) {
 
