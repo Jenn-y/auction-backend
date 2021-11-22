@@ -34,25 +34,9 @@ public class Auction {
 	@Column
     private Double startPrice;
 
-	@Column
-	private Double highestBid;
-
-	@Column
-	private String address;
-
-	@Column
-	private Integer zipCode;
-
-	@Column
-	private String phone;
-
 	@Enumerated(EnumType.STRING)
 	@Column
 	private Status status;
-
-	@Enumerated(EnumType.STRING)
-	@Column
-	private Status shippingCostIncluded;
 
 	@ManyToOne
 	@JoinColumn
@@ -73,12 +57,7 @@ public class Auction {
                    final Timestamp startDate,
                    final Timestamp endDate,
                    final Double startPrice,
-                   final Double highestBid,
-                   final String address,
-                   final Integer zipCode,
-                   final String phone,
                    final Status status,
-                   final Status shippingCostIncluded,
                    final Category category,
                    final User seller,
                    final Item item) {
@@ -94,12 +73,7 @@ public class Auction {
         this.startDate = startDate;
         this.endDate = endDate;
         this.startPrice = startPrice;
-        this.highestBid = highestBid;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.phone = phone;
         this.status = status;
-        this.shippingCostIncluded = shippingCostIncluded;
         this.category = category;
         this.seller = seller;
         this.item = item;
@@ -121,32 +95,8 @@ public class Auction {
 		return startPrice;
 	}
 
-	public Double getHighestBid() {
-		return highestBid;
-	}
-
-	public void setHighestBid(final Double highestBid) {
-        this.highestBid = highestBid;
-    }
-
-	public String getAddress() {
-		return address;
-	}
-
-	public Integer getZipCode() {
-		return zipCode;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
 	public Status getStatus() {
 		return status;
-	}
-
-	public Status getShippingCostIncluded() {
-		return shippingCostIncluded;
 	}
 
 	public Category getCategory() {
