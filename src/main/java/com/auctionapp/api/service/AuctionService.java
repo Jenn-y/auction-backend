@@ -45,7 +45,6 @@ public class AuctionService {
 									payload.getEndDate(),
 									payload.getStartPrice(),
 									payload.getStatus(),
-									payload.getShippingCostIncluded(),
 									CategoryService.fromPayload(payload.getCategory()),
 									UserService.fromPayload(payload.getSeller()),
 									ItemService.fromPayload(payload.getItem())
@@ -60,7 +59,6 @@ public class AuctionService {
                                             auction.getEndDate(),
                                             auction.getStartPrice(),
                                             auction.getStatus(),
-                                            auction.getShippingCostIncluded(),
                                             CategoryService.toPayload(auction.getCategory()),
                                             UserService.toPayload(auction.getSeller()),
                                             ItemService.toPayload(auction.getItem())

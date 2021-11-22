@@ -11,7 +11,6 @@ public class AuctionDto {
 	private Timestamp endDate;
 	private Double startPrice;
 	private Status status;
-	private Status shippingCostIncluded;
 	private CategoryDto category;
 	private UserDto seller;
 	private ItemDto item;
@@ -23,7 +22,6 @@ public class AuctionDto {
                     final Timestamp endDate,
                     final Double startPrice,
                     final Status status,
-                    final Status shippingCostIncluded,
                     final CategoryDto category,
                     final UserDto seller,
                     final ItemDto item) {
@@ -33,7 +31,6 @@ public class AuctionDto {
         this.endDate = endDate;
         this.startPrice = startPrice;
         this.status = status;
-        this.shippingCostIncluded = shippingCostIncluded;
         this.category = category;
         this.seller = seller;
         this.item = item;
@@ -57,10 +54,6 @@ public class AuctionDto {
 
 	public Status getStatus() {
 		return status;
-	}
-
-	public Status getShippingCostIncluded() {
-		return shippingCostIncluded;
 	}
 
 	public CategoryDto getCategory() {

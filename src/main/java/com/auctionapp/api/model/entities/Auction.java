@@ -38,10 +38,6 @@ public class Auction {
 	@Column
 	private Status status;
 
-	@Enumerated(EnumType.STRING)
-	@Column
-	private Status shippingCostIncluded;
-
 	@ManyToOne
 	@JoinColumn
 	private Category category;
@@ -62,7 +58,6 @@ public class Auction {
                    final Timestamp endDate,
                    final Double startPrice,
                    final Status status,
-                   final Status shippingCostIncluded,
                    final Category category,
                    final User seller,
                    final Item item) {
@@ -79,7 +74,6 @@ public class Auction {
         this.endDate = endDate;
         this.startPrice = startPrice;
         this.status = status;
-        this.shippingCostIncluded = shippingCostIncluded;
         this.category = category;
         this.seller = seller;
         this.item = item;
@@ -103,10 +97,6 @@ public class Auction {
 
 	public Status getStatus() {
 		return status;
-	}
-
-	public Status getShippingCostIncluded() {
-		return shippingCostIncluded;
 	}
 
 	public Category getCategory() {
