@@ -3,13 +3,11 @@ package com.auctionapp.api.model.dto;
 import java.util.UUID;
 
 public class ItemDto {
-	private UUID id;
-	private String name;
-	private String color;
-	private Integer size;
-	private String description;
-
-	public ItemDto() {}
+	private final UUID id;
+	private final String name;
+	private final String color;
+	private final Integer size;
+	private final String description;
 
 	public ItemDto(final UUID id,
 					final String name,
