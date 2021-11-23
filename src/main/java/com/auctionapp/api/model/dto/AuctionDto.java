@@ -6,17 +6,15 @@ import java.util.UUID;
 import com.auctionapp.api.model.entities.Status;
 
 public class AuctionDto {
-	private UUID id;
-	private Timestamp startDate;
-	private Timestamp endDate;
-	private Double startPrice;
-	private Status status;
-	private CategoryDto category;
-	private UserDto seller;
-	private ItemDto item;
+	private final UUID id;
+	private final Timestamp startDate;
+	private final Timestamp endDate;
+	private final Double startPrice;
+	private final Status status;
+	private final CategoryDto category;
+	private final UserDto seller;
+	private final ItemDto item;
 
-	public AuctionDto() {}
-	
 	public AuctionDto(final UUID id,
                     final Timestamp startDate,
                     final Timestamp endDate,

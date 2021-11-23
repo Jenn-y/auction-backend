@@ -6,17 +6,14 @@ import java.util.UUID;
 import com.auctionapp.api.model.entities.UserRole;
 
 public class UserDto {
-	private UUID id;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String password;
-	private Timestamp createdAt;
-	private Timestamp updatedAt;
-	private UserRole role;
-
-	public UserDto() {
-	}
+	private final UUID id;
+	private final String firstName;
+	private final String lastName;
+	private final String email;
+	private final String password;
+	private final Timestamp createdAt;
+	private final Timestamp updatedAt;
+	private final UserRole role;
 
 	public UserDto(final UUID id, 
 				  final String firstName, 
@@ -24,7 +21,8 @@ public class UserDto {
 				  final String email, 
 				  final String password,
 				  final Timestamp createdAt, 
-				  final Timestamp updatedAt) {
+				  final Timestamp updatedAt,
+				  final UserRole role) {
 					  
 		this.id = id;
 		this.firstName = firstName;
@@ -33,6 +31,7 @@ public class UserDto {
 		this.password = password;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.role = role;
 	}
 
 	public UUID getId() {
