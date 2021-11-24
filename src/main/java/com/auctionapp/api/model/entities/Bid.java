@@ -66,16 +66,8 @@ public class Bid {
 		return bidAmount;
 	}
 
-	public void setBidAmount(final Double bidAmount) {
-		this.bidAmount = bidAmount;
-	}
-
 	public Timestamp getBidDate() {
 		return bidDate;
-	}
-
-	public void setBidDate(final Timestamp bidDate) {
-		this.bidDate = bidDate;
 	}
 
 	public User getBuyer() {
@@ -84,9 +76,5 @@ public class Bid {
 
 	public Auction getAuction() {
 		return auction;
-	}
-
-	public void setAuction(final Auction auction) {
-		this.auction = auction;
 	}
 }
