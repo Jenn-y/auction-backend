@@ -4,14 +4,11 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 public class BidDto {
-	private UUID id;
-	private Double bidAmount;
+	private final  UUID id;
+	private final Double bidAmount;
 	private Timestamp bidDate;
-	private UserDto buyer;
-	private AuctionDto auction;
-
-	public BidDto() {
-	}
+	private final UserDto buyer;
+	private final AuctionDto auction;
 
 	public BidDto(final UUID id,
 				  final Double bidAmount,
@@ -36,10 +33,6 @@ public class BidDto {
 
 	public Timestamp getBidDate() {
 		return bidDate;
-	}
-
-	public void setBidDate(final Timestamp bidDate) {
-		this.bidDate = bidDate;
 	}
 
 	public UserDto getBuyer() {

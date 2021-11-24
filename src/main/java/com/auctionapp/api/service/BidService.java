@@ -1,7 +1,5 @@
 package com.auctionapp.api.service;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -39,7 +37,6 @@ public class BidService {
 	}
 
 	public BidDto save(final BidDto payload) {
-		payload.setBidDate(Timestamp.from(Instant.now()));
         Bid bid = fromPayload(payload);
         bid = bidRepository.save(bid);
         return toPayload(bid);
