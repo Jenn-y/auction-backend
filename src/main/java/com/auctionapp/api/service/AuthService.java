@@ -8,7 +8,7 @@ import com.auctionapp.api.model.dto.AuthenticationResponse;
 import com.auctionapp.api.model.dto.LoginRequest;
 import com.auctionapp.api.model.dto.RegisterRequest;
 import com.auctionapp.api.model.entities.User;
-import com.auctionapp.api.model.entities.UserRoleEnum;
+import com.auctionapp.api.model.entities.UserRole;
 import com.auctionapp.api.repository.UserRepository;
 import com.auctionapp.api.security.JwtProvider;
 
@@ -84,15 +84,15 @@ public class AuthService {
  	}
 
 	@Transactional
-	public String register(RegisterRequest registerRequest) {
+	public String register(final RegisterRequest registerRequest) {
 		User user = new User(null,
 							registerRequest.getFirstName(),
 							registerRequest.getLastName(),
 							registerRequest.getEmail(),
 							passwordEncoder.encode(registerRequest.getPassword()),
 							Timestamp.from(Instant.now()),
-							null,
-							UserRoleEnum.USER
+							Timestamp.from(Instant.now()),
+							UserRole.USER
 		);
 
 		if (userRepository.save(user) != null) {
@@ -101,7 +101,7 @@ public class AuthService {
 		return "User registration unsuccessful";
 	}
 
-	public AuthenticationResponse login(LoginRequest loginRequest) {
+	public AuthenticationResponse login(final LoginRequest loginRequest) {
 		Authentication authenticate = authenticationManager.authenticate(
 			new UsernamePasswordAuthenticationToken(
 				loginRequest.getEmail(), 

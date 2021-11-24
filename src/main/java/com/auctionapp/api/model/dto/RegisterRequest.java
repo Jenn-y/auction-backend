@@ -10,6 +10,7 @@ public class RegisterRequest {
 						   final String lastName,
 						   final String email,
 						   final String password) {
+							   
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
