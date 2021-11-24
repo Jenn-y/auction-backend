@@ -32,7 +32,7 @@ public class Category {
 	private Category subcategoryOf;
 
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-	private Set<Auction> itemList;
+	private Set<Auction> auctionSet;
 
 	public Category() {
 	}
@@ -61,11 +61,11 @@ public class Category {
 		this.subcategoryOf = subcategory;
 	}
 
-	public Set<Auction> getItemList() {
-		return itemList;
+	public Set<Auction> getAuctionSet() {
+		return auctionSet;
 	}
 
-	public void setItemList(final Set<Auction> itemList) {
-		this.itemList = itemList;
+	public void setAuctionSet(final Set<Auction> auctionSet) {
+		this.auctionSet = auctionSet;
 	}
 }
