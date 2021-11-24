@@ -8,19 +8,19 @@ public class CategoryDto {
 	private UUID id;
 	private String name;
 	private CategoryDto subcategoryOf;
-	private Set<AuctionDto> itemList = new HashSet<AuctionDto>();
+	private Set<AuctionDto> auctionSet = new HashSet<AuctionDto>();
 
 	public CategoryDto() {}
 
 	public CategoryDto(final UUID id,
 						final String name,
 						final CategoryDto subcategoryOf,
-						final Set<AuctionDto> itemList) {
+						final Set<AuctionDto> auctionSet) {
 
 		this.id = id;
 		this.name = name;
 		this.subcategoryOf = subcategoryOf;
-		this.itemList = itemList;
+		this.auctionSet = auctionSet;
 	}
 
 	public UUID getId() {
@@ -47,11 +47,11 @@ public class CategoryDto {
 		this.subcategoryOf = subcategoryOf;
 	}
 
-	public Set<AuctionDto> getItemList() {
-		return itemList;
+	public Set<AuctionDto> getAuctionSet() {
+		return auctionSet;
 	}
 
-	public void setItemList(Set<AuctionDto> itemList) {
-		this.itemList = itemList;
+	public void setAuctionSet(Set<AuctionDto> auctionSet) {
+		this.auctionSet = auctionSet;
 	}
 }

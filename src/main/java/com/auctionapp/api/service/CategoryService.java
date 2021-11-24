@@ -19,7 +19,7 @@ public class CategoryService {
 		if (payload.getSubcategoryOf() != null) {
 			category.setSubcategoryOf(CategoryService.fromPayload(payload.getSubcategoryOf()));
 		}
-		category.setItemList(payload.getItemList()
+		category.setAuctionSet(payload.getAuctionSet()
 									.stream()
 									.map(t -> AuctionService.fromPayload(t))
 									.collect(Collectors.toSet()));
