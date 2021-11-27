@@ -38,6 +38,11 @@ public class AuctionService {
 		throw new RuntimeException("Auction with id " + id + " does not exist!");
 	}
 
+	public List<AuctionDto> getAuctionsByCategory(UUID categoryId) {
+		final List<Auction> auctions = auctionRepository.findAllByCategoryId(categoryId);
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
 	public static Auction fromPayload(final AuctionDto payload) {
 		Auction auction = new Auction(
 									payload.getId(),

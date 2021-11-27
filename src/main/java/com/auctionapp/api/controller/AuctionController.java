@@ -43,4 +43,11 @@ public class AuctionController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
+
+	@GetMapping("/categories/{categoryId}")
+	public ResponseEntity<List<AuctionDto>> getAuctionsByCategory(@PathVariable final UUID categoryId) {
+		final List<AuctionDto> auctions = service.getAuctionsByCategory(categoryId);
+
+		return ResponseEntity.status(HttpStatus.OK).body(auctions);
+	}
 }

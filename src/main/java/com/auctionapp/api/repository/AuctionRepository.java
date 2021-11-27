@@ -14,4 +14,6 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID> {
 	List<Auction> findAllByOrderByStartDateDesc();
 
 	List<Auction> findAllByOrderByEndDateAsc();
+
+	List<Auction> findAllByCategoryId(UUID categoryId);
 }
