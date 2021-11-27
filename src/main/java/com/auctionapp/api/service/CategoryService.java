@@ -1,14 +1,27 @@
 package com.auctionapp.api.service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.auctionapp.api.model.dto.CategoryDto;
 import com.auctionapp.api.model.entities.Category;
+import com.auctionapp.api.repository.CategoryRepository;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryService {
+
+	private final CategoryRepository categoryRepository;
+
+	public CategoryService(final CategoryRepository categoryRepository) {
+		this.categoryRepository = categoryRepository;
+	}
+
+	public List<CategoryDto> getLimitedCategories() {
+		List<Category> categories = categoryRepository.findTop6ByOrderByNameAsc();
+		return categories.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
 
 	public static Category fromPayload(final CategoryDto payload) {
 		Category category = new Category();
