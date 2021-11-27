@@ -31,7 +31,7 @@ public class AuctionService {
 	}
 
 	public AuctionDto getAuction(final UUID id) {
-		Optional<Auction> auction = auctionRepository.findById(id);
+		final Optional<Auction> auction = auctionRepository.findById(id);
 		if (auction.isPresent()) {
 			return toPayload(auction.get());
 		}
