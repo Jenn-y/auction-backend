@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, UUID> {
 
-	List<Category> findTop6BySubcategoryOfIsNullOrderByNameAsc();
+	List<Category> findTop9BySubcategoryOfIsNullOrderByNameAsc();
 
 	List<Category> findAllBySubcategoryOfIsNullOrderByNameAsc();
 

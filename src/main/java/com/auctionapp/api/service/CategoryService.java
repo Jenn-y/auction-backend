@@ -21,7 +21,7 @@ public class CategoryService {
 	}
 
 	public List<CategoryDto> getLandingPageCategories() {
-		List<Category> categories = categoryRepository.findTop6BySubcategoryOfIsNullOrderByNameAsc();
+		List<Category> categories = categoryRepository.findTop9BySubcategoryOfIsNullOrderByNameAsc();
 		return categories.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
