@@ -25,10 +25,9 @@ public class CategoryService {
 		return categories.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
-	public List<CategoryDto> getAllSubcategories(final UUID categoryId) {
-		final Category category = getCategory(categoryId);
-		List<Category> subcategories = categoryRepository.findAllBySubcategoryOf(category);
-		return subcategories.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	public List<CategoryDto> getAllCategories() {
+		List<Category> categories = categoryRepository.findAllBySubcategoryOfIsNullOrderByNameAsc();
+		return categories.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
 	public Category getCategory(final UUID categoryId) {
