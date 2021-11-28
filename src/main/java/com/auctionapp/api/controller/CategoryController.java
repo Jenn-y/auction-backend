@@ -22,8 +22,8 @@ public class CategoryController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<CategoryDto>> getCategories() {
-		final List<CategoryDto> categories = service.getLimitedCategories();
+	public ResponseEntity<List<CategoryDto>> getLandingPageCategories() {
+		final List<CategoryDto> categories = service.getLandingPageCategories();
 
 		return ResponseEntity.status(HttpStatus.OK).body(categories);
 	}
