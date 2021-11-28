@@ -21,12 +21,12 @@ public class CategoryService {
 	}
 
 	public List<CategoryDto> getLandingPageCategories() {
-		List<Category> categories = categoryRepository.findTop9BySubcategoryOfIsNullOrderByNameAsc();
+		final List<Category> categories = categoryRepository.findTop9BySubcategoryOfIsNullOrderByNameAsc();
 		return categories.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
 	public List<CategoryDto> getAllCategories() {
-		List<Category> categories = categoryRepository.findAllBySubcategoryOfIsNullOrderByNameAsc();
+		final List<Category> categories = categoryRepository.findAllBySubcategoryOfIsNullOrderByNameAsc();
 		return categories.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
@@ -55,16 +55,14 @@ public class CategoryService {
 	}
 
 	public static CategoryDto toPayload(final Category category) {
-		CategoryDto payload = new CategoryDto();
-		payload.setId(category.getId());
-		payload.setName(category.getName());
+		CategoryDto payload = categoryToPayload(category);
 		if (category.getSubcategoryOf() != null) {
-			payload.setSubcategoryOf(CategoryService.parentToPayload(category.getSubcategoryOf()));
+			payload.setSubcategoryOf(CategoryService.categoryToPayload(category.getSubcategoryOf()));
 		}
 		return payload;
 	}
 
-	public static CategoryDto parentToPayload(final Category category) {
+	public static CategoryDto categoryToPayload(final Category category) {
 		CategoryDto payload = new CategoryDto();
 		payload.setId(category.getId());
 		payload.setName(category.getName());
