@@ -38,6 +38,13 @@ public class CategoryService {
 		throw new RuntimeException("Category with id " + categoryId + " does not exist!");
 	}
 
+	public List<CategoryDto> getAllSubcategories(final UUID categoryId) {
+		final Category category = getCategory(categoryId);
+		List<Category> subcategories = categoryRepository.findAllBySubcategoryOf(category);
+		return subcategories.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+ 
+
 	public static Category fromPayload(final CategoryDto payload) {
 		Category category = new Category();
 		if (payload.getId() != null) {

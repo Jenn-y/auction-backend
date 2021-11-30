@@ -15,4 +15,6 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
 
 	List<Category> findAllBySubcategoryOfIsNullOrderByNameAsc();
 
+	List<Category> findAllBySubcategoryOf(Category subcategoryOf);
+
 }
