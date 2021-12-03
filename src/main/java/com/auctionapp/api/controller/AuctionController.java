@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -47,6 +48,15 @@ public class AuctionController {
 	@GetMapping("/categories/{categoryId}")
 	public ResponseEntity<List<AuctionDto>> getAuctionsByCategory(@PathVariable final UUID categoryId) {
 		final List<AuctionDto> auctions = service.getAuctionsByCategory(categoryId);
+
+		return ResponseEntity.status(HttpStatus.OK).body(auctions);
+	}
+
+	@GetMapping("/categories/filter")
+	public ResponseEntity<List<AuctionDto>> getFilteredAuctions(@RequestParam final String[] categories, 
+																@RequestParam final String[] subcategories) {
+																	
+		final List<AuctionDto> auctions = service.getFilteredAuctions(categories, subcategories);
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}

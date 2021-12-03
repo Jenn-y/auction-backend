@@ -1,5 +1,6 @@
 package com.auctionapp.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.model.entities.Auction;
+import com.auctionapp.api.model.entities.Category;
 import com.auctionapp.api.repository.AuctionRepository;
 
 import org.springframework.stereotype.Service;
@@ -15,9 +17,12 @@ import org.springframework.stereotype.Service;
 public class AuctionService {
 
 	private final AuctionRepository auctionRepository;
+	private final CategoryService categoryService;
 
-	public AuctionService(final AuctionRepository auctionRepository) {
+	public AuctionService(final AuctionRepository auctionRepository,
+						  final CategoryService categoryService) {
 		this.auctionRepository = auctionRepository;
+		this.categoryService = categoryService;
 	}
 
 	public List<AuctionDto> getNewArrivals() {
@@ -41,6 +46,22 @@ public class AuctionService {
 	public List<AuctionDto> getAuctionsByCategory(final UUID categoryId) {
 		final List<Auction> auctions = auctionRepository.findAllByCategoryId(categoryId);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	public List<AuctionDto> getFilteredAuctions(String[] categories, String[] subcategories) {
+		final List<Category> parentCategories = getCategories(categories);
+		final List<Category> childrenCategories = getCategories(subcategories);
+
+		final List<Auction> auctions = auctionRepository.findAllByCategoryId(parentCategories, childrenCategories);
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	private List<Category> getCategories(String[] categories) {
+		List<Category> retrievedCategories = new ArrayList<>();
+		for (String category : categories) {
+			retrievedCategories.add(categoryService.getCategory(UUID.fromString(category)));
+		}
+		return retrievedCategories;
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {
