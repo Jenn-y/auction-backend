@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.auctionapp.api.model.dto.CategoryDto;
+import com.auctionapp.api.model.entities.Category;
 import com.auctionapp.api.service.CategoryService;
 
 import org.springframework.http.HttpStatus;
@@ -44,4 +45,10 @@ public class CategoryController {
        return ResponseEntity.status(HttpStatus.OK).body(subcategories);
    }
 
+   @GetMapping("/{id}")
+	public ResponseEntity<CategoryDto> get(@PathVariable final UUID id) {
+		final Category result = service.getCategory(id);
+
+		return ResponseEntity.status(HttpStatus.OK).body(CategoryService.toPayload(result));
+	}
 }

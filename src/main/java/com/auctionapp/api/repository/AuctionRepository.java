@@ -18,8 +18,6 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID> {
 
 	List<Auction> findAllByOrderByEndDateAsc();
 
-	List<Auction> findAllByCategoryId(UUID categoryId);
-
 	@Query(value = "SELECT * FROM auction WHERE category_id IN :categoryList OR category_id IN :subcategoryList", nativeQuery = true)
 	List<Auction> findAllByCategoryId(@Param("categoryList") List<Category> categoryList, @Param("subcategoryList") List<Category> subcategoryList);
 }
