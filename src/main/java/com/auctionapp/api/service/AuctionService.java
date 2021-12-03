@@ -51,6 +51,18 @@ public class AuctionService {
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
+	public Double getMaxPrice() {
+		return auctionRepository.getMaxPrice();
+	}
+
+	public Double getMinPrice() {
+		return auctionRepository.getMinPrice();
+	}
+
+	public Double getAveragePrice() {
+		return auctionRepository.getAveragePrice();
+	}
+
 	private List<Category> getCategories(String[] categories) {
 		List<Category> retrievedCategories = new ArrayList<>();
 		for (String category : categories) {

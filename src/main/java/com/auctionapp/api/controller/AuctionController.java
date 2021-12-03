@@ -53,4 +53,25 @@ public class AuctionController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
+
+	@GetMapping("/maxPrice")
+    public ResponseEntity<Double> getMaxPrice() {
+		final Double result = service.getMaxPrice();
+
+		return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+	@GetMapping("/minPrice")
+    public ResponseEntity<Double> getMinPrice() {
+		final Double result = service.getMinPrice();
+
+		return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+	@GetMapping("/averagePrice")
+    public ResponseEntity<Double> getAveragePrice() {
+		final Double result = service.getAveragePrice();
+
+		return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 }
