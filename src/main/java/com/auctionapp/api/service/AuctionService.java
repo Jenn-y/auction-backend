@@ -43,6 +43,21 @@ public class AuctionService {
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
+	public List<AuctionDto> getAuctionsByDefaultSort() {
+		List<Auction> auctions = auctionRepository.findAllByOrderByIdAsc();
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	public List<AuctionDto> getAuctionsSortedByPriceDesc() {
+		List<Auction> auctions = auctionRepository.findAllByOrderByStartPriceDesc();
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	public List<AuctionDto> getAuctionsSortedByPriceAsc() {
+		List<Auction> auctions = auctionRepository.findAllByOrderByStartPriceAsc();
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
 	public static Auction fromPayload(final AuctionDto payload) {
 		Auction auction = new Auction(
 									payload.getId(),

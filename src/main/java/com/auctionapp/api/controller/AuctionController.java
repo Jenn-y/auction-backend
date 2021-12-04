@@ -50,4 +50,25 @@ public class AuctionController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
+
+	@GetMapping("/defaultSort")
+	public ResponseEntity<List<AuctionDto>> getAuctionsByDefaultSort() {
+		final List<AuctionDto> auctions = service.getAuctionsByDefaultSort();
+
+		return ResponseEntity.status(HttpStatus.OK).body(auctions);
+	}
+
+	@GetMapping("/priceSortDesc")
+	public ResponseEntity<List<AuctionDto>> getAuctionsSortedByPriceDesc() {
+		final List<AuctionDto> auctions = service.getAuctionsSortedByPriceDesc();
+
+		return ResponseEntity.status(HttpStatus.OK).body(auctions);
+	}
+
+	@GetMapping("/priceSortAsc")
+	public ResponseEntity<List<AuctionDto>> getAuctionsSortedByPriceAsc() {
+		final List<AuctionDto> auctions = service.getAuctionsSortedByPriceAsc();
+
+		return ResponseEntity.status(HttpStatus.OK).body(auctions);
+	}
 }
