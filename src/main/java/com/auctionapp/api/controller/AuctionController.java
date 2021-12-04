@@ -54,23 +54,30 @@ public class AuctionController {
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
 
+	@GetMapping("/countBySubcategory/{subcategoryId}")
+    public ResponseEntity<Integer> getCountBySubcategory(@PathVariable final UUID subcategoryId) {
+		final Integer result = service.getCountBySubcategory(subcategoryId);
+
+		return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
 	@GetMapping("/maxPrice")
-    public ResponseEntity<Double> getMaxPrice() {
-		final Double result = service.getMaxPrice();
+    public ResponseEntity<Double> getMaxPrice(@RequestParam final String[] auctions) {
+		final Double result = service.getMaxPrice(auctions);
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
 	@GetMapping("/minPrice")
-    public ResponseEntity<Double> getMinPrice() {
-		final Double result = service.getMinPrice();
+    public ResponseEntity<Double> getMinPrice(@RequestParam final String[] auctions) {
+		final Double result = service.getMinPrice(auctions);
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
 	@GetMapping("/averagePrice")
-    public ResponseEntity<Double> getAveragePrice() {
-		final Double result = service.getAveragePrice();
+    public ResponseEntity<Double> getAveragePrice(@RequestParam final String[] auctions) {
+		final Double result = service.getAveragePrice(auctions);
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
     }
