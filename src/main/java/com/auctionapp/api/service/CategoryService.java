@@ -20,7 +20,7 @@ public class CategoryService {
 		this.categoryRepository = categoryRepository;
 	}
 
-	public List<CategoryDto> getLandingPageCategories() {
+	public List<CategoryDto> getTop9Categories() {
 		final List<Category> categories = categoryRepository.findTop9BySubcategoryOfIsNullOrderByNameAsc();
 		return categories.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
