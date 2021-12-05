@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -51,23 +52,37 @@ public class AuctionController {
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
 
-	@GetMapping("/defaultSort")
-	public ResponseEntity<List<AuctionDto>> getAuctionsByDefaultSort() {
-		final List<AuctionDto> auctions = service.getAuctionsByDefaultSort();
+	@GetMapping("/default")
+	public ResponseEntity<List<AuctionDto>> getAuctionsSortDefault(@RequestParam final String[] selectedAuctions) {
+		final List<AuctionDto> auctions = service.getAuctionsSortDefault(selectedAuctions);
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
 
-	@GetMapping("/priceSortDesc")
-	public ResponseEntity<List<AuctionDto>> getAuctionsSortedByPriceDesc() {
-		final List<AuctionDto> auctions = service.getAuctionsSortedByPriceDesc();
+	@GetMapping("/oldToNew")
+	public ResponseEntity<List<AuctionDto>> getAuctionsOldToNew(@RequestParam final String[] selectedAuctions) {
+		final List<AuctionDto> auctions = service.getAuctionsOldToNew(selectedAuctions);
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
 
-	@GetMapping("/priceSortAsc")
-	public ResponseEntity<List<AuctionDto>> getAuctionsSortedByPriceAsc() {
-		final List<AuctionDto> auctions = service.getAuctionsSortedByPriceAsc();
+	@GetMapping("/newToOld")
+	public ResponseEntity<List<AuctionDto>> getAuctionsNewToOld(@RequestParam final String[] selectedAuctions) {
+		final List<AuctionDto> auctions = service.getAuctionsNewToOld(selectedAuctions);
+
+		return ResponseEntity.status(HttpStatus.OK).body(auctions);
+	}
+
+	@GetMapping("/byPriceSortDesc")
+	public ResponseEntity<List<AuctionDto>> getAuctionsByPriceDesc(@RequestParam final String[] selectedAuctions) {
+		final List<AuctionDto> auctions = service.getAuctionsByPriceDesc(selectedAuctions);
+
+		return ResponseEntity.status(HttpStatus.OK).body(auctions);
+	}
+
+	@GetMapping("/byPriceSortAsc")
+	public ResponseEntity<List<AuctionDto>> getAuctionsByPriceAsc(@RequestParam final String[] selectedAuctions) {
+		final List<AuctionDto> auctions = service.getAuctionsByPriceAsc(selectedAuctions);
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}

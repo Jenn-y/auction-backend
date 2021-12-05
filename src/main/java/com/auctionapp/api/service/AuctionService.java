@@ -1,5 +1,6 @@
 package com.auctionapp.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -43,19 +44,42 @@ public class AuctionService {
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
-	public List<AuctionDto> getAuctionsByDefaultSort() {
-		List<Auction> auctions = auctionRepository.findAllByOrderByIdAsc();
+	public List<AuctionDto> getAuctionsSortDefault(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		final List<Auction> auctions = auctionRepository.getAuctionsSortDefault(auctionIds);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
-	public List<AuctionDto> getAuctionsSortedByPriceDesc() {
-		List<Auction> auctions = auctionRepository.findAllByOrderByStartPriceDesc();
+	public List<AuctionDto> getAuctionsOldToNew(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		final List<Auction> auctions = auctionRepository.getAuctionsOldToNew(auctionIds);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
-	public List<AuctionDto> getAuctionsSortedByPriceAsc() {
-		List<Auction> auctions = auctionRepository.findAllByOrderByStartPriceAsc();
+	public List<AuctionDto> getAuctionsNewToOld(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		final List<Auction> auctions = auctionRepository.getAuctionsNewToOld(auctionIds);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	public List<AuctionDto> getAuctionsByPriceDesc(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		final List<Auction> auctions = auctionRepository.getAuctionsByPriceDesc(auctionIds);
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	public List<AuctionDto> getAuctionsByPriceAsc(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		final List<Auction> auctions = auctionRepository.getAuctionsByPriceAsc(auctionIds);
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	private List<UUID> getAuctions(final String[] auctions) {
+		List<UUID> retrievedAuctionIds = new ArrayList<>();
+		for (String auction : auctions) {
+			retrievedAuctionIds.add(UUID.fromString(auction));
+		}
+		return retrievedAuctionIds;
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {
