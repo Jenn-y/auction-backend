@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.model.entities.Auction;
-import com.auctionapp.api.model.entities.Category;
 import com.auctionapp.api.repository.AuctionRepository;
 
 import org.springframework.stereotype.Service;
@@ -17,12 +16,9 @@ import org.springframework.stereotype.Service;
 public class AuctionService {
 
 	private final AuctionRepository auctionRepository;
-	private final CategoryService categoryService;
 
-	public AuctionService(final AuctionRepository auctionRepository,
-						  final CategoryService categoryService) {
+	public AuctionService(final AuctionRepository auctionRepository) {
 		this.auctionRepository = auctionRepository;
-		this.categoryService = categoryService;
 	}
 
 	public List<AuctionDto> getNewArrivals() {
@@ -44,8 +40,8 @@ public class AuctionService {
 	}
 
 	public List<AuctionDto> getFilteredAuctions(String[] categories, String[] subcategories) {
-		final List<Category> parentCategories = getCategories(categories);
-		final List<Category> childrenCategories = getCategories(subcategories);
+		final List<UUID> parentCategories = getCategories(categories);
+		final List<UUID> childrenCategories = getCategories(subcategories);
 
 		final List<Auction> auctions = auctionRepository.findAllByCategoryId(parentCategories, childrenCategories);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
@@ -55,24 +51,35 @@ public class AuctionService {
 		return auctionRepository.getCountBySubcategory(subcategoryId);
 	}
 
-	public Double getMaxPrice(final String[] auctions) {
-		return auctionRepository.getMaxPrice(auctions);
+	public Double getMaxPrice(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		return auctionRepository.getMaxPrice(auctionIds);
 	}
 
-	public Double getMinPrice(final String[] auctions) {
-		return auctionRepository.getMinPrice(auctions);
+	public Double getMinPrice(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		return auctionRepository.getMinPrice(auctionIds);
 	}
 
-	public Double getAveragePrice(final String[] auctions) {
-		return auctionRepository.getAveragePrice(auctions);
+	public Double getAveragePrice(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		return auctionRepository.getAveragePrice(auctionIds);
 	}
 
-	private List<Category> getCategories(String[] categories) {
-		List<Category> retrievedCategories = new ArrayList<>();
+	private List<UUID> getCategories(String[] categories) {
+		List<UUID> retrievedCategories = new ArrayList<>();
 		for (String category : categories) {
-			retrievedCategories.add(categoryService.getCategory(UUID.fromString(category)));
+			retrievedCategories.add(UUID.fromString(category));
 		}
 		return retrievedCategories;
+	}
+
+	private List<UUID> getAuctions(final String[] auctions) {
+		List<UUID> retrievedAuctionIds = new ArrayList<>();
+		for (String auction : auctions) {
+			retrievedAuctionIds.add(UUID.fromString(auction));
+		}
+		return retrievedAuctionIds;
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {
