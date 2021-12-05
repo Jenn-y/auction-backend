@@ -3,6 +3,7 @@ package com.auctionapp.api.repository;
 import java.util.List;
 import java.util.UUID;
 
+import com.auctionapp.api.model.dto.PriceCount;
 import com.auctionapp.api.model.entities.Auction;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,4 +32,7 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID> {
 
 	@Query(value = "SELECT AVG(start_price) FROM auction WHERE id IN :auctions", nativeQuery = true)
 	Double getAveragePrice(@Param("auctions") List<UUID> auctions);
+
+	@Query(value = "select distinct a1.start_price as price, (select count(*) from auction as a2 where a1.start_price=a2.start_price) as count from auction as a1 order by a1.start_price ASC", nativeQuery = true)
+	List<PriceCount> getPriceCount();
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.auctionapp.api.model.dto.AuctionDto;
+import com.auctionapp.api.model.dto.PriceCount;
 import com.auctionapp.api.service.AuctionService;
 
 import org.springframework.http.HttpStatus;
@@ -78,6 +79,13 @@ public class AuctionController {
 	@GetMapping("/averagePrice")
     public ResponseEntity<Double> getAveragePrice(@RequestParam final String[] auctions) {
 		final Double result = service.getAveragePrice(auctions);
+
+		return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+	@GetMapping("/priceCount")
+    public ResponseEntity<List<PriceCount>> getPriceCount() {
+		final List<PriceCount> result = service.getPriceCount();
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
     }

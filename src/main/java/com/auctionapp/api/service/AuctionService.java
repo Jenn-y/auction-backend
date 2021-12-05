@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.auctionapp.api.model.dto.AuctionDto;
+import com.auctionapp.api.model.dto.PriceCount;
 import com.auctionapp.api.model.entities.Auction;
 import com.auctionapp.api.repository.AuctionRepository;
 
@@ -80,6 +81,10 @@ public class AuctionService {
 			retrievedAuctionIds.add(UUID.fromString(auction));
 		}
 		return retrievedAuctionIds;
+	}
+
+	public List<PriceCount> getPriceCount() {
+		return auctionRepository.getPriceCount();
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {
