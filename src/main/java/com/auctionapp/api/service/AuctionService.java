@@ -67,7 +67,7 @@ public class AuctionService {
 		return auctionRepository.getAveragePrice(auctionIds);
 	}
 
-	private List<UUID> getCategories(String[] categories) {
+	private List<UUID> getCategories(final String[] categories) {
 		List<UUID> retrievedCategories = new ArrayList<>();
 		for (String category : categories) {
 			retrievedCategories.add(UUID.fromString(category));
@@ -83,8 +83,9 @@ public class AuctionService {
 		return retrievedAuctionIds;
 	}
 
-	public List<PriceCount> getPriceCount() {
-		return auctionRepository.getPriceCount();
+	public List<PriceCount> getPriceCount(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		return auctionRepository.getPriceCount(auctionIds);
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {

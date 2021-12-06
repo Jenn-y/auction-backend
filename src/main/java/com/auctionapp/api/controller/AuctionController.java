@@ -84,8 +84,8 @@ public class AuctionController {
     }
 
 	@GetMapping("/priceCount")
-    public ResponseEntity<List<PriceCount>> getPriceCount() {
-		final List<PriceCount> result = service.getPriceCount();
+    public ResponseEntity<List<PriceCount>> getPriceCount(@RequestParam final String[] auctions) {
+		final List<PriceCount> result = service.getPriceCount(auctions);
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
     }

@@ -33,6 +33,6 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID> {
 	@Query(value = "SELECT AVG(start_price) FROM auction WHERE id IN :auctions", nativeQuery = true)
 	Double getAveragePrice(@Param("auctions") List<UUID> auctions);
 
-	@Query(value = "select distinct a1.start_price as price, (select count(*) from auction as a2 where a1.start_price=a2.start_price) as count from auction as a1 order by a1.start_price ASC", nativeQuery = true)
-	List<PriceCount> getPriceCount();
+	@Query(value = "SELECT DISTINCT a1.start_price as price, (SELECT count(*) FROM auction AS a2 WHERE a1.start_price = a2.start_price AND a2.id IN :auctions) AS count FROM auction AS a1 WHERE a1.id IN :auctions ORDER BY a1.start_price ASC", nativeQuery = true)
+	List<PriceCount> getPriceCount(@Param("auctions") List<UUID> auctions);
 }
