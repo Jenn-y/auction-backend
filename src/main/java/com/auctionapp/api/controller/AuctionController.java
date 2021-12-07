@@ -47,10 +47,12 @@ public class AuctionController {
 	}
 
 	@GetMapping("/categories/filter")
-	public ResponseEntity<List<AuctionDto>> getFilteredAuctions(@RequestParam final String[] categories, 
+	public ResponseEntity<List<AuctionDto>> getFilteredAuctions(@RequestParam final Double minPrice,
+																@RequestParam final Double maxPrice,
+																@RequestParam final String[] categories, 
 																@RequestParam final String[] subcategories) {
 																	
-		final List<AuctionDto> auctions = service.getFilteredAuctions(categories, subcategories);
+		final List<AuctionDto> auctions = service.getFilteredAuctions(minPrice, maxPrice, categories, subcategories);
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}

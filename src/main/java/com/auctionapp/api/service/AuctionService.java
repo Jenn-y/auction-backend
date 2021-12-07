@@ -40,11 +40,15 @@ public class AuctionService {
 		throw new RuntimeException("Auction with id " + id + " does not exist!");
 	}
 
-	public List<AuctionDto> getFilteredAuctions(String[] categories, String[] subcategories) {
+	public List<AuctionDto> getFilteredAuctions(final Double minPrice, 
+												final Double maxPrice, 
+												final String[] categories, 
+												final String[] subcategories) {
+
 		final List<UUID> parentCategories = getCategories(categories);
 		final List<UUID> childrenCategories = getCategories(subcategories);
 
-		final List<Auction> auctions = auctionRepository.findAllByCategoryId(parentCategories, childrenCategories);
+		final List<Auction> auctions = auctionRepository.getFilteredAuctions(minPrice, maxPrice, parentCategories, childrenCategories);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 

@@ -18,8 +18,8 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID> {
 
 	List<Auction> findAllByOrderByEndDateAsc();
 
-	@Query(value = "SELECT DISTINCT a.item_id, a.id, a.status, a.seller_id, a.category_id, a.start_price, a.start_date, a.end_date  FROM auction a WHERE a.category_id IN :categoryList OR a.category_id IN :subcategoryList", nativeQuery = true)
-	List<Auction> findAllByCategoryId(@Param("categoryList") List<UUID> categoryList, @Param("subcategoryList") List<UUID> subcategoryList);
+	@Query(value = "SELECT a.item_id, a.id, a.status, a.seller_id, a.category_id, a.start_price, a.start_date, a.end_date  FROM auction a WHERE a.category_id IN :categoryList OR a.category_id IN :subcategoryList AND (a.start_price >= :minPrice AND a.start_price <= :maxPrice)", nativeQuery = true)
+	List<Auction> getFilteredAuctions(@Param("minPrice") Double minPrice, @Param("maxPrice") Double maxPrice, @Param("categoryList") List<UUID> categoryList, @Param("subcategoryList") List<UUID> subcategoryList);
 
 	@Query(value = "SELECT COUNT(*) FROM auction where category_id = :subcategoryId", nativeQuery = true)
 	Integer getCountBySubcategory(@Param("subcategoryId") final UUID subcategoryId);
