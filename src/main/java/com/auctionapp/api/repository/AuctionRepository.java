@@ -18,8 +18,11 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID> {
 
 	List<Auction> findAllByOrderByEndDateAsc();
 
-	@Query(value = "SELECT a.item_id, a.id, a.status, a.seller_id, a.category_id, a.start_price, a.start_date, a.end_date  FROM auction a WHERE a.category_id IN :categoryList OR a.category_id IN :subcategoryList AND (a.start_price >= :minPrice AND a.start_price <= :maxPrice)", nativeQuery = true)
+	@Query(value = "SELECT a.item_id, a.id, a.status, a.seller_id, a.category_id, a.start_price, a.start_date, a.end_date  FROM auction a WHERE (a.category_id IN :categoryList OR a.category_id IN :subcategoryList) AND (a.start_price >= :minPrice AND a.start_price <= :maxPrice)", nativeQuery = true)
 	List<Auction> getFilteredAuctions(@Param("minPrice") final Double minPrice, @Param("maxPrice") final Double maxPrice, @Param("categoryList") final List<UUID> categoryList, @Param("subcategoryList") final List<UUID> subcategoryList);
+
+	@Query(value = "SELECT a.item_id, a.id, a.status, a.seller_id, a.category_id, a.start_price, a.start_date, a.end_date  FROM auction a WHERE a.start_price >= :minPrice AND a.start_price <= :maxPrice", nativeQuery = true)
+	List<Auction> getFilteredAuctionsByPrice(@Param("minPrice") final Double minPrice, @Param("maxPrice") final Double maxPrice);
 
 	@Query(value = "SELECT COUNT(*) FROM auction where category_id = :subcategoryId", nativeQuery = true)
 	Integer getCountBySubcategory(@Param("subcategoryId") final UUID subcategoryId);

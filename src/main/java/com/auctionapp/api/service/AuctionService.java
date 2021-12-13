@@ -48,6 +48,11 @@ public class AuctionService {
 		final List<UUID> parentCategories = getCategories(categories);
 		final List<UUID> childrenCategories = getCategories(subcategories);
 
+		if (parentCategories.isEmpty() && childrenCategories.isEmpty()){
+			final List<Auction> auctions = auctionRepository.getFilteredAuctionsByPrice(minPrice, maxPrice);
+			return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+		}
+
 		final List<Auction> auctions = auctionRepository.getFilteredAuctions(minPrice, maxPrice, parentCategories, childrenCategories);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
