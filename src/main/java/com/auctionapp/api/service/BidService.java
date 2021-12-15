@@ -28,12 +28,22 @@ public class BidService {
 		return bids.stream().map(t -> toPayload(t)).collect(Collectors.toList());
     }
 
+	public List<BidDto> getAuctionsByBidder(final UUID bidderId) {
+        final List<Bid> bids = bidRepository.findAllByBuyerId(bidderId);
+		return bids.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+    }
+
 	public Double getHighestBidAmount(final UUID auctionId) {
 		final Optional<Bid> bidEntity = bidRepository.findTopByAuctionIdOrderByBidAmountDesc(auctionId);
 		if (bidEntity.isPresent()) {
 			return bidEntity.get().getBidAmount();
 		}
 		return auctionService.getAuction(auctionId).getStartPrice();
+	}
+
+	public Integer getNoOfBids(final UUID auctionId) {
+		final List<Bid> bids = bidRepository.findAllByAuctionId(auctionId);
+		return bids.size();
 	}
 
 	public BidDto save(final BidDto payload) {

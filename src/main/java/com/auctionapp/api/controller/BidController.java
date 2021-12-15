@@ -32,11 +32,25 @@ public class BidController {
 		return ResponseEntity.status(HttpStatus.OK).body(bids);
 	}
 
+	@GetMapping("/bidder/{bidderId}")
+	public ResponseEntity<List<BidDto>> getAuctionsByBidder(@PathVariable final UUID bidderId) {
+		final List<BidDto> bids = service.getAuctionsByBidder(bidderId);
+
+		return ResponseEntity.status(HttpStatus.OK).body(bids);
+	}
+
 	@GetMapping("/highestBid/{auctionId}")
 	public ResponseEntity<Double> getHighestBidAmount(@PathVariable final UUID auctionId) {
 		final Double highestBid = service.getHighestBidAmount(auctionId);
 
 		return ResponseEntity.status(HttpStatus.OK).body(highestBid);
+	}
+
+	@GetMapping("/noOfBids/{auctionId}")
+	public ResponseEntity<Integer> getNoOfBids(@PathVariable final UUID auctionId) {
+		final Integer noOfBids = service.getNoOfBids(auctionId);
+
+		return ResponseEntity.status(HttpStatus.OK).body(noOfBids);
 	}
 
 	@PostMapping("/newBid")
