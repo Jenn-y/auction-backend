@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.auctionapp.api.model.dto.AuthenticationResponse;
 import com.auctionapp.api.model.dto.LoginRequest;
 import com.auctionapp.api.model.dto.RegisterRequest;
+import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.model.entities.User;
 import com.auctionapp.api.model.entities.UserRole;
 import com.auctionapp.api.repository.UserRepository;
@@ -92,7 +93,8 @@ public class AuthService {
 							passwordEncoder.encode(registerRequest.getPassword()),
 							Timestamp.from(Instant.now()),
 							Timestamp.from(Instant.now()),
-							UserRole.USER
+							UserRole.USER,
+							Status.ACTIVE
 		);
 
 		if (userRepository.save(user) != null) {
@@ -113,6 +115,6 @@ public class AuthService {
 		String token = jwtProvider.generateToken(authenticate);
 
 		Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
-		return new AuthenticationResponse(token, loginRequest.getEmail(), user.get().getRole());
+		return new AuthenticationResponse(token, user.get().getId(), loginRequest.getEmail(), user.get().getRole());
 	}
 }
