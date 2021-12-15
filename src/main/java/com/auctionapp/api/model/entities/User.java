@@ -45,6 +45,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Enumerated(EnumType.STRING)
+	@Column
+	private Status status;
+
     public User() {
     }
 	
@@ -55,7 +59,8 @@ public class User {
                 final String password,
                 final Timestamp createdAt,
                 final Timestamp updatedAt,
-                final UserRole role) {
+                final UserRole role,
+                final Status status) {
 
         Objects.requireNonNull(firstName, "The first name field must not be null");
         Objects.requireNonNull(lastName, "The last name field must not be null");
@@ -73,9 +78,10 @@ public class User {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.role = role;
+        this.status = status;
     }
 
-    public UUID getUuid() {
+    public UUID getId() {
         return id;
     }
 
@@ -105,5 +111,13 @@ public class User {
 	
     public UserRole getRole() {
         return role;
+    }
+
+    public Status getStatus() {
+		return status;
+	}
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

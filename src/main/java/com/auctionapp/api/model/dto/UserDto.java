@@ -3,6 +3,7 @@ package com.auctionapp.api.model.dto;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.model.entities.UserRole;
 
 public class UserDto {
@@ -14,6 +15,7 @@ public class UserDto {
 	private final Timestamp createdAt;
 	private final Timestamp updatedAt;
 	private final UserRole role;
+	private final Status status;
 
 	public UserDto(final UUID id, 
 				  final String firstName, 
@@ -22,7 +24,8 @@ public class UserDto {
 				  final String password,
 				  final Timestamp createdAt, 
 				  final Timestamp updatedAt,
-				  final UserRole role) {
+				  final UserRole role,
+				  final Status status) {
 					  
 		this.id = id;
 		this.firstName = firstName;
@@ -32,6 +35,7 @@ public class UserDto {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.role = role;
+		this.status = status;
 	}
 
 	public UUID getId() {
@@ -64,5 +68,9 @@ public class UserDto {
 
 	public UserRole getRole() {
 		return role;
+	}
+
+	public Status getStatus() {
+		return status;
 	}
 }
