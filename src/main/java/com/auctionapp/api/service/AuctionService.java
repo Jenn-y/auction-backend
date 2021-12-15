@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.model.dto.PriceCount;
 import com.auctionapp.api.model.entities.Auction;
+import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.repository.AuctionRepository;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +30,11 @@ public class AuctionService {
 
 	public List<AuctionDto> getLastChance() {
 		List<Auction> auctions = auctionRepository.findAllByOrderByEndDateAsc();
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	public List<AuctionDto> getAuctionsBySellerAndStatus(final Status status, final UUID sellerId) {
+		List<Auction> auctions = auctionRepository.findAllBySellerIdAndStatus(sellerId, status);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 

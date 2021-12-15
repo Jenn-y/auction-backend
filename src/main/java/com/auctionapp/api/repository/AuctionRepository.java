@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.auctionapp.api.model.dto.PriceCount;
 import com.auctionapp.api.model.entities.Auction;
+import com.auctionapp.api.model.entities.Status;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,4 +39,6 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID> {
 
 	@Query(value = "SELECT DISTINCT a1.start_price as price, (SELECT count(*) FROM auction AS a2 WHERE a1.start_price = a2.start_price AND a2.id IN :auctions) AS count FROM auction AS a1 WHERE a1.id IN :auctions ORDER BY a1.start_price ASC", nativeQuery = true)
 	List<PriceCount> getPriceCount(@Param("auctions") final List<UUID> auctions);
+
+	List<Auction> findAllBySellerIdAndStatus(UUID sellerId, Status active);
 }

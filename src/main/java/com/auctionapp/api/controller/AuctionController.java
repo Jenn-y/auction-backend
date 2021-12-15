@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.model.dto.PriceCount;
+import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.service.AuctionService;
 
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,14 @@ public class AuctionController {
 	@GetMapping("/last_chance")
 	public ResponseEntity<List<AuctionDto>> getLastChance() {
 		final List<AuctionDto> auctions = service.getLastChance();
+
+		return ResponseEntity.status(HttpStatus.OK).body(auctions);
+	}
+
+	@GetMapping("/{status}/{sellerId}")
+	public ResponseEntity<List<AuctionDto>> getAuctionsBySellerAndStatus(@PathVariable final Status status, 
+																		 @PathVariable final UUID sellerId) {
+		final List<AuctionDto> auctions = service.getAuctionsBySellerAndStatus(status, sellerId);
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
