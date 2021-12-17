@@ -1,15 +1,19 @@
 package com.auctionapp.api.model.entities;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -36,6 +40,16 @@ public class User {
     private String password;
 
     @Column
+    private String phoneNum;
+
+    @Enumerated(EnumType.STRING)
+	@Column
+	private Gender gender;
+
+    @Column
+    private Date dateOfBirth;
+
+    @Column
     private Timestamp createdAt;
 
     @Column
@@ -49,6 +63,14 @@ public class User {
 	@Column
 	private Status status;
 
+    @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn
+	private PaymentDetails paymentDetails;
+
+    @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn
+	private ShippingDetails shippingDetails;
+
     public User() {
     }
 	
@@ -57,6 +79,9 @@ public class User {
                 final String lastName,
                 final String email,
                 final String password,
+                final String phoneNum,
+                final Gender gender,
+                final Date dateOfBirth,
                 final Timestamp createdAt,
                 final Timestamp updatedAt,
                 final UserRole role,
@@ -75,6 +100,9 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.phoneNum = phoneNum;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.role = role;
@@ -120,4 +148,32 @@ public class User {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public PaymentDetails getPaymentDetails() {
+        return paymentDetails;
+    }
+
+    public void setPaymentDetails(PaymentDetails paymentDetails) {
+		this.paymentDetails = paymentDetails;
+	}
+
+	public ShippingDetails getShippingDetails() {
+		return shippingDetails;
+	}
+
+	public void setShippingDetails(ShippingDetails shippingDetails) {
+		this.shippingDetails = shippingDetails;
+	}
 }
