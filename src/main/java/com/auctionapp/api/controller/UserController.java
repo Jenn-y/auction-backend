@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,5 +34,13 @@ public class UserController {
     public ResponseEntity<Object> deactivateUser(@PathVariable final UUID id) {
         service.deactivateUser(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UserDto> update(@PathVariable final UUID id,
+                                          @RequestBody final UserDto user) {
+
+        final UserDto result = service.update(id, user);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }

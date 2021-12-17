@@ -28,6 +28,9 @@ public class ObjectTestBuilder {
 							PASSWORD,
 							null,
 							null,
+							null,
+							null,
+							null,
 							ROLE,
 							STATUS
 							);
