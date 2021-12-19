@@ -103,7 +103,7 @@ public class UserDto {
 		return paymentDetails;
 	}
 
-	public void setPaymentDetails(PaymentDetailsDto paymentDetails) {
+	public void setPaymentDetails(final PaymentDetailsDto paymentDetails) {
 		this.paymentDetails = paymentDetails;
 	}
 
@@ -111,7 +111,7 @@ public class UserDto {
 		return shippingDetails;
 	}
 
-	public void setShippingDetails(ShippingDetailsDto shippingDetails) {
+	public void setShippingDetails(final ShippingDetailsDto shippingDetails) {
 		this.shippingDetails = shippingDetails;
 	}
 }

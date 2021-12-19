@@ -145,7 +145,7 @@ public class User {
 		return status;
 	}
 
-    public void setStatus(Status status) {
+    public void setStatus(final Status status) {
         this.status = status;
     }
 
@@ -165,7 +165,7 @@ public class User {
         return paymentDetails;
     }
 
-    public void setPaymentDetails(PaymentDetails paymentDetails) {
+    public void setPaymentDetails(final PaymentDetails paymentDetails) {
 		this.paymentDetails = paymentDetails;
 	}
 
@@ -173,7 +173,7 @@ public class User {
 		return shippingDetails;
 	}
 
-	public void setShippingDetails(ShippingDetails shippingDetails) {
+	public void setShippingDetails(final ShippingDetails shippingDetails) {
 		this.shippingDetails = shippingDetails;
 	}
 }
