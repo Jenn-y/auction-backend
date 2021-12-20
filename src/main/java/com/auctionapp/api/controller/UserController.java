@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.auctionapp.api.model.dto.UserDto;
 import com.auctionapp.api.service.UserService;
+import com.auctionapp.api.service.ValidationService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService service;
+    private final ValidationService validationService;
 
-    public UserController(final UserService userService) {
+    public UserController(final UserService userService, final ValidationService validationService) {
         this.service = userService;
+        this.validationService = validationService;
     }
 
     @GetMapping("/{email}")
@@ -39,8 +42,12 @@ public class UserController {
     @PutMapping("/update/{id}")
     public ResponseEntity<UserDto> update(@PathVariable final UUID id,
                                           @RequestBody final UserDto user) {
+                                              
+        if (validationService.validateUserUpdateInfo(user)) {
+            final UserDto result = service.update(id, user);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
 
-        final UserDto result = service.update(id, user);
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 }
