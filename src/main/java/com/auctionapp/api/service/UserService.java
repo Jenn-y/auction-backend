@@ -36,6 +36,14 @@ public class UserService {
         throw new RuntimeException("User with email " + email + " does not exist!");
 	}
 
+	public UserDto getUserById(final UUID id) {
+		Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+			return toPayload(user.get());
+		}
+        throw new RuntimeException("User with id " + id + " does not exist!");
+	}
+
 	public void deactivateUser(final UUID id) {
 		Optional<User> user = userRepository.findById(id);
 		user.get().setStatus(Status.INACTIVE);

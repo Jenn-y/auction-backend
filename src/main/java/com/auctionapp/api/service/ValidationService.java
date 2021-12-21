@@ -59,15 +59,12 @@ public class ValidationService {
 
 	public boolean validateUserUpdateInfo(UserDto user) {
 		if (user.getFirstName().isEmpty() || user.getLastName().isEmpty()
-			|| user.getEmail().isEmpty() || user.getPassword().isEmpty()) { 
+			|| user.getEmail().isEmpty() || user.getGender() == null 
+			|| user.getDateOfBirth() == null || user.getPhoneNum().isEmpty()) { 
 			return false;
 		} else if (!validateEmailAdress(user.getEmail())) {
 			return false;
-		} else if (!isEmailAvailable(user.getEmail())) {
-			return false;
-		} else if (user.getPassword().length() < 6) {
-			return false;
-		}
+		} 
 
 		return true;
 	}

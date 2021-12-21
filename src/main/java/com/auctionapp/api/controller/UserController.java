@@ -33,6 +33,18 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<UserDto> getById(@PathVariable final UUID id) {
+        UserDto result = service.getUserById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/available/{email}")
+    public ResponseEntity<Boolean> isEmailAvailable(@PathVariable final String email) {
+        final Boolean result = validationService.isEmailAvailable(email);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
     @PutMapping("/deactivate/{id}")
     public ResponseEntity<Object> deactivateUser(@PathVariable final UUID id) {
         service.deactivateUser(id);
