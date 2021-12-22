@@ -66,26 +66,26 @@ insert into category(id, name, subcategory_of)
 values('e8eebd99-9c0b-4ef8-ba6d-6bb9bd388a15', 'Drums', 'e1eebc89-9c0b-4ef8-ba6d-6bb9bd380a17');
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a16', current_timestamp, current_date + interval '100 days', 'active', 200, 'e8eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-9a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a16', current_timestamp, current_date + interval '100 days', 'ACTIVE', 200, 'e8eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-9a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a17', current_timestamp, current_date + interval '100 days', 'active', 360, 'e8eeba99-9c0b-4ef8-ba6d-6bb9bd388a15', 'e8eebc89-8a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a17', current_timestamp, current_date + interval '100 days', 'ACTIVE', 360, 'e8eeba99-9c0b-4ef8-ba6d-6bb9bd388a15', 'e8eebc89-8a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a18', current_timestamp, current_date + interval '100 days', 'active', 500, 'e8eebd99-9c0b-4ef8-ba6d-6bb9bd388a15', 'e8eebc89-7a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a18', current_timestamp, current_date + interval '100 days', 'ACTIVE', 500, 'e8eebd99-9c0b-4ef8-ba6d-6bb9bd388a15', 'e8eebc89-7a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a19', current_timestamp, current_date + interval '50 days', 'active', 250, 'e8eeba99-9c0b-4ef8-ba6d-6bb9bd388a15', 'e8eebc89-6a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a19', current_timestamp, current_date + interval '50 days', 'ACTIVE', 250, 'e8eeba99-9c0b-4ef8-ba6d-6bb9bd388a15', 'e8eebc89-6a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a10', current_timestamp, current_date + interval '50 days', 'active', 70, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-5a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a10', current_timestamp, current_date + interval '50 days', 'ACTIVE', 70, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-5a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', current_timestamp, current_date + interval '30 days', 'active', 50, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-4a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', current_timestamp, current_date + interval '30 days', 'ACTIVE', 50, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-4a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a12', current_timestamp, current_date + interval '30 days', 'active', 400, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-3a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a12', current_timestamp, current_date + interval '30 days', 'ACTIVE', 400, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-3a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a13', current_timestamp, current_date + interval '30 days', 'active', 120, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-2a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a13', current_timestamp, current_date + interval '30 days', 'ACTIVE', 120, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-2a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 COMMIT;
