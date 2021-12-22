@@ -17,15 +17,15 @@ CREATE TABLE IF NOT EXISTS payment_details (
   verification_code text
 );
 
-ALTER TABLE user_account
-  ADD payment_details_id UUID,
-      shipping_details_id UUID;
+ALTER TABLE IF EXISTS user_account
+  ADD COLUMN payment_details_id UUID,
+  ADD COLUMN shipping_details_id UUID;
       
-ALTER TABLE user_account
+ALTER TABLE IF EXISTS user_account
   ADD CONSTRAINT fk_payment_details
           FOREIGN KEY(payment_details_id)
         REFERENCES payment_details(id),
-      CONSTRAINT fk_shipping_details
+  ADD CONSTRAINT fk_shipping_details
           FOREIGN KEY(shipping_details_id)
         REFERENCES shipping_details(id);
 COMMIT;
