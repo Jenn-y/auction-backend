@@ -14,6 +14,6 @@ CREATE TABLE IF NOT EXISTS user_account (
   updated_at timestamp NOT NULL,
   role text NOT NULL,
   status text NOT NULL,
-  CONSTRAINT email_unique UNIQUE (email);
+  CONSTRAINT email_unique UNIQUE (email)
 );
 COMMIT;
