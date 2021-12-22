@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS user_account (
   created_at timestamp NOT NULL,
   updated_at timestamp NOT NULL,
   role text NOT NULL,
-  status text NOT NULL
+  status text NOT NULL,
+  CONSTRAINT email_unique UNIQUE (email);
 );
 COMMIT;
