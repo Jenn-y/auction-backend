@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.model.dto.PriceCount;
 import com.auctionapp.api.model.entities.Status;
+import com.auctionapp.api.model.dto.PriceInfo;
 import com.auctionapp.api.service.AuctionService;
 
 import org.springframework.http.HttpStatus;
@@ -56,15 +57,14 @@ public class AuctionController {
 	}
 
 	@GetMapping("/categories/filter")
-	public ResponseEntity<List<AuctionDto>> getFilteredAuctions(@RequestParam final Double minPrice,
-																@RequestParam final Double maxPrice,
-																@RequestParam final String[] categories, 
-																@RequestParam final String[] subcategories) {
-																	
-		final List<AuctionDto> auctions = service.getFilteredAuctions(minPrice, maxPrice, categories, subcategories);
+    public ResponseEntity<List<AuctionDto>> getFilteredAuctions(@RequestParam final Double minPrice,
+                                                                @RequestParam final Double maxPrice,
+                                                                @RequestParam final String[] categories) {
+                                                                    
+        final List<AuctionDto> auctions = service.getFilteredAuctions(minPrice, maxPrice, categories);
 
-		return ResponseEntity.status(HttpStatus.OK).body(auctions);
-	}
+        return ResponseEntity.status(HttpStatus.OK).body(auctions);
+    }
 
 	@GetMapping("/countBySubcategory/{subcategoryId}")
     public ResponseEntity<Integer> getCountBySubcategory(@PathVariable final UUID subcategoryId) {
@@ -73,23 +73,9 @@ public class AuctionController {
 		return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-	@GetMapping("/maxPrice")
-    public ResponseEntity<Double> getMaxPrice(@RequestParam final String[] auctions) {
-		final Double result = service.getMaxPrice(auctions);
-
-		return ResponseEntity.status(HttpStatus.OK).body(result);
-    }
-
-	@GetMapping("/minPrice")
-    public ResponseEntity<Double> getMinPrice(@RequestParam final String[] auctions) {
-		final Double result = service.getMinPrice(auctions);
-
-		return ResponseEntity.status(HttpStatus.OK).body(result);
-    }
-
-	@GetMapping("/averagePrice")
-    public ResponseEntity<Double> getAveragePrice(@RequestParam final String[] auctions) {
-		final Double result = service.getAveragePrice(auctions);
+	@GetMapping("/priceInfo")
+    public ResponseEntity<PriceInfo> getPriceInfo() {
+		final PriceInfo result = service.getPriceInfo();
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
     }
