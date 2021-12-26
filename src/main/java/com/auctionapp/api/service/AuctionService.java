@@ -2,14 +2,19 @@ package com.auctionapp.api.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.model.dto.PriceCount;
+import com.auctionapp.api.model.dto.PriceInfo;
 import com.auctionapp.api.model.entities.Auction;
+import com.auctionapp.api.model.entities.Category;
 import com.auctionapp.api.repository.AuctionRepository;
+import com.auctionapp.api.repository.specification.GenericSpecificationsBuilder;
+import com.auctionapp.api.repository.specification.SpecificationFactory;
 
 import org.springframework.stereotype.Service;
 
@@ -17,9 +22,15 @@ import org.springframework.stereotype.Service;
 public class AuctionService {
 
 	private final AuctionRepository auctionRepository;
+	private final CategoryService categoryService;
+	private SpecificationFactory<Auction> auctionSpecificationFactory;
 
-	public AuctionService(final AuctionRepository auctionRepository) {
+	public AuctionService(final AuctionRepository auctionRepository,
+						  final CategoryService categoryService,
+						  final SpecificationFactory<Auction> aFactory) {
 		this.auctionRepository = auctionRepository;
+		this.categoryService = categoryService;
+		this.auctionSpecificationFactory = aFactory;
 	}
 
 	public List<AuctionDto> getNewArrivals() {
@@ -42,18 +53,24 @@ public class AuctionService {
 
 	public List<AuctionDto> getFilteredAuctions(final Double minPrice, 
 												final Double maxPrice, 
-												final String[] categories, 
-												final String[] subcategories) {
+												final String[] categories) {
 
-		final List<UUID> parentCategories = getCategories(categories);
-		final List<UUID> childrenCategories = getCategories(subcategories);
-
-		if (parentCategories.isEmpty() && childrenCategories.isEmpty()){
-			final List<Auction> auctions = auctionRepository.getFilteredAuctionsByPrice(minPrice, maxPrice);
-			return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
+		
+		if (Objects.nonNull(minPrice)) {
+			builder.with(auctionSpecificationFactory.isGreaterThan("startPrice", minPrice - 1));
 		}
 
-		final List<Auction> auctions = auctionRepository.getFilteredAuctions(minPrice, maxPrice, parentCategories, childrenCategories);
+		if (Objects.nonNull(maxPrice)) {
+			builder.with(auctionSpecificationFactory.isLessThan("startPrice", maxPrice + 1));
+		}
+
+		if (categories.length > 0) {
+			final List<Category> selectedCategories = getCategories(categories);
+			builder.with(auctionSpecificationFactory.isIn("category", selectedCategories));
+		}  
+
+		final List<Auction> auctions = auctionRepository.findAll(builder.build());
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
@@ -61,25 +78,15 @@ public class AuctionService {
 		return auctionRepository.getCountBySubcategory(subcategoryId);
 	}
 
-	public Double getMaxPrice(final String[] selectedAuctions) {
-		final List<UUID> auctionIds = getAuctions(selectedAuctions);
-		return auctionRepository.getMaxPrice(auctionIds);
+	public PriceInfo getPriceInfo() {
+		return auctionRepository.getPriceInfo();
 	}
 
-	public Double getMinPrice(final String[] selectedAuctions) {
-		final List<UUID> auctionIds = getAuctions(selectedAuctions);
-		return auctionRepository.getMinPrice(auctionIds);
-	}
-
-	public Double getAveragePrice(final String[] selectedAuctions) {
-		final List<UUID> auctionIds = getAuctions(selectedAuctions);
-		return auctionRepository.getAveragePrice(auctionIds);
-	}
-
-	private List<UUID> getCategories(final String[] categories) {
-		List<UUID> retrievedCategories = new ArrayList<>();
+	private List<Category> getCategories(final String[] categories) {
+		List<Category> retrievedCategories = new ArrayList<>();
 		for (String category : categories) {
-			retrievedCategories.add(UUID.fromString(category));
+			Category cat = categoryService.getCategory(UUID.fromString(category));
+			retrievedCategories.add(cat);
 		}
 		return retrievedCategories;
 	}
