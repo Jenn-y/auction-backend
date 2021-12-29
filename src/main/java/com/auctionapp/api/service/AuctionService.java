@@ -25,13 +25,16 @@ public class AuctionService {
 	private final AuctionRepository auctionRepository;
 	private final CategoryService categoryService;
 	private SpecificationFactory<Auction> auctionSpecificationFactory;
+	private final ItemService itemService;
 
 	public AuctionService(final AuctionRepository auctionRepository,
 						  final CategoryService categoryService,
-						  final SpecificationFactory<Auction> aFactory) {
+						  final SpecificationFactory<Auction> aFactory,
+						  final ItemService itemService) {
 		this.auctionRepository = auctionRepository;
 		this.categoryService = categoryService;
 		this.auctionSpecificationFactory = aFactory;
+		this.itemService = itemService;
 	}
 
 	public List<AuctionDto> getNewArrivals() {
@@ -108,6 +111,13 @@ public class AuctionService {
 	public List<PriceCount> getPriceCount(final String[] selectedAuctions) {
 		final List<UUID> auctionIds = getAuctions(selectedAuctions);
 		return auctionRepository.getPriceCount(auctionIds);
+	}
+
+	public AuctionDto save(final AuctionDto payload) {
+        Auction auction = fromPayload(payload);
+		auction.setItem(itemService.save(auction.getItem()));
+        auction = auctionRepository.save(auction);
+        return toPayload(auction);
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {
