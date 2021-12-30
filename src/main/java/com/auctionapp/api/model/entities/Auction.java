@@ -100,6 +100,10 @@ public class Auction {
 		return status;
 	}
 
+	public void setStatus(final Status status) {
+		this.status = status;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
