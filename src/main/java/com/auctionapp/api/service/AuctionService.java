@@ -58,16 +58,16 @@ public class AuctionService {
 		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
 		
 		if (Objects.nonNull(minPrice)) {
-			builder.with(auctionSpecificationFactory.isGreaterThan("startPrice", minPrice - 1));
+			builder.with(auctionSpecificationFactory.filterByMinPrice("startPrice", minPrice - 1));
 		}
 
 		if (Objects.nonNull(maxPrice)) {
-			builder.with(auctionSpecificationFactory.isLessThan("startPrice", maxPrice + 1));
+			builder.with(auctionSpecificationFactory.filterByMaxPrice("startPrice", maxPrice + 1));
 		}
 
 		if (categories.length > 0) {
 			final List<Category> selectedCategories = getCategories(categories);
-			builder.with(auctionSpecificationFactory.isIn("category", selectedCategories));
+			builder.with(auctionSpecificationFactory.filterBySelectedCategories("category", selectedCategories));
 		}  
 
 		final List<Auction> auctions = auctionRepository.findAll(builder.build());
