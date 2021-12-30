@@ -27,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    public static final String HOST = "bidba-api.herokuapp.com";
 
     public SecurityConfiguration(final UserDetailsService userDetailsService,
                                 final JwtAuthenticationFilter jwtAuthenticationFilter) {

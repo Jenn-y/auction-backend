@@ -18,7 +18,7 @@ public class SwaggerConfiguration {
     @Bean
     public Docket auction() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .host("bidba-api.herokuapp.com")
+                .host(SecurityConfiguration.HOST)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())

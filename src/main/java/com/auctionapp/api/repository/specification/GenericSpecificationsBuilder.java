@@ -29,18 +29,23 @@ public class GenericSpecificationsBuilder<T> {
 	   params.add(new SearchCriteria(key, searchOperation, isOrOperation, arguments));
 	   return this;
 	}
+
 	public final GenericSpecificationsBuilder<T> with(final Specification<T> specification) {
 	   specifications.add(specification);
 	   return this;
 	}
+
 	public Specification<T> build() {
 	   Specification<T> result = null;
 	   if (!params.isEmpty()) {
 		  result = new GenericSpecification<>(params.get(0));
 		  for (int index = 1; index < params.size(); ++index) {
 			 SearchCriteria searchCriteria = params.get(index);
-			 result = searchCriteria.isOrOperation() ? Specification.where(result).or(new GenericSpecification<>(searchCriteria))
-				: Specification.where(result).and(new GenericSpecification<>(searchCriteria));
+			 if (searchCriteria.isOrOperation()) {
+				 result = Specification.where(result).or(new GenericSpecification<>(searchCriteria));
+			 } else {
+				 result = Specification.where(result).and(new GenericSpecification<>(searchCriteria));
+			 }
 		  }
 	   }
 	   if (!specifications.isEmpty()) {
