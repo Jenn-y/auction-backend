@@ -2,7 +2,6 @@ package com.auctionapp.api.configuration;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
 import com.auctionapp.api.security.JwtAuthenticationFilter;
 
 import org.springframework.context.annotation.Bean;
@@ -14,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -27,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    public static final String HOST = "bidba-api.herokuapp.com";
 
     public SecurityConfiguration(final UserDetailsService userDetailsService,
                                 final JwtAuthenticationFilter jwtAuthenticationFilter) {
@@ -39,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
+    
     @Override
     public void configure(HttpSecurity http) throws Exception {
         // Enable CORS and disable CSRF
@@ -56,10 +57,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Set permissions on endpoints
         http.authorizeRequests()
                 .antMatchers("/v2/api-docs", 
-                            "/configuration/ui", 
                             "/swagger-resources/**", 
-                            "/configuration/security",
-                            "/swagger-ui.html", 
+                            "/configuration/**",
+                            "/swagger-ui",
+                            "/swagger-ui/**",
                             "/webjars/**")
                 .permitAll()
                 .antMatchers("/api/auth/**").permitAll()
