@@ -62,7 +62,10 @@ public class BidService {
 	}
 
     private boolean isBidderEqualSeller(final UUID bidderId, final UUID sellerId) {
-        return bidderId == sellerId;
+		if (bidderId.compareTo(sellerId) == 0) {
+			return true;
+		}
+        return false;
     }
 
 	public static Bid fromPayload(final BidDto payload) {
