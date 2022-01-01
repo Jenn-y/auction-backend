@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 public class GenericSpecification<T> implements Specification<T> {
@@ -20,18 +21,27 @@ public class GenericSpecification<T> implements Specification<T> {
 	
 	@Override
 	public Predicate toPredicate(Root<T> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-	   List<Object> arguments = searchCriteria.getArguments();
-	   Object arg = arguments.get(0);
- 
-	   switch (searchCriteria.getSearchOperation()) {
+		List<Object> arguments = searchCriteria.getArguments();
+		Object arg = arguments.get(0);
+
+		switch (searchCriteria.getSearchOperation()) {
 			case LESS_THAN:
 				return criteriaBuilder.lessThan(root.get(searchCriteria.getKey()), (Comparable) arg);
 			case GREATER_THAN:
 				return criteriaBuilder.greaterThan(root.get(searchCriteria.getKey()), (Comparable) arg);
 			case IN:
 				return root.get(searchCriteria.getKey()).in(arguments);
-	   }
+			case ORDER_BY:
+				SortingCriteria sortingCriteria = (SortingCriteria) arguments.get(0);
+				if (sortingCriteria.getDirection().equals(Sort.Direction.DESC)) {
+					return (Predicate) criteriaBuilder.createQuery(root.getJavaType())
+													  .orderBy(criteriaBuilder.desc(root.get(sortingCriteria.getSortBy())));
+				} else {
+					return (Predicate) criteriaBuilder.createQuery(root.getJavaType())
+													  .orderBy(criteriaBuilder.asc(root.get(sortingCriteria.getSortBy())));
+				}
+		}
 
-	   return criteriaBuilder.equal(root.get(searchCriteria.getKey()), arg);
+		return criteriaBuilder.equal(root.get(searchCriteria.getKey()), arg);
 	}
  }

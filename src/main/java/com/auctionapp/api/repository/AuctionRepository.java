@@ -22,21 +22,6 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID>, JpaSpec
 
 	List<Auction> findAllByCategoryId(UUID categoryId);
 
-	@Query(value = "SELECT a.id, a.start_price, a.start_date, a.end_date, a.status, a.category_id, a.item_id, a.seller_id, i.id, i.name FROM auction a, item i WHERE a.item_id = i.id AND a.id IN :auctions ORDER BY i.name ASC", nativeQuery = true)
-	List<Auction> getAuctionsSortDefault(@Param("auctions") List<UUID>  auctions);
-
-	@Query(value = "SELECT * FROM auction WHERE id IN :auctions ORDER BY end_date ASC", nativeQuery = true)
-	List<Auction> getAuctionsOldToNew(@Param("auctions") List<UUID>  auctions);
-
-	@Query(value = "SELECT * FROM auction WHERE id IN :auctions ORDER BY start_date DESC", nativeQuery = true)
-	List<Auction> getAuctionsNewToOld(@Param("auctions") List<UUID>  auctions);
-
-	@Query(value = "SELECT * FROM auction WHERE id IN :auctions ORDER BY start_price DESC", nativeQuery = true)
-	List<Auction> getAuctionsByPriceDesc(@Param("auctions") List<UUID>  auctions);
-
-	@Query(value = "SELECT * FROM auction WHERE id IN :auctions ORDER BY start_price ASC", nativeQuery = true)
-	List<Auction> getAuctionsByPriceAsc(@Param("auctions") List<UUID> auctions);
-	
 	@Query(value = "SELECT COUNT(*) FROM auction where category_id = :subcategoryId", nativeQuery = true)
 	Integer getCountBySubcategory(@Param("subcategoryId") final UUID subcategoryId);
 

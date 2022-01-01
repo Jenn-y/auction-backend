@@ -47,50 +47,16 @@ public class AuctionController {
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
-	@GetMapping("/categories/filter")
+	@GetMapping("/filter")
     public ResponseEntity<List<AuctionDto>> getFilteredAuctions(@RequestParam final Double minPrice,
                                                                 @RequestParam final Double maxPrice,
-                                                                @RequestParam final String[] categories) {
+                                                                @RequestParam final String[] categories,
+																@RequestParam final String sortType) {
                                                                     
-        final List<AuctionDto> auctions = service.getFilteredAuctions(minPrice, maxPrice, categories);
+        final List<AuctionDto> auctions = service.getFilteredAuctions(minPrice, maxPrice, categories, sortType);
 
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
-
-	@GetMapping("/default")
-	public ResponseEntity<List<AuctionDto>> getAuctionsSortDefault(@RequestParam final String[] selectedAuctions) {
-		final List<AuctionDto> auctions = service.getAuctionsSortDefault(selectedAuctions);
-
-		return ResponseEntity.status(HttpStatus.OK).body(auctions);
-	}
-
-	@GetMapping("/oldToNew")
-	public ResponseEntity<List<AuctionDto>> getAuctionsOldToNew(@RequestParam final String[] selectedAuctions) {
-		final List<AuctionDto> auctions = service.getAuctionsOldToNew(selectedAuctions);
-
-		return ResponseEntity.status(HttpStatus.OK).body(auctions);
-	}
-
-	@GetMapping("/newToOld")
-	public ResponseEntity<List<AuctionDto>> getAuctionsNewToOld(@RequestParam final String[] selectedAuctions) {
-		final List<AuctionDto> auctions = service.getAuctionsNewToOld(selectedAuctions);
-
-		return ResponseEntity.status(HttpStatus.OK).body(auctions);
-	}
-
-	@GetMapping("/byPriceSortDesc")
-	public ResponseEntity<List<AuctionDto>> getAuctionsByPriceDesc(@RequestParam final String[] selectedAuctions) {
-		final List<AuctionDto> auctions = service.getAuctionsByPriceDesc(selectedAuctions);
-
-		return ResponseEntity.status(HttpStatus.OK).body(auctions);
-	}
-
-	@GetMapping("/byPriceSortAsc")
-	public ResponseEntity<List<AuctionDto>> getAuctionsByPriceAsc(@RequestParam final String[] selectedAuctions) {
-		final List<AuctionDto> auctions = service.getAuctionsByPriceAsc(selectedAuctions);
-
-		return ResponseEntity.status(HttpStatus.OK).body(auctions);
-    }
 
 	@GetMapping("/countBySubcategory/{subcategoryId}")
     public ResponseEntity<Integer> getCountBySubcategory(@PathVariable final UUID subcategoryId) {

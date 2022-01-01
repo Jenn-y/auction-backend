@@ -14,8 +14,10 @@ import com.auctionapp.api.model.entities.Auction;
 import com.auctionapp.api.model.entities.Category;
 import com.auctionapp.api.repository.AuctionRepository;
 import com.auctionapp.api.repository.specification.GenericSpecificationsBuilder;
+import com.auctionapp.api.repository.specification.SortingCriteria;
 import com.auctionapp.api.repository.specification.SpecificationFactory;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -53,7 +55,8 @@ public class AuctionService {
 
 	public List<AuctionDto> getFilteredAuctions(final Double minPrice, 
 												final Double maxPrice, 
-												final String[] categories) {
+												final String[] categories, 
+												final String sortType) {
 
 		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
 		
@@ -70,46 +73,41 @@ public class AuctionService {
 			builder.with(auctionSpecificationFactory.filterBySelectedCategories("category", selectedCategories));
 		}  
 
-		final List<Auction> auctions = auctionRepository.findAll(builder.build());
-		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
-	}
+		if (Objects.nonNull(sortType)) {
+			final SortingCriteria sort = getSortOptions(sortType);
+			builder.with(auctionSpecificationFactory.orderBySortingCriteria(sort));
+		}  
 
-	public List<AuctionDto> getAuctionsSortDefault(final String[] selectedAuctions) {
-		final List<UUID> auctionIds = getAuctions(selectedAuctions);
-		final List<Auction> auctions = auctionRepository.getAuctionsSortDefault(auctionIds);
-		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
-	}
-
-	public List<AuctionDto> getAuctionsOldToNew(final String[] selectedAuctions) {
-		final List<UUID> auctionIds = getAuctions(selectedAuctions);
-		final List<Auction> auctions = auctionRepository.getAuctionsOldToNew(auctionIds);
-		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
-	}
-
-	public List<AuctionDto> getAuctionsNewToOld(final String[] selectedAuctions) {
-		final List<UUID> auctionIds = getAuctions(selectedAuctions);
-		final List<Auction> auctions = auctionRepository.getAuctionsNewToOld(auctionIds);
-		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
-	}
-
-	public List<AuctionDto> getAuctionsByPriceDesc(final String[] selectedAuctions) {
-		final List<UUID> auctionIds = getAuctions(selectedAuctions);
-		final List<Auction> auctions = auctionRepository.getAuctionsByPriceDesc(auctionIds);
-		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
-	}
-
-	public List<AuctionDto> getAuctionsByPriceAsc(final String[] selectedAuctions) {
-		final List<UUID> auctionIds = getAuctions(selectedAuctions);
-		final List<Auction> auctions = auctionRepository.getAuctionsByPriceAsc(auctionIds);
+		List<Auction> auctions = auctionRepository.findAll(builder.build());
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 	
+	private SortingCriteria getSortOptions(String sortType) {
+		switch (sortType) {
+			case "newToOld":
+				return new SortingCriteria(Sort.Direction.DESC, "startDate");
+			case "oldToNew":
+				return new SortingCriteria(Sort.Direction.ASC, "endDate");
+			case "lowestPrice":
+				return new SortingCriteria(Sort.Direction.ASC, "startPrice");
+			case "highestPrice":
+				return new SortingCriteria(Sort.Direction.DESC, "startPrice");
+			default:
+				return new SortingCriteria(Sort.Direction.DESC, "startDate");
+		}
+	}
+
 	public Integer getCountBySubcategory(final UUID subcategoryId) {
 		return auctionRepository.getCountBySubcategory(subcategoryId);
 	}
 
 	public PriceInfo getPriceInfo() {
 		return auctionRepository.getPriceInfo();
+	}
+
+	public List<PriceCount> getPriceCount(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		return auctionRepository.getPriceCount(auctionIds);
 	}
 
 	private List<Category> getCategories(final String[] categories) {
@@ -127,11 +125,6 @@ public class AuctionService {
 			retrievedAuctionIds.add(UUID.fromString(auction));
 		}
 		return retrievedAuctionIds;
-	}
-
-	public List<PriceCount> getPriceCount(final String[] selectedAuctions) {
-		final List<UUID> auctionIds = getAuctions(selectedAuctions);
-		return auctionRepository.getPriceCount(auctionIds);
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {
