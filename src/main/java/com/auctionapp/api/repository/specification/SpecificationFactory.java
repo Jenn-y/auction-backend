@@ -11,17 +11,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SpecificationFactory<T> {
-	public Specification<T> isIn(String key, List<Category> selectedCategories) {
+	public Specification<T> filterBySelectedCategories(String key, List<Category> selectedCategories) {
         GenericSpecificationsBuilder<T> builder = new GenericSpecificationsBuilder<>();
         return builder.with(key, SearchOperation.IN, new ArrayList<Object>(selectedCategories)).build();
     }
 
-	public Specification<T> isLessThan(String key, Double arg) {
+	public Specification<T> filterByMaxPrice(String key, Double arg) {
         GenericSpecificationsBuilder<T> builder = new GenericSpecificationsBuilder<>();
         return builder.with(key, SearchOperation.LESS_THAN, Collections.singletonList(arg)).build();
     }
 
-	public Specification<T> isGreaterThan(String key, Double arg) {
+	public Specification<T> filterByMinPrice(String key, Double arg) {
         GenericSpecificationsBuilder<T> builder = new GenericSpecificationsBuilder<>();
         return builder.with(key, SearchOperation.GREATER_THAN, Collections.singletonList(arg)).build();
     }

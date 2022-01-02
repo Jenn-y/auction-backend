@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.auctionapp.api.security.JwtAuthenticationFilter;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -27,6 +28,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    
+    @Value("${host}")
+    public static String HOST;
 
     public SecurityConfiguration(final UserDetailsService userDetailsService,
                                 final JwtAuthenticationFilter jwtAuthenticationFilter) {

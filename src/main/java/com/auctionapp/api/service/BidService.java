@@ -28,8 +28,8 @@ public class BidService {
 		return bids.stream().map(t -> toPayload(t)).collect(Collectors.toList());
     }
 
-	public List<BidDto> getAuctionsByBidder(final UUID bidderId) {
-        final List<Bid> bids = bidRepository.findAllByBuyerId(bidderId);
+	public List<BidDto> getBidsByBidder(final UUID bidderId) {
+        final List<Bid> bids = bidRepository.findAllByBidderId(bidderId);
 		return bids.stream().map(t -> toPayload(t)).collect(Collectors.toList());
     }
 
@@ -54,7 +54,7 @@ public class BidService {
 
 	public boolean validateBid(final BidDto bid){
 		return validateBidAmount(bid.getBidAmount(), getHighestBidAmount(bid.getAuction().getId())) 
-                && !isBidderEqualSeller(bid.getBuyer().getId(), bid.getAuction().getSeller().getId());
+                && !isBidderEqualSeller(bid.getBidder().getId(), bid.getAuction().getSeller().getId());
 	}
 
 	private boolean validateBidAmount(final Double currentBid, final Double highestBid) {
@@ -70,7 +70,7 @@ public class BidService {
 						  payload.getId(),
 						  payload.getBidAmount(),
 						  payload.getBidDate(),
-						  UserService.fromPayload(payload.getBuyer()),
+						  UserService.fromPayload(payload.getBidder()),
 						  AuctionService.fromPayload(payload.getAuction())
 						  );
 		return bid;
@@ -81,7 +81,7 @@ public class BidService {
 									bid.getId(),
 									bid.getBidAmount(),
 									bid.getBidDate(),
-									UserService.toPayload(bid.getBuyer()),
+									UserService.toPayload(bid.getBidder()),
 									AuctionService.toPayload(bid.getAuction())
 									);
 		return payload;

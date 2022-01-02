@@ -3,7 +3,7 @@ package com.auctionapp.api.controller;
 import com.auctionapp.api.model.dto.AuthenticationResponse;
 import com.auctionapp.api.model.dto.LoginRequest;
 import com.auctionapp.api.model.dto.RegisterRequest;
-import com.auctionapp.api.model.dto.ValidationRequest;
+import com.auctionapp.api.model.dto.ValidationResponse;
 import com.auctionapp.api.service.AuthService;
 import com.auctionapp.api.service.ValidationService;
 
@@ -27,16 +27,16 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ValidationRequest> register(@RequestBody final RegisterRequest registerRequest) {
+    public ResponseEntity<ValidationResponse> register(@RequestBody final RegisterRequest registerRequest) {
         String error = validationService.validateRegisterRequest(registerRequest);
 
         if (error.isEmpty()) {
-            ValidationRequest validationRequest = new ValidationRequest(authService.register(registerRequest), true);
-            return new ResponseEntity<>(validationRequest, HttpStatus.OK);
+            ValidationResponse validationResponse = new ValidationResponse(authService.register(registerRequest), true);
+            return new ResponseEntity<>(validationResponse, HttpStatus.OK);
         }
 
-        ValidationRequest validationRequest = new ValidationRequest(error, false);
-        return new ResponseEntity<>(validationRequest, HttpStatus.OK);
+        ValidationResponse validationResponse = new ValidationResponse(error, false);
+        return new ResponseEntity<>(validationResponse, HttpStatus.OK);
     }
 
     @PostMapping("/login")

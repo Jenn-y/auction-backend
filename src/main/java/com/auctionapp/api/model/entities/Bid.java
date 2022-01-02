@@ -31,7 +31,7 @@ public class Bid {
 
 	@ManyToOne
 	@JoinColumn
-	private User buyer;
+	private User bidder;
 
 	@ManyToOne
 	@JoinColumn
@@ -43,18 +43,18 @@ public class Bid {
 	public Bid(final UUID id,
 			   final Double bidAmount,
 			   final Timestamp bidDate,
-			   final User buyer,
+			   final User bidder,
 			   final Auction auction) {
 		
 		Objects.requireNonNull(bidAmount, "The bid amount must not be null");
 		Objects.requireNonNull(bidDate, "The bid date must not be null");
-		Objects.requireNonNull(buyer, "The buyer must not be null");
+		Objects.requireNonNull(bidder, "The bidder must not be null");
 		Objects.requireNonNull(auction, "The auction must not be null");
 
 		this.id = id;
 		this.bidAmount = bidAmount;
 		this.bidDate = bidDate;
-		this.buyer = buyer;
+		this.bidder = bidder;
 		this.auction = auction;
 	}
 
@@ -70,8 +70,8 @@ public class Bid {
 		return bidDate;
 	}
 
-	public User getBuyer() {
-		return buyer;
+	public User getBidder() {
+		return bidder;
 	}
 
 	public Auction getAuction() {
