@@ -47,7 +47,7 @@ public class Auction {
 	@JoinColumn
 	private User seller;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn
 	private Item item;
 

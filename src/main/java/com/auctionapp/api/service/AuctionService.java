@@ -115,7 +115,7 @@ public class AuctionService {
 
 	public AuctionDto save(final AuctionDto payload) {
         Auction auction = fromPayload(payload);
-		auction.setItem(itemService.save(auction.getItem()));
+		// auction.setItem(itemService.save(auction.getItem()));
 		auction.setStatus(Status.ACTIVE);
         auction = auctionRepository.save(auction);
         return toPayload(auction);
