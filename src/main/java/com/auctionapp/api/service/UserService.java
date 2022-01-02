@@ -6,8 +6,6 @@ import java.util.UUID;
 import com.auctionapp.api.model.dto.UserDto;
 import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.model.entities.User;
-import com.auctionapp.api.repository.PaymentDetailsRepository;
-import com.auctionapp.api.repository.ShippingDetailsRepository;
 import com.auctionapp.api.repository.UserRepository;
 
 import org.springframework.stereotype.Service;
@@ -16,16 +14,10 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
 	private final UserRepository userRepository;
-	private final PaymentDetailsRepository paymentDetailsRepository;
-	private final ShippingDetailsRepository shippingDetailsRepository;
 
-	public UserService(final UserRepository userRepository,
-					   final PaymentDetailsRepository paymentDetailsRepository,
-					   final ShippingDetailsRepository shippingDetailsRepository) {
+	public UserService(final UserRepository userRepository) {
 
 		this.userRepository = userRepository;
-		this.paymentDetailsRepository = paymentDetailsRepository;
-		this.shippingDetailsRepository = shippingDetailsRepository;
 	}
 
 	public UserDto getUser(final String email) {
@@ -53,8 +45,6 @@ public class UserService {
 	public UserDto update(UUID id, UserDto user) {
         User updatedUser = fromPayload(user);
         updatedUser = userRepository.save(updatedUser);
-		paymentDetailsRepository.save(updatedUser.getPaymentDetails());
-		shippingDetailsRepository.save(updatedUser.getShippingDetails());
         return toPayload(updatedUser);
 	}
 
