@@ -14,10 +14,10 @@ public interface BidRepository extends JpaRepository<Bid, UUID> {
 
 	List<Bid> findAllByAuctionId(final UUID auctionId);
 
-	Boolean existsByBuyerIdAndAuctionId(final UUID buyerId, final UUID auctionId);
+	Boolean existsByBidderIdAndAuctionId(final UUID bidderId, final UUID auctionId);
 
 	Optional<Bid> findTopByAuctionIdOrderByBidAmountDesc(final UUID auctionId);
 
-	List<Bid> findAllByBuyerId(final UUID buyerId);
+	List<Bid> findAllByBidderId(final UUID bidderId);
 	
 }

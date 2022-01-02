@@ -33,8 +33,8 @@ public class BidController {
 	}
 
 	@GetMapping("/bidder/{bidderId}")
-	public ResponseEntity<List<BidDto>> getAuctionsByBidder(@PathVariable final UUID bidderId) {
-		final List<BidDto> bids = service.getAuctionsByBidder(bidderId);
+	public ResponseEntity<List<BidDto>> getBidsByBidder(@PathVariable final UUID bidderId) {
+		final List<BidDto> bids = service.getBidsByBidder(bidderId);
 
 		return ResponseEntity.status(HttpStatus.OK).body(bids);
 	}
