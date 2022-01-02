@@ -1,10 +1,10 @@
 package com.auctionapp.api.model.dto;
 
-public class ValidationRequest {
+public class ValidationResponse {
 	private String message;
 	private boolean status;
 	
-	public ValidationRequest(final String message, final boolean status) {
+	public ValidationResponse(final String message, final boolean status) {
 		this.message = message;
 		this.status = status;
 	}

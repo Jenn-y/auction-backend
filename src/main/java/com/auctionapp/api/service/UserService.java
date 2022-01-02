@@ -45,9 +45,9 @@ public class UserService {
 	}
 
 	public void deactivateUser(final UUID id) {
-		Optional<User> user = userRepository.findById(id);
-		user.get().setStatus(Status.INACTIVE);
-		userRepository.save(user.get());
+		User user = userRepository.getById(id);
+		user.setStatus(Status.INACTIVE);
+		userRepository.save(user);
 	}
 
 	public UserDto update(UUID id, UserDto user) {

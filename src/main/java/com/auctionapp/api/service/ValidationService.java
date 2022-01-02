@@ -16,7 +16,7 @@ public class ValidationService {
 		this.userRepository = userRepository;
 	}
 
-	public String validateRegisterRequest(RegisterRequest registerRequest) {
+	public String validateRegisterRequest(final RegisterRequest registerRequest) {
 		if (registerRequest.getFirstName().isEmpty()) { 
 			return "First name field must not be empty!";
 		} else if (registerRequest.getLastName().isEmpty()) {
@@ -35,7 +35,7 @@ public class ValidationService {
 		return "";
 	}
 
-	public boolean validateLoginRequest(LoginRequest loginRequest) {
+	public boolean validateLoginRequest(final LoginRequest loginRequest) {
 		if (loginRequest.getEmail().isEmpty()) {
 			return false;
 		} else if (!validateEmailAdress(loginRequest.getEmail())) {
@@ -46,18 +46,18 @@ public class ValidationService {
 		return true;
 	}
 
-	public boolean validateEmailAdress(String email) {
-		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+	public boolean validateEmailAdress(final String email) {
+		final String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
 		java.util.regex.Matcher m = p.matcher(email);
 		return m.matches();
  	}
 
-	public boolean isEmailAvailable(String email) {
+	public boolean isEmailAvailable(final String email) {
 		return !userRepository.existsByEmail(email);
  	}
 
-	public boolean validateUserUpdateInfo(UserDto user) {
+	public boolean validateUserUpdateInfo(final UserDto user) {
 		if (user.getFirstName().isEmpty() || user.getLastName().isEmpty()
 			|| user.getEmail().isEmpty() || user.getGender() == null 
 			|| user.getDateOfBirth() == null || user.getPhoneNum().isEmpty()) { 
