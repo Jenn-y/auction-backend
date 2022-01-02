@@ -25,16 +25,13 @@ public class AuctionService {
 	private final AuctionRepository auctionRepository;
 	private final CategoryService categoryService;
 	private SpecificationFactory<Auction> auctionSpecificationFactory;
-	private final ItemService itemService;
 
 	public AuctionService(final AuctionRepository auctionRepository,
 						  final CategoryService categoryService,
-						  final SpecificationFactory<Auction> aFactory,
-						  final ItemService itemService) {
+						  final SpecificationFactory<Auction> aFactory) {
 		this.auctionRepository = auctionRepository;
 		this.categoryService = categoryService;
 		this.auctionSpecificationFactory = aFactory;
-		this.itemService = itemService;
 	}
 
 	public List<AuctionDto> getNewArrivals() {
@@ -115,7 +112,6 @@ public class AuctionService {
 
 	public AuctionDto save(final AuctionDto payload) {
         Auction auction = fromPayload(payload);
-		// auction.setItem(itemService.save(auction.getItem()));
 		auction.setStatus(Status.ACTIVE);
         auction = auctionRepository.save(auction);
         return toPayload(auction);

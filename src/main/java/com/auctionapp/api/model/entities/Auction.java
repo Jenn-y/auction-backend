@@ -115,8 +115,4 @@ public class Auction {
 	public Item getItem() {
 		return item;
 	}
-
-	public void setItem(final Item item) {
-		this.item = item;
-	}
 }
