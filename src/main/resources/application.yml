@@ -22,3 +22,6 @@ spring:
     baselineOnMigrate: true
     url: jdbc:postgresql://${APPLICATION_DB_URL:localhost}:${APPLICATION_DB_PORT:5432}/${APPLICATION_DB_NAME:auction}
     locations: filesystem:src/main/resources/db/migration
+    
+# swagger host property
+host: "bidba-api.herokuapp.com"

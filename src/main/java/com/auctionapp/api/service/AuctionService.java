@@ -1,13 +1,20 @@
 package com.auctionapp.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.auctionapp.api.model.dto.AuctionDto;
+import com.auctionapp.api.model.dto.PriceCount;
+import com.auctionapp.api.model.dto.PriceInfo;
 import com.auctionapp.api.model.entities.Auction;
+import com.auctionapp.api.model.entities.Category;
 import com.auctionapp.api.repository.AuctionRepository;
+import com.auctionapp.api.repository.specification.GenericSpecificationsBuilder;
+import com.auctionapp.api.repository.specification.SpecificationFactory;
 
 import org.springframework.stereotype.Service;
 
@@ -15,9 +22,15 @@ import org.springframework.stereotype.Service;
 public class AuctionService {
 
 	private final AuctionRepository auctionRepository;
+	private final CategoryService categoryService;
+	private SpecificationFactory<Auction> auctionSpecificationFactory;
 
-	public AuctionService(final AuctionRepository auctionRepository) {
+	public AuctionService(final AuctionRepository auctionRepository,
+						  final CategoryService categoryService,
+						  final SpecificationFactory<Auction> aFactory) {
 		this.auctionRepository = auctionRepository;
+		this.categoryService = categoryService;
+		this.auctionSpecificationFactory = aFactory;
 	}
 
 	public List<AuctionDto> getNewArrivals() {
@@ -31,11 +44,64 @@ public class AuctionService {
 	}
 
 	public AuctionDto getAuction(final UUID id) {
-		Optional<Auction> auction = auctionRepository.findById(id);
+		final Optional<Auction> auction = auctionRepository.findById(id);
 		if (auction.isPresent()) {
 			return toPayload(auction.get());
 		}
 		throw new RuntimeException("Auction with id " + id + " does not exist!");
+	}
+
+	public List<AuctionDto> getFilteredAuctions(final Double minPrice, 
+												final Double maxPrice, 
+												final String[] categories) {
+
+		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
+		
+		if (Objects.nonNull(minPrice)) {
+			builder.with(auctionSpecificationFactory.filterByMinPrice("startPrice", minPrice - 1));
+		}
+
+		if (Objects.nonNull(maxPrice)) {
+			builder.with(auctionSpecificationFactory.filterByMaxPrice("startPrice", maxPrice + 1));
+		}
+
+		if (categories.length > 0) {
+			final List<Category> selectedCategories = getCategories(categories);
+			builder.with(auctionSpecificationFactory.filterBySelectedCategories("category", selectedCategories));
+		}  
+
+		final List<Auction> auctions = auctionRepository.findAll(builder.build());
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	public Integer getCountBySubcategory(final UUID subcategoryId) {
+		return auctionRepository.getCountBySubcategory(subcategoryId);
+	}
+
+	public PriceInfo getPriceInfo() {
+		return auctionRepository.getPriceInfo();
+	}
+
+	private List<Category> getCategories(final String[] categories) {
+		List<Category> retrievedCategories = new ArrayList<>();
+		for (String category : categories) {
+			Category cat = categoryService.getCategory(UUID.fromString(category));
+			retrievedCategories.add(cat);
+		}
+		return retrievedCategories;
+	}
+
+	private List<UUID> getAuctions(final String[] auctions) {
+		List<UUID> retrievedAuctionIds = new ArrayList<>();
+		for (String auction : auctions) {
+			retrievedAuctionIds.add(UUID.fromString(auction));
+		}
+		return retrievedAuctionIds;
+	}
+
+	public List<PriceCount> getPriceCount(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		return auctionRepository.getPriceCount(auctionIds);
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {
