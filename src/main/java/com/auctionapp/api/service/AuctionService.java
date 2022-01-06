@@ -110,6 +110,13 @@ public class AuctionService {
 		return auctionRepository.getPriceCount(auctionIds);
 	}
 
+	public AuctionDto save(final AuctionDto payload) {
+        Auction auction = fromPayload(payload);
+		auction.setStatus(Status.ACTIVE);
+        auction = auctionRepository.save(auction);
+        return toPayload(auction);
+	}
+
 	public static Auction fromPayload(final AuctionDto payload) {
 		Auction auction = new Auction(
 									payload.getId(),

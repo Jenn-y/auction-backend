@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -46,7 +47,7 @@ public class Auction {
 	@JoinColumn
 	private User seller;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn
 	private Item item;
 
@@ -97,6 +98,10 @@ public class Auction {
 
 	public Status getStatus() {
 		return status;
+	}
+
+	public void setStatus(final Status status) {
+		this.status = status;
 	}
 
 	public Category getCategory() {

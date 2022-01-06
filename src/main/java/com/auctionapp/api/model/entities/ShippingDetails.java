@@ -26,7 +26,7 @@ public class ShippingDetails {
     private String city;
 
     @Column
-    private Integer zipCode;
+    private String zipCode;
 
     @Column
     private String state;
@@ -40,7 +40,7 @@ public class ShippingDetails {
     public ShippingDetails(final UUID id, 
                            final String streetName, 
                            final String city, 
-                           final Integer zipCode, 
+                           final String zipCode, 
                            final String state, 
                            final String country) {
         this.id = id;
@@ -63,7 +63,7 @@ public class ShippingDetails {
         return city;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
