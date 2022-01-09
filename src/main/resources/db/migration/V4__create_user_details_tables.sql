@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS shipping_details (
   id UUID DEFAULT gen_random_uuid () PRIMARY KEY,
   street_name text,
   city text,
-  zip_code numeric,
+  zip_code text,
   state text,
   country text
 );

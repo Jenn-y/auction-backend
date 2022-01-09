@@ -6,14 +6,14 @@ public class ShippingDetailsDto {
     private final UUID id;
     private final String streetName;
     private final String city;
-    private final Integer zipCode;
+    private final String zipCode;
     private final String state;
     private final String country;
 
     public ShippingDetailsDto(final UUID id, 
                             final String streetName, 
                             final String city, 
-                            final Integer zipCode, 
+                            final String zipCode, 
                             final String state, 
                             final String country) {
         this.id = id;
@@ -36,7 +36,7 @@ public class ShippingDetailsDto {
         return city;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 

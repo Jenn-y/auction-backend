@@ -2,11 +2,22 @@ package com.auctionapp.api.service;
 
 import com.auctionapp.api.model.dto.ItemDto;
 import com.auctionapp.api.model.entities.Item;
+import com.auctionapp.api.repository.ItemRepository;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class ItemService {
+
+	private final ItemRepository itemRepository;
+
+	public ItemService(final ItemRepository itemRepository) {
+		this.itemRepository = itemRepository;
+	}
+
+	public Item save(final Item payload) {
+        return itemRepository.save(payload);
+	}
 
 	public static Item fromPayload(final ItemDto payload) {
 		Item item = new Item(
