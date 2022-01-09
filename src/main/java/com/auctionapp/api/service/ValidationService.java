@@ -1,8 +1,12 @@
 package com.auctionapp.api.service;
 
+import java.util.Optional;
+
 import com.auctionapp.api.model.dto.LoginRequest;
 import com.auctionapp.api.model.dto.RegisterRequest;
 import com.auctionapp.api.model.dto.UserDto;
+import com.auctionapp.api.model.entities.Status;
+import com.auctionapp.api.model.entities.User;
 import com.auctionapp.api.repository.UserRepository;
 
 import org.springframework.stereotype.Service;
@@ -43,7 +47,12 @@ public class ValidationService {
 		} else if (loginRequest.getPassword().isEmpty()) {
 			return false;
 		}
-		return true;
+		return !isUserDeactivated(loginRequest.getEmail());
+	}
+
+	private boolean isUserDeactivated(final String email) {
+		Optional<User> user = userRepository.findByEmail(email);
+		return user.get().getStatus() == Status.INACTIVE;
 	}
 
 	public boolean validateEmailAdress(final String email) {
