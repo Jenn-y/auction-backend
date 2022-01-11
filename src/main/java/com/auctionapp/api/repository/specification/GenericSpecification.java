@@ -33,8 +33,9 @@ public class GenericSpecification<T> implements Specification<T> {
 			case IN:
 				return root.get(searchCriteria.getKey()).in(arguments);
 			case LIKE:
-				Join<Object, Object> item = root.join("Item");
-				return criteriaBuilder.like(item.get("name"), (Expression<String>) arg);
+				Join<Object, Object> item = root.join("item");
+				final String pattern = "%" + arg + "%";
+				return criteriaBuilder.like(item.get("name"), pattern);
 	   }
 
 	   return criteriaBuilder.equal(root.get(searchCriteria.getKey()), arg);

@@ -65,8 +65,7 @@ public class AuctionService {
 		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
 
 		if (Objects.nonNull(search)) {
-			final String pattern = "%" + search + "%";
-			builder.with(auctionSpecificationFactory.filterBySearch("name", pattern));
+			builder.with(auctionSpecificationFactory.filterBySearch("name", search));
 		}
 		
 		if (Objects.nonNull(minPrice)) {
