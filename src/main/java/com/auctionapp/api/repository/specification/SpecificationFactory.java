@@ -25,4 +25,9 @@ public class SpecificationFactory<T> {
         GenericSpecificationsBuilder<T> builder = new GenericSpecificationsBuilder<>();
         return builder.with(key, SearchOperation.GREATER_THAN, Collections.singletonList(arg)).build();
     }
+
+    public Specification<T> filterBySearch(String key, String arg) {
+        GenericSpecificationsBuilder<T> builder = new GenericSpecificationsBuilder<>();
+        return builder.with(key, SearchOperation.LIKE, Collections.singletonList(arg)).build();
+    }
 }

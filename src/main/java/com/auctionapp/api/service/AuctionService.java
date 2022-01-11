@@ -11,8 +11,8 @@ import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.model.dto.PriceCount;
 import com.auctionapp.api.model.dto.PriceInfo;
 import com.auctionapp.api.model.entities.Auction;
-import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.model.entities.Category;
+import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.repository.AuctionRepository;
 import com.auctionapp.api.repository.specification.GenericSpecificationsBuilder;
 import com.auctionapp.api.repository.specification.SpecificationFactory;
@@ -57,11 +57,17 @@ public class AuctionService {
 		throw new RuntimeException("Auction with id " + id + " does not exist!");
 	}
 
-	public List<AuctionDto> getFilteredAuctions(final Double minPrice, 
+	public List<AuctionDto> getFilteredAuctions(final String search, 
+												final Double minPrice, 
 												final Double maxPrice, 
 												final String[] categories) {
 
 		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
+
+		if (Objects.nonNull(search)) {
+			final String pattern = "%" + search + "%";
+			builder.with(auctionSpecificationFactory.filterBySearch("name", pattern));
+		}
 		
 		if (Objects.nonNull(minPrice)) {
 			builder.with(auctionSpecificationFactory.filterByMinPrice("startPrice", minPrice - 1));

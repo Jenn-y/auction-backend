@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -30,6 +32,9 @@ public class GenericSpecification<T> implements Specification<T> {
 				return criteriaBuilder.greaterThan(root.get(searchCriteria.getKey()), (Comparable) arg);
 			case IN:
 				return root.get(searchCriteria.getKey()).in(arguments);
+			case LIKE:
+				Join<Object, Object> item = root.join("Item");
+				return criteriaBuilder.like(item.get("name"), (Expression<String>) arg);
 	   }
 
 	   return criteriaBuilder.equal(root.get(searchCriteria.getKey()), arg);
