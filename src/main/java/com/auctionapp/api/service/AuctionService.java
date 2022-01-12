@@ -17,6 +17,9 @@ import com.auctionapp.api.repository.AuctionRepository;
 import com.auctionapp.api.repository.specification.GenericSpecificationsBuilder;
 import com.auctionapp.api.repository.specification.SpecificationFactory;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -57,10 +60,11 @@ public class AuctionService {
 		throw new RuntimeException("Auction with id " + id + " does not exist!");
 	}
 
-	public List<AuctionDto> getFilteredAuctions(final String search, 
+	public Page<Auction> getFilteredAuctions(final String search, 
 												final Double minPrice, 
 												final Double maxPrice, 
-												final String[] categories) {
+												final String[] categories, 
+												final Integer page) {
 
 		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
 
@@ -81,8 +85,9 @@ public class AuctionService {
 			builder.with(auctionSpecificationFactory.filterBySelectedCategories("category", selectedCategories));
 		}  
 
-		final List<Auction> auctions = auctionRepository.findAll(builder.build());
-		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+		final Pageable pageable = PageRequest.of(page, 6);
+		final Page<Auction> auctions = auctionRepository.findAll(builder.build(), pageable);
+		return auctions;
 	}
 
 	public Integer getCountBySubcategory(final UUID subcategoryId) {

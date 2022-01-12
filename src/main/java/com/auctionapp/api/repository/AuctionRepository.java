@@ -30,5 +30,5 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID>, JpaSpec
 	@Query(value = "SELECT DISTINCT a1.start_price as price, (SELECT count(*) FROM auction AS a2 WHERE a1.start_price = a2.start_price AND a2.id IN :auctions) AS count FROM auction AS a1 WHERE a1.id IN :auctions ORDER BY a1.start_price ASC", nativeQuery = true)
 	List<PriceCount> getPriceCount(@Param("auctions") final List<UUID> auctions);
 
-	List<Auction> findAllBySellerIdAndStatus(UUID sellerId, Status active);
+	List<Auction> findAllBySellerIdAndStatus(final UUID sellerId, final Status active);
 }

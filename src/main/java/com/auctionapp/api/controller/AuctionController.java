@@ -5,10 +5,12 @@ import java.util.UUID;
 
 import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.model.dto.PriceCount;
+import com.auctionapp.api.model.entities.Auction;
 import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.model.dto.PriceInfo;
 import com.auctionapp.api.service.AuctionService;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,14 +61,15 @@ public class AuctionController {
 	}
 
 	@GetMapping("/categories/filter")
-    public ResponseEntity<List<AuctionDto>> getFilteredAuctions(@RequestParam final String search,
-                                                                @RequestParam final Double minPrice,
-                                                                @RequestParam final Double maxPrice,
-                                                                @RequestParam final String[] categories) {
+    public Page<Auction> getFilteredAuctions(@RequestParam final String search,
+												@RequestParam final Double minPrice,
+												@RequestParam final Double maxPrice,
+												@RequestParam final String[] categories,
+												@RequestParam Integer page) {
                                                                     
-        final List<AuctionDto> auctions = service.getFilteredAuctions(search, minPrice, maxPrice, categories);
+		final Page<Auction> auctions = service.getFilteredAuctions(search, minPrice, maxPrice, categories, page);
 
-        return ResponseEntity.status(HttpStatus.OK).body(auctions);
+        return auctions;
     }
 
 	@GetMapping("/countBySubcategory/{subcategoryId}")
