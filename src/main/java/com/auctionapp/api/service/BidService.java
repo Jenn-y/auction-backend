@@ -9,6 +9,9 @@ import com.auctionapp.api.model.dto.BidDto;
 import com.auctionapp.api.model.entities.Bid;
 import com.auctionapp.api.repository.BidRepository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,9 +26,10 @@ public class BidService {
 		this.auctionService = auctionService;
     }
 
-    public List<BidDto> getAuctionBids(final UUID auctionId) {
-        final List<Bid> bids = bidRepository.findAllByAuctionId(auctionId);
-		return bids.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+    public Page<Bid> getAuctionBids(final UUID auctionId, final Integer page) {
+		final Pageable pageable = PageRequest.of(page, 5);
+        final Page<Bid> bids = bidRepository.findAllByAuctionId(auctionId, pageable);
+		return bids;
     }
 
 	public List<BidDto> getBidsByBidder(final UUID bidderId) {
