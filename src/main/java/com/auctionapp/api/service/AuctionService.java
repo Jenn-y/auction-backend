@@ -52,6 +52,11 @@ public class AuctionService {
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
+	public List<AuctionDto> getTop3AuctionsByCategory(final String auctionId, final String categoryId) {
+		List<Auction> auctions = auctionRepository.findTop3ByCategoryIdAndIdNot(UUID.fromString(categoryId), UUID.fromString(auctionId));
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
 	public AuctionDto getAuction(final UUID id) {
 		final Optional<Auction> auction = auctionRepository.findById(id);
 		if (auction.isPresent()) {

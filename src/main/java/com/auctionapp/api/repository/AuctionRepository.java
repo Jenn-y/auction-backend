@@ -31,4 +31,6 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID>, JpaSpec
 	List<PriceCount> getPriceCount(@Param("auctions") final List<UUID> auctions);
 
 	List<Auction> findAllBySellerIdAndStatus(final UUID sellerId, final Status active);
+
+	List<Auction> findTop3ByCategoryIdAndIdNot(final UUID categoryId, final UUID id);
 }

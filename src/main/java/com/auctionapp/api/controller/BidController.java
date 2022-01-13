@@ -29,7 +29,7 @@ public class BidController {
 	}
 
 	@GetMapping("/{auctionId}")
-	public Page<Bid> getAuctionBids(@PathVariable final UUID auctionId, @RequestParam Integer page) {
+	public Page<Bid> getAuctionBids(@PathVariable final UUID auctionId, @RequestParam final Integer page) {
 		final Page<Bid> bids = service.getAuctionBids(auctionId, page);
 		return bids;
 	}

@@ -53,6 +53,14 @@ public class AuctionController {
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
 
+	@GetMapping("/{auctionId}/category/{categoryId}")
+	public ResponseEntity<List<AuctionDto>> getTop3AuctionsByCategory(@PathVariable final String auctionId,
+																	  @PathVariable final String categoryId) {
+		final List<AuctionDto> auctions = service.getTop3AuctionsByCategory(auctionId, categoryId);
+
+		return ResponseEntity.status(HttpStatus.OK).body(auctions);
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<AuctionDto> get(@PathVariable final UUID id) {
 		final AuctionDto result = service.getAuction(id);
@@ -65,7 +73,7 @@ public class AuctionController {
 												@RequestParam final Double minPrice,
 												@RequestParam final Double maxPrice,
 												@RequestParam final String[] categories,
-												@RequestParam Integer page) {
+												@RequestParam final Integer page) {
                                                                     
 		final Page<Auction> auctions = service.getFilteredAuctions(search, minPrice, maxPrice, categories, page);
 
