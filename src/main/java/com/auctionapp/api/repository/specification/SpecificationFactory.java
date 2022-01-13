@@ -26,8 +26,8 @@ public class SpecificationFactory<T> {
         return builder.with(key, SearchOperation.GREATER_THAN, Collections.singletonList(arg)).build();
     }
 
-    public Specification<T> orderBySortingCriteria(SortingCriteria sort) {
+    public Specification<T> filterBySearch(String key, String arg) {
         GenericSpecificationsBuilder<T> builder = new GenericSpecificationsBuilder<>();
-        return builder.with(null, SearchOperation.ORDER_BY, Collections.singletonList(sort)).build();
+        return builder.with(key, SearchOperation.LIKE, Collections.singletonList(arg)).build();
     }
 }

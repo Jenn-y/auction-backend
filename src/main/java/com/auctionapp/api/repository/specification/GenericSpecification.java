@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -31,16 +33,11 @@ public class GenericSpecification<T> implements Specification<T> {
 				return criteriaBuilder.greaterThan(root.get(searchCriteria.getKey()), (Comparable) arg);
 			case IN:
 				return root.get(searchCriteria.getKey()).in(arguments);
-			case ORDER_BY:
-				SortingCriteria sortingCriteria = (SortingCriteria) arguments.get(0);
-				if (sortingCriteria.getDirection().equals(Sort.Direction.DESC)) {
-					return (Predicate) criteriaBuilder.createQuery(root.getJavaType())
-													  .orderBy(criteriaBuilder.desc(root.get(sortingCriteria.getSortBy())));
-				} else {
-					return (Predicate) criteriaBuilder.createQuery(root.getJavaType())
-													  .orderBy(criteriaBuilder.asc(root.get(sortingCriteria.getSortBy())));
-				}
-		}
+			case LIKE:
+				Join<Object, Object> item = root.join("item");
+				final String pattern = "%" + arg + "%";
+				return criteriaBuilder.like(item.get("name"), pattern);
+	   }
 
 		return criteriaBuilder.equal(root.get(searchCriteria.getKey()), arg);
 	}

@@ -12,12 +12,16 @@ import com.auctionapp.api.model.dto.PriceCount;
 import com.auctionapp.api.model.dto.PriceInfo;
 import com.auctionapp.api.model.entities.Auction;
 import com.auctionapp.api.model.entities.Category;
+import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.repository.AuctionRepository;
 import com.auctionapp.api.repository.specification.GenericSpecificationsBuilder;
 import com.auctionapp.api.repository.specification.SortingCriteria;
 import com.auctionapp.api.repository.specification.SpecificationFactory;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -45,6 +49,16 @@ public class AuctionService {
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
+	public List<AuctionDto> getAuctionsBySellerAndStatus(final Status status, final UUID sellerId) {
+		List<Auction> auctions = auctionRepository.findAllBySellerIdAndStatus(sellerId, status);
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	public List<AuctionDto> getTop3AuctionsByCategory(final String auctionId, final String categoryId) {
+		List<Auction> auctions = auctionRepository.findTop3ByCategoryIdAndIdNot(UUID.fromString(categoryId), UUID.fromString(auctionId));
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
 	public AuctionDto getAuction(final UUID id) {
 		final Optional<Auction> auction = auctionRepository.findById(id);
 		if (auction.isPresent()) {
@@ -53,12 +67,18 @@ public class AuctionService {
 		throw new RuntimeException("Auction with id " + id + " does not exist!");
 	}
 
-	public List<AuctionDto> getFilteredAuctions(final Double minPrice, 
+	public Page<Auction> getFilteredAuctions(final String search, 
+												final Double minPrice, 
 												final Double maxPrice, 
 												final String[] categories, 
-												final String sortType) {
+												final String sortType,
+												final Integer page) {
 
 		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
+
+		if (Objects.nonNull(search)) {
+			builder.with(auctionSpecificationFactory.filterBySearch("name", search));
+		}
 		
 		if (Objects.nonNull(minPrice)) {
 			builder.with(auctionSpecificationFactory.filterByMinPrice("startPrice", minPrice - 1));
@@ -73,13 +93,9 @@ public class AuctionService {
 			builder.with(auctionSpecificationFactory.filterBySelectedCategories("category", selectedCategories));
 		}  
 
-		if (Objects.nonNull(sortType)) {
-			final SortingCriteria sort = getSortOptions(sortType);
-			builder.with(auctionSpecificationFactory.orderBySortingCriteria(sort));
-		}  
-
-		List<Auction> auctions = auctionRepository.findAll(builder.build());
-		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+		final Pageable pageable = PageRequest.of(page, 6);
+		final Page<Auction> auctions = auctionRepository.findAll(builder.build(), pageable);
+		return auctions;
 	}
 	
 	private SortingCriteria getSortOptions(String sortType) {
@@ -105,11 +121,6 @@ public class AuctionService {
 		return auctionRepository.getPriceInfo();
 	}
 
-	public List<PriceCount> getPriceCount(final String[] selectedAuctions) {
-		final List<UUID> auctionIds = getAuctions(selectedAuctions);
-		return auctionRepository.getPriceCount(auctionIds);
-	}
-
 	private List<Category> getCategories(final String[] categories) {
 		List<Category> retrievedCategories = new ArrayList<>();
 		for (String category : categories) {
@@ -125,6 +136,18 @@ public class AuctionService {
 			retrievedAuctionIds.add(UUID.fromString(auction));
 		}
 		return retrievedAuctionIds;
+	}
+
+	public List<PriceCount> getPriceCount(final String[] selectedAuctions) {
+		final List<UUID> auctionIds = getAuctions(selectedAuctions);
+		return auctionRepository.getPriceCount(auctionIds);
+	}
+
+	public AuctionDto save(final AuctionDto payload) {
+        Auction auction = fromPayload(payload);
+		auction.setStatus(Status.ACTIVE);
+        auction = auctionRepository.save(auction);
+        return toPayload(auction);
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {
