@@ -25,6 +25,7 @@ public class GenericSpecification<T> implements Specification<T> {
 	public Predicate toPredicate(Root<T> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 		List<Object> arguments = searchCriteria.getArguments();
 		Object arg = arguments.get(0);
+		Join<Object, Object> item = root.join("item");
 
 		switch (searchCriteria.getSearchOperation()) {
 			case LESS_THAN:
@@ -34,7 +35,6 @@ public class GenericSpecification<T> implements Specification<T> {
 			case IN:
 				return root.get(searchCriteria.getKey()).in(arguments);
 			case LIKE:
-				Join<Object, Object> item = root.join("item");
 				final String pattern = "%" + arg + "%";
 				return criteriaBuilder.like(item.get("name"), pattern);
 	   }

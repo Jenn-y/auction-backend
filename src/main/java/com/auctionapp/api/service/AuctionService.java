@@ -93,12 +93,13 @@ public class AuctionService {
 			builder.with(auctionSpecificationFactory.filterBySelectedCategories("category", selectedCategories));
 		}  
 
-		final Pageable pageable = PageRequest.of(page, 6);
+		final SortingCriteria sort = getSortOption(sortType);
+		final Pageable pageable = PageRequest.of(page, 6, Sort.by(sort.getDirection(), sort.getSortBy()));
 		final Page<Auction> auctions = auctionRepository.findAll(builder.build(), pageable);
 		return auctions;
 	}
 	
-	private SortingCriteria getSortOptions(String sortType) {
+	private SortingCriteria getSortOption(String sortType) {
 		switch (sortType) {
 			case "newToOld":
 				return new SortingCriteria(Sort.Direction.DESC, "startDate");
@@ -109,7 +110,7 @@ public class AuctionService {
 			case "highestPrice":
 				return new SortingCriteria(Sort.Direction.DESC, "startPrice");
 			default:
-				return new SortingCriteria(Sort.Direction.DESC, "startDate");
+				return new SortingCriteria(Sort.Direction.ASC, "item.name");
 		}
 	}
 
