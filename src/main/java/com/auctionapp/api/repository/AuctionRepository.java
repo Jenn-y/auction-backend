@@ -21,8 +21,6 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID>, JpaSpec
 
 	List<Auction> findAllByOrderByEndDateAsc();
 
-	List<Auction> findAllByCategoryId(UUID categoryId);
-
 	@Query(value = "SELECT COUNT(*) FROM auction where category_id = :subcategoryId", nativeQuery = true)
 	Integer getCountBySubcategory(@Param("subcategoryId") final UUID subcategoryId);
 
