@@ -36,6 +36,9 @@ public class GenericSpecification<T> implements Specification<T> {
 				Join<Object, Object> item = root.join("item");
 				final String pattern = "%" + arg + "%";
 				return criteriaBuilder.like(item.get("name"), pattern);
+			case EQUALITY:
+				return criteriaBuilder.equal(root.get(searchCriteria.getKey()), arg);
+	
 	   }
 
 	   return criteriaBuilder.equal(root.get(searchCriteria.getKey()), arg);
