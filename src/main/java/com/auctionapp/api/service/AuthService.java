@@ -53,7 +53,9 @@ public class AuthService {
 							Timestamp.from(Instant.now()),
 							Timestamp.from(Instant.now()),
 							UserRole.USER,
-							Status.ACTIVE
+							Status.ACTIVE,
+							null,
+							null
 		);
 
 		if (userRepository.save(user) != null) {

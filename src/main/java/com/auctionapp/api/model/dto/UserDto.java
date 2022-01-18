@@ -21,8 +21,8 @@ public class UserDto {
 	private final Timestamp updatedAt;
 	private final UserRole role;
 	private final Status status;
-	private PaymentDetailsDto paymentDetails;
-	private ShippingDetailsDto shippingDetails;
+	private final PaymentDetailsDto paymentDetails;
+	private final ShippingDetailsDto shippingDetails;
 
 	public UserDto(final UUID id, 
 				  final String firstName, 
@@ -35,7 +35,9 @@ public class UserDto {
 				  final Timestamp createdAt, 
 				  final Timestamp updatedAt,
 				  final UserRole role,
-				  final Status status) {
+				  final Status status,
+				  final PaymentDetailsDto paymentDetails,
+				  final ShippingDetailsDto shippingDetails) {
 					  
 		this.id = id;
 		this.firstName = firstName;
@@ -49,6 +51,8 @@ public class UserDto {
 		this.updatedAt = updatedAt;
 		this.role = role;
 		this.status = status;
+		this.paymentDetails = paymentDetails;
+		this.shippingDetails = shippingDetails;
 	}
 
 	public UUID getId() {
@@ -103,15 +107,7 @@ public class UserDto {
 		return paymentDetails;
 	}
 
-	public void setPaymentDetails(final PaymentDetailsDto paymentDetails) {
-		this.paymentDetails = paymentDetails;
-	}
-
 	public ShippingDetailsDto getShippingDetails() {
 		return shippingDetails;
-	}
-
-	public void setShippingDetails(final ShippingDetailsDto shippingDetails) {
-		this.shippingDetails = shippingDetails;
 	}
 }
