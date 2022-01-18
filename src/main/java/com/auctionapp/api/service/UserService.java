@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.auctionapp.api.model.dto.UserDto;
-import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.model.entities.User;
 import com.auctionapp.api.repository.UserRepository;
 
@@ -37,9 +36,7 @@ public class UserService {
 	}
 
 	public void deactivateUser(final UUID id) {
-		User user = userRepository.getById(id);
-		user.setStatus(Status.INACTIVE);
-		userRepository.save(user);
+		userRepository.deactivateUser(id);
 	}
 
 	public UserDto update(UUID id, UserDto user) {
