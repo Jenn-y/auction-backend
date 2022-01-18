@@ -1,7 +1,5 @@
 package com.auctionapp.api.service;
 
-import java.util.Optional;
-
 import com.auctionapp.api.model.dto.ItemDto;
 import com.auctionapp.api.model.entities.Item;
 import com.auctionapp.api.repository.ItemRepository;
@@ -18,8 +16,7 @@ public class ItemService {
 	}
 
 	public String getDidYouMeanString(final String searchText, final Integer levenshteinDistance) {
-		final Optional<Item> item = itemRepository.getAuctionsByLevenshteinDistance(searchText.toLowerCase(), levenshteinDistance);
-		return item.isPresent() ? item.get().getName() : null;
+		return itemRepository.getStringByLevenshteinDistance(searchText, levenshteinDistance);
 	}
 
 	public Item save(final Item payload) {
