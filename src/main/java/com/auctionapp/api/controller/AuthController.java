@@ -32,7 +32,7 @@ public class AuthController {
 
         if (error.isEmpty()) {
             ValidationResponse validationResponse = new ValidationResponse(authService.register(registerRequest), true);
-            return new ResponseEntity<>(validationResponse, HttpStatus.OK);
+            return new ResponseEntity<>(validationResponse, HttpStatus.CREATED);
         }
 
         ValidationResponse validationResponse = new ValidationResponse(error, false);
