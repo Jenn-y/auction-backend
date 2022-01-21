@@ -1,5 +1,5 @@
 package com.auctionapp.api.model.entities;
 
 public enum Status {
-	ACTIVE, INACTIVE
+	ACTIVE, INACTIVE, SOLD
 }

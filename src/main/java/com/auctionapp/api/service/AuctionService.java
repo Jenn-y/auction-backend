@@ -133,6 +133,11 @@ public class AuctionService {
         return toPayload(auction);
 	}
 
+	public void updateSoldStatus(final Auction auction) {
+		auction.setStatus(Status.SOLD);
+		auctionRepository.save(auction);
+	}
+
 	public static Auction fromPayload(final AuctionDto payload) {
 		Auction auction = new Auction(
 									payload.getId(),
