@@ -15,8 +15,10 @@ import com.auctionapp.api.model.entities.Category;
 import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.repository.AuctionRepository;
 import com.auctionapp.api.repository.specification.GenericSpecificationsBuilder;
+import com.auctionapp.api.repository.specification.SortingCriteria;
 import com.auctionapp.api.repository.specification.SpecificationFactory;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -69,6 +71,7 @@ public class AuctionService {
 												final Double minPrice, 
 												final Double maxPrice, 
 												final String[] categories, 
+												final String sortType,
 												final Integer page) {
 
 		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
@@ -91,9 +94,25 @@ public class AuctionService {
 			builder.with(auctionSpecificationFactory.filterBySelectedCategories("category", selectedCategories));
 		}  
 
-		final Pageable pageable = PageRequest.of(page, 6);
+		final SortingCriteria sort = getSortOption(sortType);
+		final Pageable pageable = PageRequest.of(page, 6, Sort.by(sort.getDirection(), sort.getSortBy()));
 		final Page<Auction> auctions = auctionRepository.findAll(builder.build(), pageable);
 		return auctions;
+	}
+	
+	private SortingCriteria getSortOption(String sortType) {
+		switch (sortType) {
+			case "newToOld":
+				return new SortingCriteria(Sort.Direction.DESC, "startDate");
+			case "oldToNew":
+				return new SortingCriteria(Sort.Direction.ASC, "endDate");
+			case "lowestPrice":
+				return new SortingCriteria(Sort.Direction.ASC, "startPrice");
+			case "highestPrice":
+				return new SortingCriteria(Sort.Direction.DESC, "startPrice");
+			default:
+				return new SortingCriteria(Sort.Direction.ASC, "item.name");
+		}
 	}
 
 	public Integer getCountBySubcategory(final UUID subcategoryId) {
