@@ -8,18 +8,21 @@ public class ItemDto {
 	private final String color;
 	private final Integer size;
 	private final String description;
+	private final String imageLink;
 
 	public ItemDto(final UUID id,
 					final String name,
 					final String color,
 					final Integer size,
-					final String description){
+					final String description,
+					final String imageLink){
 
 		this.id = id;
 		this.name = name;
 		this.color = color;
 		this.size = size;
 		this.description = description;
+		this.imageLink = imageLink;
 	}
 
 	public UUID getId() {
@@ -40,5 +43,9 @@ public class ItemDto {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public String getImageLink() {
+		return imageLink;
 	}
 }
