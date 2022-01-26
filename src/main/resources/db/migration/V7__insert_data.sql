@@ -99,7 +99,7 @@ insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
 values('e8eebc89-9c0b-4ed8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-36bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 90, current_timestamp);
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4eg8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-26bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 100, current_timestamp);
+values('e8eebc89-9c0b-4ed8-ba6d-8bb9bd380a71', 'dee2b360-efee-48cf-bcd8-26bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 100, current_timestamp);
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
 values('e8eebc89-9c0b-4eh8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-20bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 110, current_timestamp);
