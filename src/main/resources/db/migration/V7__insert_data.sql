@@ -5,6 +5,24 @@ values('dee2b360-efee-48cf-bcd8-27bb38b32047', 'austin@gmail.com', 'John', 'Aust
 insert into user_account(id, email, first_name, last_name, password, role, status, phone_num, date_of_birth, gender, created_at, updated_at, payment_details_id, shipping_details_id)
 values('dee2b360-efee-48cf-bcd8-29bb38b32047', 'jane@gmail.com', 'Jane', 'Austin', '$2a$12$33L0ffI4d2/pmzebYN9VnOtnvsGzPMea2tInCfFz789YGRGwwbtle', 'USER', 'ACTIVE', '555-555-555', current_timestamp, 'FEMALE', current_timestamp, current_timestamp, null, null);
 
+insert into user_account(id, email, first_name, last_name, password, role, status, phone_num, date_of_birth, gender, created_at, updated_at, payment_details_id, shipping_details_id)
+values('dee2b360-efee-48cf-bcd8-23bb38b32047', 'rick@gmail.com', 'Rick', 'Austin', '$2a$12$33L0ffI4d2/pmzebYN9VnOtnvsGzPMea2tInCfFz789YGRGwwbtle', 'USER', 'ACTIVE', '555-555-555', current_timestamp, 'FEMALE', current_timestamp, current_timestamp, null, null);
+
+insert into user_account(id, email, first_name, last_name, password, role, status, phone_num, date_of_birth, gender, created_at, updated_at, payment_details_id, shipping_details_id)
+values('dee2b360-efee-48cf-bcd8-26bb38b32047', 'mary@gmail.com', 'Mary', 'Austin', '$2a$12$33L0ffI4d2/pmzebYN9VnOtnvsGzPMea2tInCfFz789YGRGwwbtle', 'USER', 'ACTIVE', '555-555-555', current_timestamp, 'FEMALE', current_timestamp, current_timestamp, null, null);
+
+insert into user_account(id, email, first_name, last_name, password, role, status, phone_num, date_of_birth, gender, created_at, updated_at, payment_details_id, shipping_details_id)
+values('dee2b360-efee-48cf-bcd8-20bb38b32047', 'ron@gmail.com', 'Ron', 'Austin', '$2a$12$33L0ffI4d2/pmzebYN9VnOtnvsGzPMea2tInCfFz789YGRGwwbtle', 'USER', 'ACTIVE', '555-555-555', current_timestamp, 'FEMALE', current_timestamp, current_timestamp, null, null);
+
+insert into user_account(id, email, first_name, last_name, password, role, status, phone_num, date_of_birth, gender, created_at, updated_at, payment_details_id, shipping_details_id)
+values('dee2b360-efee-48cf-bcd8-36bb38b32047', 'harry@gmail.com', 'Harry', 'Austin', '$2a$12$33L0ffI4d2/pmzebYN9VnOtnvsGzPMea2tInCfFz789YGRGwwbtle', 'USER', 'ACTIVE', '555-555-555', current_timestamp, 'FEMALE', current_timestamp, current_timestamp, null, null);
+
+insert into user_account(id, email, first_name, last_name, password, role, status, phone_num, date_of_birth, gender, created_at, updated_at, payment_details_id, shipping_details_id)
+values('dee2b360-efee-48cf-bcd8-83bb38b32047', 'karen@gmail.com', 'Karen', 'Austin', '$2a$12$33L0ffI4d2/pmzebYN9VnOtnvsGzPMea2tInCfFz789YGRGwwbtle', 'USER', 'ACTIVE', '555-555-555', current_timestamp, 'FEMALE', current_timestamp, current_timestamp, null, null);
+
+insert into user_account(id, email, first_name, last_name, password, role, status, phone_num, date_of_birth, gender, created_at, updated_at, payment_details_id, shipping_details_id)
+values('dee2b360-efee-48cf-bcd8-56bb38b32047', 'bob@gmail.com', 'Bob', 'Austin', '$2a$12$33L0ffI4d2/pmzebYN9VnOtnvsGzPMea2tInCfFz789YGRGwwbtle', 'USER', 'ACTIVE', '555-555-555', current_timestamp, 'FEMALE', current_timestamp, current_timestamp, null, null);
+
 insert into category(id, name, subcategory_of)
 values('e8eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'Paintings', null);
 
@@ -72,15 +90,43 @@ insert into auction(id, start_date, end_date, status, start_price, category_id, 
 values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', current_timestamp, current_date + interval '30 days', 'ACTIVE', 50, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-4a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-29bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 70, current_timestamp);
+values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-56bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 70, current_timestamp);
+
+insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
+values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-83bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 80, current_timestamp);
+
+insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
+values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-36bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 90, current_timestamp);
+
+insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
+values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-26bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 100, current_timestamp);
+
+insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
+values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-20bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 110, current_timestamp);
+
+insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
+values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-23bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 115, current_timestamp);
+
+insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
+values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-29bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 120, current_timestamp);
 
 update auction set end_date = current_timestamp where id = 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11';
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
 values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a16', current_timestamp, current_date + interval '100 days', 'ACTIVE', 200, 'e8eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-9a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
+insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
+values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-29bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a16', 210, current_timestamp);
+
+update auction set end_date = current_timestamp where id = 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a16';
+
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a17', current_timestamp, current_date + interval '100 days', 'ACTIVE', 360, 'e8eeba99-9c0b-4ef8-ba6d-6bb9bd388a15', 'e8eebc89-8a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a17', current_timestamp, current_date + interval '100 days', 'ACTIVE', 200, 'e8eeba99-9c0b-4ef8-ba6d-6bb9bd388a15', 'e8eebc89-8a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+
+insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
+values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-29bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a17', 250, current_timestamp);
+
+update auction set end_date = current_timestamp where id = 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a17';
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
 values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a18', current_timestamp, current_date + interval '100 days', 'ACTIVE', 500, 'e8eebd99-9c0b-4ef8-ba6d-6bb9bd388a15', 'e8eebc89-7a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
@@ -92,8 +138,8 @@ insert into auction(id, start_date, end_date, status, start_price, category_id, 
 values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a10', current_timestamp, current_date + interval '50 days', 'ACTIVE', 70, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-5a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a12', current_timestamp, current_date + interval '30 days', 'ACTIVE', 400, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-3a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a12', current_timestamp, current_date + interval '30 days', 'ACTIVE', 500, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-3a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into auction(id, start_date, end_date, status, start_price, category_id, item_id, seller_id)
-values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a13', current_timestamp, current_date + interval '30 days', 'ACTIVE', 120, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-2a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
+values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a13', current_timestamp, current_date + interval '30 days', 'ACTIVE', 250, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-2a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 COMMIT;
