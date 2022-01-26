@@ -90,7 +90,7 @@ insert into auction(id, start_date, end_date, status, start_price, category_id, 
 values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', current_timestamp, current_date + interval '30 days', 'ACTIVE', 50, 'e2eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-4a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-56bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 70, current_timestamp);
+values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd370a11', 'dee2b360-efee-48cf-bcd8-56bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 70, current_timestamp);
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
 values('e8eebc89-9c0b-4ee8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-83bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 80, current_timestamp);
