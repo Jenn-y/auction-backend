@@ -93,22 +93,22 @@ insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
 values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-56bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 70, current_timestamp);
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-83bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 80, current_timestamp);
+values('e8eebc89-9c0b-4ee8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-83bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 80, current_timestamp);
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-36bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 90, current_timestamp);
+values('e8eebc89-9c0b-4ed8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-36bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 90, current_timestamp);
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-26bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 100, current_timestamp);
+values('e8eebc89-9c0b-4eg8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-26bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 100, current_timestamp);
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-20bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 110, current_timestamp);
+values('e8eebc89-9c0b-4eh8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-20bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 110, current_timestamp);
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-23bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 115, current_timestamp);
+values('e8eebc89-9c0b-4ei8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-23bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 115, current_timestamp);
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-29bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 120, current_timestamp);
+values('e8eebc89-9c0b-4ej8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-29bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11', 120, current_timestamp);
 
 update auction set end_date = current_timestamp where id = 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a11';
 
@@ -116,7 +116,7 @@ insert into auction(id, start_date, end_date, status, start_price, category_id, 
 values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a16', current_timestamp, current_date + interval '100 days', 'ACTIVE', 200, 'e8eebc89-9c0b-4ef8-ba6d-6bb9bd380a17', 'e8eebc89-9a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-29bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a16', 210, current_timestamp);
+values('e8eebc89-9c0b-4ef8-ba6j-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-29bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a16', 210, current_timestamp);
 
 update auction set end_date = current_timestamp where id = 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a16';
 
@@ -124,7 +124,7 @@ insert into auction(id, start_date, end_date, status, start_price, category_id, 
 values('e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a17', current_timestamp, current_date + interval '100 days', 'ACTIVE', 200, 'e8eeba99-9c0b-4ef8-ba6d-6bb9bd388a15', 'e8eebc89-8a0b-4ef9-ba6d-6bb9bd380a16', 'dee2b360-efee-48cf-bcd8-27bb38b32047');
 
 insert into bid(id, bidder_id, auction_id, bid_amount, bid_date)
-values('e8eebc89-9c0b-4ef8-ba6d-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-29bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a17', 250, current_timestamp);
+values('e8eebc89-9c0b-4ef8-ba6k-8bb9bd380a11', 'dee2b360-efee-48cf-bcd8-29bb38b32047', 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a17', 250, current_timestamp);
 
 update auction set end_date = current_timestamp where id = 'e8eebc89-9c0b-4ef8-ba6d-7bb9bd380a17';
 
