@@ -73,9 +73,10 @@ public class AuctionController {
 												@RequestParam final Double minPrice,
 												@RequestParam final Double maxPrice,
 												@RequestParam final String[] categories,
+												@RequestParam final String sortType,
 												@RequestParam final Integer page) {
                                                                     
-		final Page<Auction> auctions = service.getFilteredAuctions(search, minPrice, maxPrice, categories, page);
+		final Page<Auction> auctions = service.getFilteredAuctions(search, minPrice, maxPrice, categories, sortType, page);
 
         return auctions;
     }
