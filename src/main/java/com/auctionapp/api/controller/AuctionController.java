@@ -5,10 +5,12 @@ import java.util.UUID;
 
 import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.model.dto.PriceCount;
+import com.auctionapp.api.model.entities.Auction;
 import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.model.dto.PriceInfo;
 import com.auctionapp.api.service.AuctionService;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +53,14 @@ public class AuctionController {
 		return ResponseEntity.status(HttpStatus.OK).body(auctions);
 	}
 
+	@GetMapping("/{auctionId}/category/{categoryId}")
+	public ResponseEntity<List<AuctionDto>> getTop3AuctionsByCategory(@PathVariable final String auctionId,
+																	  @PathVariable final String categoryId) {
+		final List<AuctionDto> auctions = service.getTop3AuctionsByCategory(auctionId, categoryId);
+
+		return ResponseEntity.status(HttpStatus.OK).body(auctions);
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<AuctionDto> get(@PathVariable final UUID id) {
 		final AuctionDto result = service.getAuction(id);
@@ -59,13 +69,16 @@ public class AuctionController {
 	}
 
 	@GetMapping("/categories/filter")
-    public ResponseEntity<List<AuctionDto>> getFilteredAuctions(@RequestParam final Double minPrice,
-                                                                @RequestParam final Double maxPrice,
-                                                                @RequestParam final String[] categories) {
+    public Page<Auction> getFilteredAuctions(@RequestParam final String search,
+												@RequestParam final Double minPrice,
+												@RequestParam final Double maxPrice,
+												@RequestParam final String[] categories,
+												@RequestParam final String sortType,
+												@RequestParam final Integer page) {
                                                                     
-        final List<AuctionDto> auctions = service.getFilteredAuctions(minPrice, maxPrice, categories);
+		final Page<Auction> auctions = service.getFilteredAuctions(search, minPrice, maxPrice, categories, sortType, page);
 
-        return ResponseEntity.status(HttpStatus.OK).body(auctions);
+        return auctions;
     }
 
 	@GetMapping("/countBySubcategory/{subcategoryId}")

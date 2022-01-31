@@ -11,12 +11,17 @@ import com.auctionapp.api.model.dto.AuctionDto;
 import com.auctionapp.api.model.dto.PriceCount;
 import com.auctionapp.api.model.dto.PriceInfo;
 import com.auctionapp.api.model.entities.Auction;
-import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.model.entities.Category;
+import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.repository.AuctionRepository;
 import com.auctionapp.api.repository.specification.GenericSpecificationsBuilder;
+import com.auctionapp.api.repository.specification.SortingCriteria;
 import com.auctionapp.api.repository.specification.SpecificationFactory;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,17 +40,22 @@ public class AuctionService {
 	}
 
 	public List<AuctionDto> getNewArrivals() {
-		List<Auction> auctions = auctionRepository.findAllByOrderByStartDateDesc();
+		List<Auction> auctions = auctionRepository.findAllByStatusOrderByStartDateDesc(Status.ACTIVE);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
 	public List<AuctionDto> getLastChance() {
-		List<Auction> auctions = auctionRepository.findAllByOrderByEndDateAsc();
+		List<Auction> auctions = auctionRepository.findAllByStatusOrderByEndDateAsc(Status.ACTIVE);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
 	public List<AuctionDto> getAuctionsBySellerAndStatus(final Status status, final UUID sellerId) {
 		List<Auction> auctions = auctionRepository.findAllBySellerIdAndStatus(sellerId, status);
+		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+	}
+
+	public List<AuctionDto> getTop3AuctionsByCategory(final String auctionId, final String categoryId) {
+		List<Auction> auctions = auctionRepository.findTop3ByCategoryIdAndIdNotAndStatus(UUID.fromString(categoryId), UUID.fromString(auctionId), Status.ACTIVE);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
@@ -57,11 +67,19 @@ public class AuctionService {
 		throw new RuntimeException("Auction with id " + id + " does not exist!");
 	}
 
-	public List<AuctionDto> getFilteredAuctions(final Double minPrice, 
+	public Page<Auction> getFilteredAuctions(final String search, 
+												final Double minPrice, 
 												final Double maxPrice, 
-												final String[] categories) {
+												final String[] categories, 
+												final String sortType,
+												final Integer page) {
 
 		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
+		builder.with(auctionSpecificationFactory.filterByStatus("status", Status.ACTIVE));
+
+		if (Objects.nonNull(search)) {
+			builder.with(auctionSpecificationFactory.filterBySearch("name", search));
+		}
 		
 		if (Objects.nonNull(minPrice)) {
 			builder.with(auctionSpecificationFactory.filterByMinPrice("startPrice", minPrice - 1));
@@ -76,8 +94,25 @@ public class AuctionService {
 			builder.with(auctionSpecificationFactory.filterBySelectedCategories("category", selectedCategories));
 		}  
 
-		final List<Auction> auctions = auctionRepository.findAll(builder.build());
-		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
+		final SortingCriteria sort = getSortOption(sortType);
+		final Pageable pageable = PageRequest.of(page, 6, Sort.by(sort.getDirection(), sort.getSortBy()));
+		final Page<Auction> auctions = auctionRepository.findAll(builder.build(), pageable);
+		return auctions;
+	}
+	
+	private SortingCriteria getSortOption(String sortType) {
+		switch (sortType) {
+			case "newToOld":
+				return new SortingCriteria(Sort.Direction.DESC, "startDate");
+			case "oldToNew":
+				return new SortingCriteria(Sort.Direction.ASC, "endDate");
+			case "lowestPrice":
+				return new SortingCriteria(Sort.Direction.ASC, "startPrice");
+			case "highestPrice":
+				return new SortingCriteria(Sort.Direction.DESC, "startPrice");
+			default:
+				return new SortingCriteria(Sort.Direction.ASC, "item.name");
+		}
 	}
 
 	public Integer getCountBySubcategory(final UUID subcategoryId) {
@@ -115,6 +150,11 @@ public class AuctionService {
 		auction.setStatus(Status.ACTIVE);
         auction = auctionRepository.save(auction);
         return toPayload(auction);
+	}
+
+	public void updateSoldStatus(final Auction auction) {
+		auction.setStatus(Status.SOLD);
+		auctionRepository.save(auction);
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {
