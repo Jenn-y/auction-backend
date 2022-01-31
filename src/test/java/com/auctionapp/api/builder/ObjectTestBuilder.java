@@ -32,7 +32,9 @@ public class ObjectTestBuilder {
 							null,
 							null,
 							ROLE,
-							STATUS
+							STATUS,
+							null,
+							null
 							);
 		return user;
 	}

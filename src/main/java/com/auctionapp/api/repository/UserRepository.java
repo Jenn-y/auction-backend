@@ -21,6 +21,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
 	@Modifying
     @Transactional
-    @Query(value = "UPDATE user_account SET status = 'INACTIVE', first_name = null, last_name = null, phone_num = null, date_of_birth = null, gender = null WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE user_account SET status = 'INACTIVE', first_name = '', last_name = '', phone_num = null, date_of_birth = null, gender = null WHERE id = :id", nativeQuery = true)
 	void deactivateUser(@Param("id") final UUID id);
 }

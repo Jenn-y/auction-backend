@@ -57,14 +57,10 @@ public class UserService {
 							payload.getCreatedAt(),
 							payload.getUpdatedAt(),
 							payload.getRole(),
-							payload.getStatus()
+							payload.getStatus(),
+							PaymentDetailsService.fromPayload(payload.getPaymentDetails()),
+							ShippingDetailsService.fromPayload(payload.getShippingDetails())
 							);
-		if (payload.getPaymentDetails() != null) {
-			user.setPaymentDetails(PaymentDetailsService.fromPayload(payload.getPaymentDetails()));
-		}
-		if (payload.getShippingDetails() != null) {
-			user.setShippingDetails(ShippingDetailsService.fromPayload(payload.getShippingDetails()));
-		}
 		return user;
 	}
 
@@ -81,14 +77,10 @@ public class UserService {
                                       user.getCreatedAt(),
                                       user.getUpdatedAt(),
 									  user.getRole(),
-									  user.getStatus()
+									  user.getStatus(),
+									  PaymentDetailsService.toPayload(user.getPaymentDetails()),
+									  ShippingDetailsService.toPayload(user.getShippingDetails())
                                       );
-		if (user.getPaymentDetails() != null) {
-			payload.setPaymentDetails(PaymentDetailsService.toPayload(user.getPaymentDetails()));
-		}
-		if (user.getShippingDetails() != null) {
-			payload.setShippingDetails(ShippingDetailsService.toPayload(user.getShippingDetails()));
-		}
 		return payload;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.auctionapp.api.model.entities.Category;
+import com.auctionapp.api.model.entities.Status;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
@@ -29,5 +30,10 @@ public class SpecificationFactory<T> {
     public Specification<T> filterBySearch(String key, String arg) {
         GenericSpecificationsBuilder<T> builder = new GenericSpecificationsBuilder<>();
         return builder.with(key, SearchOperation.LIKE, Collections.singletonList(arg)).build();
+    }
+
+    public Specification<T> filterByStatus(String key, Status arg) {
+        GenericSpecificationsBuilder<T> builder = new GenericSpecificationsBuilder<>();
+        return builder.with(key, SearchOperation.EQUALITY, Collections.singletonList(arg)).build();
     }
 }

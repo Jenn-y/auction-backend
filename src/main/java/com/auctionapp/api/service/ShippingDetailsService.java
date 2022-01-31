@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 public class ShippingDetailsService {
 
 	public static ShippingDetails fromPayload(final ShippingDetailsDto payload) {
+		if (payload == null) {
+			return null;
+		}
 		ShippingDetails shippingDetails = new ShippingDetails(
 							payload.getId(),
 							payload.getStreetName(),
@@ -21,6 +24,9 @@ public class ShippingDetailsService {
 	}
 
 	public static ShippingDetailsDto toPayload(final ShippingDetails shippingDetails) {
+		if (shippingDetails == null) {
+			return null;
+		}
 		ShippingDetailsDto payload = new ShippingDetailsDto(
                                       shippingDetails.getId(),
                                       shippingDetails.getStreetName(),
