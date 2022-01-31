@@ -17,9 +17,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuctionRepository extends JpaRepository<Auction, UUID>, JpaSpecificationExecutor<Auction> {
 
-	List<Auction> findAllByOrderByStartDateDesc();
+	List<Auction> findAllByStatusOrderByStartDateDesc(final Status status);
 
-	List<Auction> findAllByOrderByEndDateAsc();
+	List<Auction> findAllByStatusOrderByEndDateAsc(final Status status);
 
 	@Query(value = "SELECT COUNT(*) FROM auction where category_id = :subcategoryId", nativeQuery = true)
 	Integer getCountBySubcategory(@Param("subcategoryId") final UUID subcategoryId);
@@ -31,4 +31,6 @@ public interface AuctionRepository extends JpaRepository<Auction, UUID>, JpaSpec
 	List<PriceCount> getPriceCount(@Param("auctions") final List<UUID> auctions);
 
 	List<Auction> findAllBySellerIdAndStatus(final UUID sellerId, final Status active);
+
+	List<Auction> findTop3ByCategoryIdAndIdNotAndStatus(final UUID categoryId, final UUID id, final Status status);
 }

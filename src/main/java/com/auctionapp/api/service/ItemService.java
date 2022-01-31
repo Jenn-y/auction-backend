@@ -29,7 +29,8 @@ public class ItemService {
 							payload.getName(),
 							payload.getColor(),
 							payload.getSize(),
-							payload.getDescription()
+							payload.getDescription(),
+							payload.getImageLink()
 							);
 		return item;
 	}
@@ -40,7 +41,8 @@ public class ItemService {
                                       item.getName(),
                                       item.getColor(),
                                       item.getSize(),
-                                      item.getDescription()
+                                      item.getDescription(),
+									  item.getImageLink()
                                       );
 		return payload;
 	}

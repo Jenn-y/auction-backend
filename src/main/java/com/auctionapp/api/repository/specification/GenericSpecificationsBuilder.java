@@ -37,6 +37,7 @@ public class GenericSpecificationsBuilder<T> {
 
 	public Specification<T> build() {
 	   Specification<T> result = null;
+	   
 	   if (!params.isEmpty()) {
 		  result = new GenericSpecification<>(params.get(0));
 		  for (int index = 1; index < params.size(); ++index) {

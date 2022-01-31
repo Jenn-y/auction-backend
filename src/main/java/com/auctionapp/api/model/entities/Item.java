@@ -32,6 +32,9 @@ public class Item {
     @Column
     private String description;
 
+    @Column
+    private String imageLink;
+
     public Item() {
     }
 
@@ -39,7 +42,8 @@ public class Item {
                 final String name,
                 final String color,
                 final Integer size,
-                final String description) {
+                final String description,
+                final String imageLink) {
 
         Objects.requireNonNull(name, "The name field must not be null");
         Objects.requireNonNull(description, "The description field must not be null");
@@ -49,6 +53,7 @@ public class Item {
         this.color = color;
         this.size = size;
         this.description = description;
+        this.imageLink = imageLink;
     }
 
     public UUID getId() {
@@ -69,5 +74,9 @@ public class Item {
 	
     public String getDescription() {
         return description;
+    }
+
+    public String getImageLink() {
+        return imageLink;
     }
 }
