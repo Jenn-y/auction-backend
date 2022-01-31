@@ -85,7 +85,9 @@ public class User {
                 final Timestamp createdAt,
                 final Timestamp updatedAt,
                 final UserRole role,
-                final Status status) {
+                final Status status,
+                final PaymentDetails paymentDetails,
+                final ShippingDetails shippingDetails) {
 
         Objects.requireNonNull(firstName, "The first name field must not be null");
         Objects.requireNonNull(lastName, "The last name field must not be null");
@@ -107,6 +109,8 @@ public class User {
         this.updatedAt = updatedAt;
         this.role = role;
         this.status = status;
+        this.paymentDetails = paymentDetails;
+        this.shippingDetails = shippingDetails;
     }
 
     public UUID getId() {
@@ -165,15 +169,7 @@ public class User {
         return paymentDetails;
     }
 
-    public void setPaymentDetails(final PaymentDetails paymentDetails) {
-		this.paymentDetails = paymentDetails;
-	}
-
 	public ShippingDetails getShippingDetails() {
 		return shippingDetails;
-	}
-
-	public void setShippingDetails(final ShippingDetails shippingDetails) {
-		this.shippingDetails = shippingDetails;
 	}
 }

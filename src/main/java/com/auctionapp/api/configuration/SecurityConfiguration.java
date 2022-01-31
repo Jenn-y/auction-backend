@@ -70,6 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auctions/**").permitAll()
                 .antMatchers("/api/bids/highestBid/**").permitAll()
                 .antMatchers("/api/categories/**").permitAll()
+                .antMatchers("/api/items/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
                 .anyRequest().authenticated();
 

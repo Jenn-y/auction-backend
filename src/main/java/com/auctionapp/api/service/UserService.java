@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.auctionapp.api.model.dto.UserDto;
-import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.model.entities.User;
 import com.auctionapp.api.repository.UserRepository;
 
@@ -37,9 +36,7 @@ public class UserService {
 	}
 
 	public void deactivateUser(final UUID id) {
-		User user = userRepository.getById(id);
-		user.setStatus(Status.INACTIVE);
-		userRepository.save(user);
+		userRepository.deactivateUser(id);
 	}
 
 	public UserDto update(UUID id, UserDto user) {
@@ -60,14 +57,10 @@ public class UserService {
 							payload.getCreatedAt(),
 							payload.getUpdatedAt(),
 							payload.getRole(),
-							payload.getStatus()
+							payload.getStatus(),
+							PaymentDetailsService.fromPayload(payload.getPaymentDetails()),
+							ShippingDetailsService.fromPayload(payload.getShippingDetails())
 							);
-		if (payload.getPaymentDetails() != null) {
-			user.setPaymentDetails(PaymentDetailsService.fromPayload(payload.getPaymentDetails()));
-		}
-		if (payload.getShippingDetails() != null) {
-			user.setShippingDetails(ShippingDetailsService.fromPayload(payload.getShippingDetails()));
-		}
 		return user;
 	}
 
@@ -84,14 +77,10 @@ public class UserService {
                                       user.getCreatedAt(),
                                       user.getUpdatedAt(),
 									  user.getRole(),
-									  user.getStatus()
+									  user.getStatus(),
+									  PaymentDetailsService.toPayload(user.getPaymentDetails()),
+									  ShippingDetailsService.toPayload(user.getShippingDetails())
                                       );
-		if (user.getPaymentDetails() != null) {
-			payload.setPaymentDetails(PaymentDetailsService.toPayload(user.getPaymentDetails()));
-		}
-		if (user.getShippingDetails() != null) {
-			payload.setShippingDetails(ShippingDetailsService.toPayload(user.getShippingDetails()));
-		}
 		return payload;
 	}
 }

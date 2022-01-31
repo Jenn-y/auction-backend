@@ -40,12 +40,12 @@ public class AuctionService {
 	}
 
 	public List<AuctionDto> getNewArrivals() {
-		List<Auction> auctions = auctionRepository.findAllByOrderByStartDateDesc();
+		List<Auction> auctions = auctionRepository.findAllByStatusOrderByStartDateDesc(Status.ACTIVE);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
 	public List<AuctionDto> getLastChance() {
-		List<Auction> auctions = auctionRepository.findAllByOrderByEndDateAsc();
+		List<Auction> auctions = auctionRepository.findAllByStatusOrderByEndDateAsc(Status.ACTIVE);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
@@ -55,7 +55,7 @@ public class AuctionService {
 	}
 
 	public List<AuctionDto> getTop3AuctionsByCategory(final String auctionId, final String categoryId) {
-		List<Auction> auctions = auctionRepository.findTop3ByCategoryIdAndIdNot(UUID.fromString(categoryId), UUID.fromString(auctionId));
+		List<Auction> auctions = auctionRepository.findTop3ByCategoryIdAndIdNotAndStatus(UUID.fromString(categoryId), UUID.fromString(auctionId), Status.ACTIVE);
 		return auctions.stream().map(t -> toPayload(t)).collect(Collectors.toList());
 	}
 
@@ -75,6 +75,7 @@ public class AuctionService {
 												final Integer page) {
 
 		GenericSpecificationsBuilder<Auction> builder = new GenericSpecificationsBuilder<>();
+		builder.with(auctionSpecificationFactory.filterByStatus("status", Status.ACTIVE));
 
 		if (Objects.nonNull(search)) {
 			builder.with(auctionSpecificationFactory.filterBySearch("name", search));
@@ -149,6 +150,11 @@ public class AuctionService {
 		auction.setStatus(Status.ACTIVE);
         auction = auctionRepository.save(auction);
         return toPayload(auction);
+	}
+
+	public void updateSoldStatus(final Auction auction) {
+		auction.setStatus(Status.SOLD);
+		auctionRepository.save(auction);
 	}
 
 	public static Auction fromPayload(final AuctionDto payload) {

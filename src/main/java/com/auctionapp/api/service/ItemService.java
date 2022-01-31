@@ -15,6 +15,10 @@ public class ItemService {
 		this.itemRepository = itemRepository;
 	}
 
+	public String getDidYouMeanString(final String searchText, final Integer levenshteinDistance) {
+		return itemRepository.getStringByLevenshteinDistance(searchText, levenshteinDistance);
+	}
+
 	public Item save(final Item payload) {
         return itemRepository.save(payload);
 	}
@@ -25,7 +29,8 @@ public class ItemService {
 							payload.getName(),
 							payload.getColor(),
 							payload.getSize(),
-							payload.getDescription()
+							payload.getDescription(),
+							payload.getImageLink()
 							);
 		return item;
 	}
@@ -36,7 +41,8 @@ public class ItemService {
                                       item.getName(),
                                       item.getColor(),
                                       item.getSize(),
-                                      item.getDescription()
+                                      item.getDescription(),
+									  item.getImageLink()
                                       );
 		return payload;
 	}

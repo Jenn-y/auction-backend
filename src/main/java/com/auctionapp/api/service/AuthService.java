@@ -53,7 +53,9 @@ public class AuthService {
 							Timestamp.from(Instant.now()),
 							Timestamp.from(Instant.now()),
 							UserRole.USER,
-							Status.ACTIVE
+							Status.ACTIVE,
+							null,
+							null
 		);
 
 		if (userRepository.save(user) != null) {
@@ -74,14 +76,6 @@ public class AuthService {
 		String token = jwtProvider.generateToken(authenticate);
 
 		Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
-		if (user.get().getStatus() == Status.INACTIVE) {
-			activateUserAccount(user.get());
-		}
 		return new AuthenticationResponse(token, user.get().getId(), loginRequest.getEmail(), user.get().getRole());
-	}
-
-	private void activateUserAccount(final User user) {
-		user.setStatus(Status.ACTIVE);
-		userRepository.save(user);
 	}
 }

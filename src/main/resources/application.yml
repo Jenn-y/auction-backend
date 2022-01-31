@@ -25,3 +25,6 @@ spring:
     
 # swagger host property
 host: "bidba-api.herokuapp.com"
+
+stripe:
+  apiKey: ${STRIPE_API_KEY:sk_test_51KKK3gHfG2ohyeRDiBA53JiIi4x5m8ijb0tBMbvQtVXUI2EXg5KSIT8BM5cwlgxPBeufRRS8EGHM3Z1Wj9XlEZa800qRoayin4}
