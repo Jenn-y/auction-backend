@@ -15,8 +15,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "bid")
-public class Bid {
+@Table(name = "payment")
+public class Payment {
 	
 	@Id
 	@GeneratedValue(generator = "UUID")
@@ -24,57 +24,66 @@ public class Bid {
 	private UUID id;
 
 	@Column
-	private Double bidAmount;
+	private Double amount;
 
 	@Column
-	private Timestamp bidDate;
+	private String paymentMethod;
+
+	@Column
+	private Timestamp date;
 
 	@ManyToOne
 	@JoinColumn
-	private User bidder;
+	private User buyer;
 
 	@ManyToOne
 	@JoinColumn
 	private Auction auction;
 
-	public Bid() {
+	public Payment() {
 	}
 
-	public Bid(final UUID id,
-			   final Double bidAmount,
-			   final Timestamp bidDate,
-			   final User bidder,
+	public Payment(final UUID id,
+			   final Double amount,
+			   final Timestamp date,
+			   final String paymentMethod,
+			   final User buyer,
 			   final Auction auction) {
 		
-		Objects.requireNonNull(bidAmount, "The bid amount must not be null");
-		Objects.requireNonNull(bidDate, "The bid date must not be null");
-		Objects.requireNonNull(bidder, "The bidder must not be null");
+		Objects.requireNonNull(amount, "The bid amount must not be null");
+		Objects.requireNonNull(buyer, "The bidder must not be null");
 		Objects.requireNonNull(auction, "The auction must not be null");
+		Objects.requireNonNull(paymentMethod, "The payment method must not be null");
 
 		this.id = id;
-		this.bidAmount = bidAmount;
-		this.bidDate = bidDate;
-		this.bidder = bidder;
+		this.amount = amount;
+		this.date = date;
+		this.buyer = buyer;
 		this.auction = auction;
+		this.paymentMethod = paymentMethod;
 	}
 
 	public UUID getId() {
 		return id;
 	}
 
-	public Double getBidAmount() {
-		return bidAmount;
+	public Double getAmount() {
+		return amount;
 	}
 
-	public Timestamp getBidDate() {
-		return bidDate;
+	public Timestamp getDate() {
+		return date;
 	}
 
-	public User getBidder() {
-		return bidder;
+	public User getBuyer() {
+		return buyer;
 	}
 
 	public Auction getAuction() {
 		return auction;
+	}
+
+	public String getPaymentMethod() {
+		return paymentMethod;
 	}
 }

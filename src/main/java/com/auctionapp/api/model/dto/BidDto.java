@@ -7,19 +7,19 @@ public class BidDto {
 	private final  UUID id;
 	private final Double bidAmount;
 	private Timestamp bidDate;
-	private final UserDto buyer;
+	private final UserDto bidder;
 	private final AuctionDto auction;
 
 	public BidDto(final UUID id,
 				  final Double bidAmount,
 				  final Timestamp bidDate,
-				  final UserDto buyer,
+				  final UserDto bidder,
 				  final AuctionDto auction) {
 
 		this.id = id;
 		this.bidAmount = bidAmount;
 		this.bidDate = bidDate;
-		this.buyer = buyer;
+		this.bidder = bidder;
 		this.auction = auction;
 	}
 
@@ -35,8 +35,8 @@ public class BidDto {
 		return bidDate;
 	}
 
-	public UserDto getBuyer() {
-		return buyer;
+	public UserDto getBidder() {
+		return bidder;
 	}
 
 	public AuctionDto getAuction() {

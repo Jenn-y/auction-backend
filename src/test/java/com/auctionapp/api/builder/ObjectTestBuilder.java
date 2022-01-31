@@ -2,6 +2,7 @@ package com.auctionapp.api.builder;
 
 import java.util.UUID;
 
+import com.auctionapp.api.model.entities.Status;
 import com.auctionapp.api.model.entities.User;
 import com.auctionapp.api.model.entities.UserRole;
 
@@ -12,6 +13,7 @@ public class ObjectTestBuilder {
 	private static final String EMAIL = "userone@gmail.com";
 	private static final String PASSWORD = "123456";
 	private static final UserRole ROLE = UserRole.USER;
+	private static final Status STATUS = Status.ACTIVE;
 	private static final UUID USER_ID = UUID.randomUUID();
 
 	private ObjectTestBuilder() {
@@ -26,7 +28,13 @@ public class ObjectTestBuilder {
 							PASSWORD,
 							null,
 							null,
-							ROLE
+							null,
+							null,
+							null,
+							ROLE,
+							STATUS,
+							null,
+							null
 							);
 		return user;
 	}
