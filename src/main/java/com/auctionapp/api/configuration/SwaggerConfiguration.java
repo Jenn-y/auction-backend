@@ -28,9 +28,9 @@ public class SwaggerConfiguration {
 
     private ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
-                .title("Auction API")
+                .title("Bid.ba API")
                 .version("1.0")
-                .description("API for Auction Application")
+                .description("API for Bid.ba Application")
                 .build();
     }
 }
