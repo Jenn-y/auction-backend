@@ -7,9 +7,13 @@ CREATE TABLE IF NOT EXISTS user_account (
   last_name text NOT NULL,
   email text NOT NULL,
   password text NOT NULL,
+  phone_num text,
+  gender text,
+  date_of_birth date,
   created_at timestamp NOT NULL,
   updated_at timestamp NOT NULL,
   role text NOT NULL,
+  status text NOT NULL,
   CONSTRAINT email_unique UNIQUE (email)
 );
 COMMIT;

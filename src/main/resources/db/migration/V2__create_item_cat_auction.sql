@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS item (
   name text NOT NULL,
   color text,
   size numeric,
+  image_link text,
   description text NOT NULL
 );
 

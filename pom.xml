@@ -15,6 +15,7 @@
 	<description>Spring Boot Project</description>
 	<properties>
 		<java.version>11</java.version>
+		<stripe.version>20.77.0</stripe.version>
 		<springfox.version>3.0.0</springfox.version>
 		<jsonwebtoken.version>0.11.2</jsonwebtoken.version>
 		<securitycore.version>5.4.6</securitycore.version>
@@ -22,6 +23,13 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- Stripe Related dependencies -->
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>${stripe.version}</version>
+		</dependency>
 
 		<!-- Flyway Related dependencies -->
 		<dependency>

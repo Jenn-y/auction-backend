@@ -9,6 +9,9 @@ import com.auctionapp.api.model.dto.BidDto;
 import com.auctionapp.api.model.entities.Bid;
 import com.auctionapp.api.repository.BidRepository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,8 +26,14 @@ public class BidService {
 		this.auctionService = auctionService;
     }
 
-    public List<BidDto> getAuctionBids(final UUID auctionId) {
-        final List<Bid> bids = bidRepository.findAllByAuctionId(auctionId);
+    public Page<Bid> getAuctionBids(final UUID auctionId, final Integer page) {
+		final Pageable pageable = PageRequest.of(page, 5);
+        final Page<Bid> bids = bidRepository.findAllByAuctionId(auctionId, pageable);
+		return bids;
+    }
+
+	public List<BidDto> getBidsByBidder(final UUID bidderId) {
+        final List<Bid> bids = bidRepository.findAllByBidderId(bidderId);
 		return bids.stream().map(t -> toPayload(t)).collect(Collectors.toList());
     }
 
@@ -36,6 +45,11 @@ public class BidService {
 		return auctionService.getAuction(auctionId).getStartPrice();
 	}
 
+	public Integer getNoOfBids(final UUID auctionId) {
+		final List<Bid> bids = bidRepository.findAllByAuctionId(auctionId);
+		return bids.size();
+	}
+
 	public BidDto save(final BidDto payload) {
         Bid bid = fromPayload(payload);
         bid = bidRepository.save(bid);
@@ -44,7 +58,7 @@ public class BidService {
 
 	public boolean validateBid(final BidDto bid){
 		return validateBidAmount(bid.getBidAmount(), getHighestBidAmount(bid.getAuction().getId())) 
-                && !isBidderEqualSeller(bid.getBuyer().getId(), bid.getAuction().getSeller().getId());
+                && !isBidderEqualSeller(bid.getBidder().getId(), bid.getAuction().getSeller().getId());
 	}
 
 	private boolean validateBidAmount(final Double currentBid, final Double highestBid) {
@@ -52,7 +66,7 @@ public class BidService {
 	}
 
     private boolean isBidderEqualSeller(final UUID bidderId, final UUID sellerId) {
-        return bidderId == sellerId;
+		return bidderId.equals(sellerId);
     }
 
 	public static Bid fromPayload(final BidDto payload) {
@@ -60,7 +74,7 @@ public class BidService {
 						  payload.getId(),
 						  payload.getBidAmount(),
 						  payload.getBidDate(),
-						  UserService.fromPayload(payload.getBuyer()),
+						  UserService.fromPayload(payload.getBidder()),
 						  AuctionService.fromPayload(payload.getAuction())
 						  );
 		return bid;
@@ -71,7 +85,7 @@ public class BidService {
 									bid.getId(),
 									bid.getBidAmount(),
 									bid.getBidDate(),
-									UserService.toPayload(bid.getBuyer()),
+									UserService.toPayload(bid.getBidder()),
 									AuctionService.toPayload(bid.getAuction())
 									);
 		return payload;

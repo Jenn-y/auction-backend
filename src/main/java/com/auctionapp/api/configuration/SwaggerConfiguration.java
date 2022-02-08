@@ -18,6 +18,7 @@ public class SwaggerConfiguration {
     @Bean
     public Docket auction() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .host(SecurityConfiguration.HOST)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
@@ -27,9 +28,9 @@ public class SwaggerConfiguration {
 
     private ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
-                .title("Auction API")
+                .title("Bid.ba API")
                 .version("1.0")
-                .description("API for Auction Application")
+                .description("API for Bid.ba Application")
                 .build();
     }
 }
